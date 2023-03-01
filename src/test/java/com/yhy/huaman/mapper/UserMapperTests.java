@@ -17,7 +17,7 @@ import org.springframework.test.context.junit4.SpringRunner;
  * 4.单元测试方法的特点:必须被@Test注解修饰;返回值类型必须是void;方法的参数列表不指定任何类型;方法的访问修饰符必须是public
  */
 @RunWith(SpringRunner.class)
-public class UserInsertTests {
+public class UserMapperTests {
     @Autowired
     private UserMapper userMapper;
     @Test
