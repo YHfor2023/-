@@ -47,5 +47,12 @@ public class UserServiceTests {
             System.out.println(e.getMessage());
         }
     }
+    @Test
+    public void login() {
+        //因为login方法可能抛出异常,所以应该捕获异常,但是测试时没必要写那么严谨
+        User user = userService.login("页面测试user注册", "123456");
+        System.out.println(user);
+    }
+
 
 }

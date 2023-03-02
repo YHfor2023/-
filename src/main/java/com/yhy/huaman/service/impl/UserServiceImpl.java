@@ -4,7 +4,9 @@ import com.yhy.huaman.entity.User;
 import com.yhy.huaman.mapper.UserMapper;
 import com.yhy.huaman.service.IUserService;
 import com.yhy.huaman.service.ex.InsertException;
+import com.yhy.huaman.service.ex.PasswordNotMatchException;
 import com.yhy.huaman.service.ex.UsernameDuplicatedException;
+import com.yhy.huaman.service.ex.UsernameNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
@@ -58,6 +60,45 @@ public class UserServiceImpl implements IUserService {
             throw new InsertException("在用户注册过程中产生了未知的异常");
         }
     }
+
+    @Override
+    public User login(String username, String password) {
+        //根据用户名称来查询用户的数据是否存在,不存在则抛出异常
+        User result = userMapper.findByUsername(username);
+        if (result == null) {
+            throw new UsernameNotFoundException("用户数据不存在");
+        }
+
+        /**
+         * 检测用户的密码是否匹配:
+         * 1.先获取数据库中加密之后的密码
+         * 2.和用户传递过来的密码进行比较
+         *  2.1先获取盐值
+         *  2.2将获取的用户密码按照相同的md5算法加密
+         */
+        String oldPassword = result.getPassword();
+        String salt = result.getSalt();
+        String newMd5Password = getMD5Password(password, salt);
+        if (!newMd5Password.equals(oldPassword)) {
+            throw new PasswordNotMatchException("用户密码错误");
+        }
+
+        //判断is_delete字段的值是否为1,为1表示被标记为删除
+        if (result.getIsDelete() == 1) {
+            throw new UsernameNotFoundException("用户数据不存在");
+        }
+
+        //方法login返回的用户数据是为了辅助其他页面做数据展示使用(只会用到uid,username,avatar)
+        //所以可以new一个新的user只赋这三个变量的值,这样使层与层之间传输时数据体量变小,后台层与
+        // 层之间传输时数据量越小性能越高,前端也是的,数据量小了前端响应速度就变快了
+        User user = new User();
+        user.setUid(result.getUid());
+        user.setUsername(result.getUsername());
+        user.setAvatar(result.getAvatar());
+        return user;
+    }
+
+
     private String getMD5Password(String password,String salt) {
         for (int i = 0; i < 3; i++) {
             password = DigestUtils.md5DigestAsHex((salt + password + salt).getBytes()).toUpperCase();

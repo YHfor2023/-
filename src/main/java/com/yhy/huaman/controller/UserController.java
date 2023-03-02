@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpSession;
+
 @RestController //其作用等同于@Controller+@ResponseBody
 //@Controller
 @RequestMapping("users")
@@ -20,6 +22,9 @@ public class UserController extends BaseController{
 
     @RequestMapping("reg")
     //@ResponseBody //表示此方法的响应结果以json格式进行数据的响应给到前端
+//    请求处理方法的参数列表设置为pojo类型:
+//    SpringBoot会将前端的url地址中的参数名和pojo类的属性名进行比较,如果这两个名称相同,则将值注入到pojo类中对应的属性上
+
     public JsonResult<Void> reg(User user) {
         JsonResult<Void> jsonResult =new JsonResult<>();
         userService.reg(user);
@@ -43,5 +48,28 @@ public class UserController extends BaseController{
         }
         return result;*/
     }
+
+
+//    请求处理方法的参数列表设置为非pojo类型:
+//    SpringBoot会直接将请求的参数名和方法的参数名直接进行比较,如果名称相同则自动完成值的依赖注入
+//    把首次登录所获取的用户数据转移到session对象:
+//    服务器本身自动创建有session对象,已经是一个全局的session对象,所以我们需要想办法获取session对象:如果直接将HttpSession类型的对象作为请求处理方法的参数,这时springboot会自动将全局的session对象注入到请求处理方法的session形参上:
+
+    @RequestMapping("login")
+    public JsonResult<User> login(String username, String password, HttpSession session) {
+        User data = userService.login(username, password);
+
+        //向session对象中完成数据的绑定(这个session是全局的,项目的任何位置都可以访问)
+        session.setAttribute("uid",data.getUid());
+        session.setAttribute("username",data.getUsername());
+
+        //测试能否正常获取session中存储的数据
+//        System.out.println(getUidFromSession(session));
+//        System.out.println(getUsernameFromSession(session));
+
+        return new JsonResult<User>(OK,data);
+    }
+
+
 }
 

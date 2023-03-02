@@ -1,10 +1,10 @@
 package com.yhy.huaman.controller;
 
-import com.yhy.huaman.service.ex.InsertException;
-import com.yhy.huaman.service.ex.ServiceException;
-import com.yhy.huaman.service.ex.UsernameDuplicatedException;
+import com.yhy.huaman.service.ex.*;
 import com.yhy.huaman.util.JsonResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+
+import javax.servlet.http.HttpSession;
 
 public class BaseController {
 
@@ -28,7 +28,29 @@ public class BaseController {
         } else if (e instanceof InsertException) {
             result.setState(5000);
             result.setMessage("插入数据时产生未知的异常");
+        }else if (e instanceof UsernameNotFoundException) {
+            result.setState(4001);
+            result.setMessage("用户数据不存在的异常");
+        } else if (e instanceof PasswordNotMatchException) {
+            result.setState(4002);
+            result.setMessage("用户名密码错误的异常");
         }
+
         return result;
     }
+
+    /**
+     * 获取session对象中的uid
+     * @param session session对象
+     * @return 当前登录的用户uid的值
+     */
+    public final Integer getUidFromSession(HttpSession session) {
+        //getAttribute返回的是Object对象,需要转换为字符串再转换为包装类
+        return Integer.valueOf(session.getAttribute("uid").toString());
+    }
+
+    public final String getUsernameFromSession(HttpSession session) {
+        return session.getAttribute("username").toString();
+    }
+
 }
