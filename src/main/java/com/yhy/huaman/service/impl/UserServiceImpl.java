@@ -3,10 +3,7 @@ package com.yhy.huaman.service.impl;
 import com.yhy.huaman.entity.User;
 import com.yhy.huaman.mapper.UserMapper;
 import com.yhy.huaman.service.IUserService;
-import com.yhy.huaman.service.ex.InsertException;
-import com.yhy.huaman.service.ex.PasswordNotMatchException;
-import com.yhy.huaman.service.ex.UsernameDuplicatedException;
-import com.yhy.huaman.service.ex.UsernameNotFoundException;
+import com.yhy.huaman.service.ex.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
@@ -97,6 +94,73 @@ public class UserServiceImpl implements IUserService {
         user.setAvatar(result.getAvatar());
         return user;
     }
+    @Override
+    public void changePassword(Integer uid,
+                               String username,
+                               String oldPassword,
+                               String newPassword) {
+        User result = userMapper.findByUid(uid);
+        /**
+         * 用户没找到:比如登录账号后的几分钟在和朋友聊天,没
+         * 有看页面,管理员错误删除了你的账号或者错误设置is_delete为1)
+         */
+        if (result ==null || result.getIsDelete() == 1) {
+            throw new UsernameNotFoundException("用户数据不存在");
+        }
+
+        //原始密码和数据库中密码进行比较
+        String oldMd5Password = getMD5Password(oldPassword,result.getSalt());
+        if (!result.getPassword().equals(oldMd5Password)) {
+            throw new PasswordNotMatchException("密码错误");
+        }
+
+        //将新的密码加密后设置到数据库中(只要曾经注册过就用以前的盐值)
+        String newMd5Password = getMD5Password(newPassword, result.getSalt());
+        Integer rows = userMapper.updatePasswordByUid(uid, newMd5Password, username, new Date());
+
+        if (rows != 1) {
+            throw new UpdateException("更新数据产生未知的异常");
+        }
+    }
+
+    @Override
+    public User getByUid(Integer uid) {
+        //查询用户是否存在
+        User result = userMapper.findByUid(uid);
+        if (result == null || result.getIsDelete() == 1) {
+            throw new UsernameNotFoundException("用户数据不存在");
+        }
+
+        //可以直接返回result给控制层,但是太臃肿了
+        User user = new User();
+        user.setUsername(result.getUsername());
+        user.setPhone(result.getPhone());
+        user.setEmail(result.getEmail());
+        user.setGender(result.getGender());
+
+        return user;
+    }
+
+    /**
+     *User对象中的数据只有phone,email,gender,username,因为springboot进行依赖
+     * 注入的时候只注入表单中数据的值,所以需要手动将uid封装到user中
+     */
+    @Override
+    public void changeInfo(Integer uid, User user) {
+        User result = userMapper.findByUid(uid);
+        if (result == null || result.getIsDelete() == 1) {
+            throw new UsernameNotFoundException("用户数据不存在");
+        }
+        user.setUid(uid);
+        user.setModifiedUser(user.getUsername());
+        user.setModifiedTime(new Date());
+
+        Integer rows = userMapper.updateInfoByUid(user);
+        if (rows!=1) {
+            throw new UpdateException("更新数据时产生异常");
+        }
+    }
+
 
 
     private String getMD5Password(String password,String salt) {

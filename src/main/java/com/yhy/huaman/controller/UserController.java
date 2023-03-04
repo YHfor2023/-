@@ -69,6 +69,37 @@ public class UserController extends BaseController{
 
         return new JsonResult<User>(OK,data);
     }
+    @RequestMapping("change_password")
+    public JsonResult<Void> changePassword(String oldPassword,
+                                           String newPassword,
+                                           HttpSession session) {
+        Integer uid = getUidFromSession(session);
+        String username = getUsernameFromSession(session);
+        userService.changePassword(uid,username,oldPassword,newPassword);
+        JsonResult<Void> result = new JsonResult<>();
+        result.setState(OK);
+        result.setMessage("修改成功");
+        return result;
+    }
+
+//    一打开页面就发送当前用户数据
+    @RequestMapping("get_by_uid")
+    public JsonResult<User> getByUid(HttpSession session) {
+        User data = userService.getByUid(getUidFromSession(session));
+        return new JsonResult<User>(OK,data);
+    }
+
+//    点击修改按钮更改用户数据
+    @RequestMapping("change_info")
+    public JsonResult<Void> changeInfo(User user,HttpSession session) {
+        //user对象中有四部分的数据:username,phone,email,gender
+        //控制层给业务层传递uid,并在业务层通过user.setUid(uid);将uid封装到user中
+        Integer uid = getUidFromSession(session);
+        userService.changeInfo(uid,user);
+        return new JsonResult<>(OK);
+    }
+
+
 
 
 }

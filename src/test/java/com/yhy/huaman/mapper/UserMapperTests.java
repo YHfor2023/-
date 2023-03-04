@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Date;
+
 //@SpringBootTest表示当前的类是一个测试类,不会随同项目一块打包
 @SpringBootTest
 /**
@@ -33,4 +35,26 @@ public class UserMapperTests {
         User user = userMapper.findByUsername("张三");
         System.out.println(user);
     }
+    @Test
+    public void updatePasswordByUid(){
+        System.out.println(userMapper.findByUid(9));
+        userMapper.updatePasswordByUid(9,"xiugaihou","修改密码测试人员",new Date());
+        System.out.println(userMapper.findByUid(9));
+    }
+
+    @Test
+    public void findByUid(){
+        System.out.println(userMapper.findByUid(9));
+    }
+    @Test
+    public void updateInfoByUid() {
+        User user = new User();
+        user.setUid(11);
+        user.setPhone("13333688");
+        user.setEmail("1454@qq.com");
+        user.setGender(1);
+        userMapper.updateInfoByUid(user);
+    }
+
+
 }

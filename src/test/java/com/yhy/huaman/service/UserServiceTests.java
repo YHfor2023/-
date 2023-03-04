@@ -53,6 +53,28 @@ public class UserServiceTests {
         User user = userService.login("页面测试user注册", "123456");
         System.out.println(user);
     }
+    @Test
+    public void changePassword() {
+        userService.changePassword(8,"管理员","123456","321");
+    }
+
+    @Test
+    public void getByUid() {
+        //err是为了让输出信息为红色
+        System.err.println(userService.getByUid(11).getUsername());
+    }
+
+    @Test
+    public void changeInfo() {
+        User user = new User();
+        //这四个属性值在真实开发中都是在控制层就已经自动封装在User对象中了
+        //而uid需要由控制层传给业务层并在业务层封装到user中
+        user.setPhone("123456789");
+        user.setEmail("123@qq.com");
+        user.setUsername("mxy");
+        user.setGender(0);
+        userService.changeInfo(11,user);
+    }
 
 
 }
