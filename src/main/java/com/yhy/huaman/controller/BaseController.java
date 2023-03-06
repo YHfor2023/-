@@ -48,7 +48,11 @@ public class BaseController {
             result.setState(6003);
         } else if (e instanceof FileUploadIOException) {
             result.setState(6004);
+        }else if (e instanceof AddressCountLimitException) {
+            result.setState(4003);
+            result.setMessage("用户的收货地址超出上限的异常");
         }
+
 
 
 
