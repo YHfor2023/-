@@ -76,5 +76,11 @@ public class UserServiceTests {
         userService.changeInfo(11,user);
     }
 
+    @Test
+    public void changeAvatar() {
+        userService.changeAvatar(11,"222","mmm");
+    }
+
+
 
 }

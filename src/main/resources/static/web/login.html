@@ -159,6 +159,7 @@
 							// ex.html完全一样,因为./就是表示当前目录
 							// 结构,也可以用../web/index.html
 							location.href = "index.html";
+							$.cookie("avatar",json.data.avatar,{expires: 7});
 						} else {
 							alert("登录失败")
 						}

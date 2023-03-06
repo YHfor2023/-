@@ -1,5 +1,6 @@
 package com.yhy.huaman.controller;
 
+import com.yhy.huaman.controller.ex.*;
 import com.yhy.huaman.service.ex.*;
 import com.yhy.huaman.util.JsonResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -19,7 +20,7 @@ public class BaseController {
      * 3.被ExceptionHandler修饰后如果项目发生异常,那么异常对象就会被自动传递给此方法的参数列表上,
      *   所以形参就需要写Throwable e用来接收异常对象
      */
-    @ExceptionHandler(ServiceException.class)
+    @ExceptionHandler({ServiceException.class, FileUploadException.class})
     public JsonResult<Void> handleException(Throwable e) {
         JsonResult<Void> result = new JsonResult<>(e);
         if (e instanceof UsernameDuplicatedException) {
@@ -37,7 +38,18 @@ public class BaseController {
         }else if (e instanceof UpdateException) {
             result.setState(5001);
             result.setMessage("更新数据时产生未知的异常");
+        }else if (e instanceof FileEmptyException) {
+            result.setState(6000);
+        } else if (e instanceof FileSizeException) {
+            result.setState(6001);
+        } else if (e instanceof FileTypeException) {
+            result.setState(6002);
+        } else if (e instanceof FileStateException) {
+            result.setState(6003);
+        } else if (e instanceof FileUploadIOException) {
+            result.setState(6004);
         }
+
 
 
         return result;

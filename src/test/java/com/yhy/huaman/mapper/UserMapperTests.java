@@ -56,5 +56,15 @@ public class UserMapperTests {
         userMapper.updateInfoByUid(user);
     }
 
+    @Test
+    public void updateAvatarByUid() {
+        userMapper.updateAvatarByUid(
+                11,
+                "abc",
+                "头像上传mapper测试",
+                new Date());
+    }
+
+
 
 }
