@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
+
 @SpringBootTest
 @RunWith(SpringRunner.class)
 public class AddressMapperTests {
@@ -28,4 +30,11 @@ public class AddressMapperTests {
         Integer count = addressMapper.countByUid(11);
         System.out.println(count);
     }
+
+    @Test
+    public void findByUid () {
+        List<Address> list = addressMapper.findByUid(14);
+        System.out.println(list);
+    }
+
 }

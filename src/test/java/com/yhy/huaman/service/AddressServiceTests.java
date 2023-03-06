@@ -23,5 +23,15 @@ public class AddressServiceTests {
         address.setName("男朋友");
         addressService.addNewAddress(11,"mxy",address);
     }
+    @Test
+    public  void findAddressbyId(){
+        System.out.println(addressService.getByUid(14));
+    }
+
+    @Test
+    public void setDefault() {
+        addressService.setDefault(1,14,"管理员");
+    }
+
 }
 

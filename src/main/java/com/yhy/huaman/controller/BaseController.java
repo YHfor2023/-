@@ -51,7 +51,26 @@ public class BaseController {
         }else if (e instanceof AddressCountLimitException) {
             result.setState(4003);
             result.setMessage("用户的收货地址超出上限的异常");
+        }else if (e instanceof AddressNotFoundException) {
+            result.setState(4004);
+            result.setMessage("用户的收货地址数据不存在的异常");
+        } else if (e instanceof AccessDeniedException) {
+            result.setState(4005);
+            result.setMessage("收货地址数据非法访问的异常");
+        }else if (e instanceof DeleteException) {
+            result.setState(5002);
+            result.setMessage("删除数据时产生未知的异常");
+        }else if (e instanceof ProductNotFoundException) {
+            result.setState(4006);
+            result.setMessage("访问的商品数据不存在的异常");
+        }else if (e instanceof CartNotFoundException) {
+            result.setState(4007);
+            result.setMessage("购物车表不存在该商品的异常");
         }
+
+
+
+
 
 
 

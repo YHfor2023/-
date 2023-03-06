@@ -3,6 +3,8 @@ package com.yhy.huaman.service;
 import com.yhy.huaman.entity.Address;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**收货地址的业务层接口*/
 @Service
 public interface IAddressService {
@@ -20,6 +22,26 @@ public interface IAddressService {
      * 把session对象定义封装在控制层中,不需要在业务层中额外处理以降低耦合
      */
     void addNewAddress(Integer uid, String username, Address address);
+
+    List<Address> getByUid(Integer uid);
+
+    /**
+     * 修改某个用户的某条收货地址数据为默认收货地址
+     * @param aid 收货地址的id
+     * @param uid 用户id
+     * @param username 修改执行人
+     */
+    void setDefault(Integer aid,Integer uid,String username);
+
+    /**
+     * 删除用户选中的收货地址数据
+     * @param aid 收货地址id
+     * @param uid 用户id
+     * @param username 用户名
+     */
+    void delete(Integer aid,Integer uid,String username);
+
+
 
 }
 
