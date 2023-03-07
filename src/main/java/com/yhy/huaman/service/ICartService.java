@@ -30,6 +30,9 @@ public interface ICartService {
      */
     Integer addNum(Integer cid,Integer uid, String username);
 
+    List<CartVO> getVOByCids(Integer uid, Integer[] cids);//uid是为了判断数据归属是否正确
+
+
 
 
 

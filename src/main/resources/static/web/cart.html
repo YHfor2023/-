@@ -174,7 +174,7 @@
 							</div>
 							<div>
 								<span class="pull-right">
-								<input type="button" value="  结  算  " class="btn btn-primary btn-lg link-account" />
+								<input type="submit" value="  结  算  " class="btn btn-primary btn-lg link-account" />
 							</span>
 							</div>
 						</form>
@@ -292,7 +292,7 @@
 									'<td>\n' +
 									'<input type="button" value="-" class="num-btn" οnclick="reduceNum(1)" />\n' +
 									'<input id="goodsCount#{cid}" type="text" size="2" readonly="readonly" class="num-text" value="#{num}">\n' +
-									'<input class="num-btn" type="button" value="+" οnclick="addNum(#{cid})" />\n' +
+									'<input class="num-btn" type="button" value="+" onclick="addNum(#{cid})" />\n' +
 									'</td>\n' +
 									'<td><span id="goodsCast#{cid}">#{totalPrice}</span></td>\n' +
 									'<td>\n' +
@@ -348,6 +348,7 @@
 					}
 				});
 			}
+
 
 		</script>
 

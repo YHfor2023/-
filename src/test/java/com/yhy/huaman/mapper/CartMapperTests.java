@@ -49,5 +49,14 @@ public class CartMapperTests {
         System.out.println(cartMapper.findByCid(1));
     }
 
+    @Test
+    public void findVOByCids() {
+        Integer[] cids = {1, 2, 6, 8, 100};//可以写表中不存在的,无非就是查不到数据,并不会报错
+        List<CartVO> list = cartMapper.findVOByCids(cids);
+        for (CartVO item : list) {
+            System.out.println(item);
+        }
+    }
+
 
 }

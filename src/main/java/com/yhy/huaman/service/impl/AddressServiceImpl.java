@@ -162,6 +162,28 @@ public class AddressServiceImpl implements IAddressService {
         }
     }
 
+    @Override
+    public Address getByAid(Integer aid, Integer uid) {
+
+        Address address = addressMapper.findByAid(aid);
+
+        if (address == null) {
+            throw new AddressNotFoundException("收货地址数据不存在的异常");
+        }
+        if (!address.getUid().equals(uid)) {
+            throw new AccessDeniedException("非法访问");
+        }
+        address.setProvinceCode(null);
+        address.setCityCode(null);
+        address.setAreaCode(null);
+        address.setCreatedUser(null);
+        address.setCreatedTime(null);
+        address.setModifiedUser(null);
+        address.setModifiedTime(null);
+        return address;
+    }
+
+
 
 
 }
