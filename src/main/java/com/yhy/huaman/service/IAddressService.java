@@ -1,6 +1,7 @@
 package com.yhy.huaman.service;
 
 import com.yhy.huaman.entity.Address;
+import com.yhy.huaman.entity.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -48,6 +49,10 @@ public interface IAddressService {
      * @return
      */
     Address getByAid(Integer aid, Integer uid);
+
+    void changeInfo(Integer uid,String username, Address address);
+
+    int deleteAddressByAid(Integer aid);
 
 
 

@@ -5,10 +5,7 @@ import com.yhy.huaman.entity.Product;
 import com.yhy.huaman.mapper.CartMapper;
 import com.yhy.huaman.mapper.ProductMapper;
 import com.yhy.huaman.service.ICartService;
-import com.yhy.huaman.service.ex.AccessDeniedException;
-import com.yhy.huaman.service.ex.CartNotFoundException;
-import com.yhy.huaman.service.ex.InsertException;
-import com.yhy.huaman.service.ex.UpdateException;
+import com.yhy.huaman.service.ex.*;
 import com.yhy.huaman.vo.CartVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -91,6 +88,23 @@ public class CartServiceImpl implements ICartService {
     }
 
     @Override
+    public Integer subNum(Integer cid, Integer uid, String username) {
+        Cart result = cartMapper.findByCid(cid);
+        if (result == null) {
+            throw new CartNotFoundException("数据不存在");
+        }
+        if (!result.getUid().equals(uid)) {
+            throw new AccessDeniedException("数据非法访问");
+        }
+        Integer num = result.getNum() - 1;
+        Integer rows = cartMapper.updateNumByCid(cid, num, username, new Date());
+        if (rows != 1) {
+            throw new UpdateException("更新数据时产生未知异常");
+        }
+        return num;
+    }
+
+    @Override
     public List<CartVO> getVOByCids(Integer uid, Integer[] cids) {
         List<CartVO> list = cartMapper.findVOByCids(cids);
 
@@ -113,6 +127,15 @@ public class CartServiceImpl implements ICartService {
         return list;
     }
 
-
-
+    @Override
+    public void deletebyCid(Integer cid,Integer uid) {
+        Cart cart = cartMapper.findByCid(cid);
+        if (cart==null){
+            throw new CartNotFoundException("未找到购物车信息");
+        } else if (cart.getUid()!=uid) {
+            throw new UsernameNotFoundException("用户错误");
+        }else {
+            cartMapper.deletebyCid(cid);
+        }
+    }
 }

@@ -144,6 +144,34 @@
 		</footer>
 		<!--页脚结束-->
 		<script>
+			//编写自动登录：在上一次登录时勾选了自动登录，会将账号密码记录在cookie
+			$(document).ready(function () {
+				if ($.cookie("auto")==1){
+					$.ajax({
+						url: "/users/login",
+						type: "POST",
+						data: $.cookie("login"),
+						dataType: "JSON",
+						success: function (json) {
+							if (json.state == 200) {
+								alert("自动登录成功")
+								//跳转到系统主页index.html
+								//index和login在同一个目录结构下,所以可以用相对路
+								// 径index.html来确定跳转的页面,index.html和./ind
+								// ex.html完全一样,因为./就是表示当前目录
+								// 结构,也可以用../web/index.html
+								location.href = "index.html";
+							} else {
+								alert("自动登录失败")
+							}
+						},
+						error: function (xhr) {
+							//xhr.message可以获取未知异常的信息
+							alert("登录时产生未知的异常!"+xhr.message);
+						}
+					});
+				}
+			})
 			$("#btn-login").click(function () {
 				$.ajax({
 					url: "/users/login",
@@ -158,8 +186,13 @@
 							// 径index.html来确定跳转的页面,index.html和./ind
 							// ex.html完全一样,因为./就是表示当前目录
 							// 结构,也可以用../web/index.html
-							location.href = "index.html";
 							$.cookie("avatar",json.data.avatar,{expires: 7});
+							if ($("#auto").prop("checked")==true){
+								alert("已勾选自动登录");
+								$.cookie("auto",1,{expires: 7})
+								$.cookie("login",$("#form-login").serialize(),{expires: 7})
+							}
+							location.href = "index.html";
 						} else {
 							alert("登录失败")
 						}

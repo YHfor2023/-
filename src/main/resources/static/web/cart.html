@@ -281,6 +281,8 @@
 					dataType: "JSON",
 					success: function(json) {
 						var list = json.data;
+						// var totalnum=0;
+						// var totalprice=0;
 						for (var i = 0; i < list.length; i++) {
 							var tr = '<tr>\n' +
 									'<td>\n' +
@@ -290,13 +292,13 @@
 									'<td>#{title}#{msg}</td>\n' +
 									'<td>¥<span id="goodsPrice#{cid}">#{singlePrice}</span></td>\n' +
 									'<td>\n' +
-									'<input type="button" value="-" class="num-btn" οnclick="reduceNum(1)" />\n' +
+									'<input type="button" value="-" class="num-btn" onclick="subNum(#{cid})" />\n' +
 									'<input id="goodsCount#{cid}" type="text" size="2" readonly="readonly" class="num-text" value="#{num}">\n' +
 									'<input class="num-btn" type="button" value="+" onclick="addNum(#{cid})" />\n' +
 									'</td>\n' +
 									'<td><span id="goodsCast#{cid}">#{totalPrice}</span></td>\n' +
 									'<td>\n' +
-									'<input type="button" οnclick="delCartItem(this)" class="cart-del btn btn-default btn-xs" value="删除" />\n' +
+									'<input type="button" onclick="deletebyCid(#{cid})" class="cart-del btn btn-default btn-xs" value="删除" />\n' +
 									'</td>\n' +
 									'</tr>';
 							tr = tr.replaceAll(/#{cid}/g, list[i].cid);
@@ -305,6 +307,8 @@
 							tr = tr.replaceAll(/#{singlePrice}/g, list[i].realPrice);
 							tr = tr.replaceAll(/#{num}/g, list[i].num);
 							tr = tr.replaceAll(/#{totalPrice}/g, list[i].realPrice * list[i].num);
+							// totalnum=totalnum+1;
+							// totalprice = totalprice +list[i].price*list[i].num;
 							if (list[i].realPrice < list[i].price) {
 								tr = tr.replace(/#{msg}/g, "比加入时降价" + (list[i].price - list[i].realPrice) + "元");
 							} else {
@@ -312,6 +316,8 @@
 							}
 							$("#cart-list").append(tr);
 						}
+						// $("#selectCount").html(totalnum);
+						// $("#selectTotal").html(totalprice);
 					},
 					error: function (xhr) {
 						alert("加载购物车列表数据时产生未知的异常"+xhr.status);
@@ -345,6 +351,53 @@
 					},
 					error: function (xhr) {
 						alert("增加购物车商品数量时产生未知的异常!"+xhr.message);
+					}
+				});
+			}
+
+			function subNum(cid) {
+				$.ajax({
+					url: "/carts/"+cid+"/num/sub",
+					type: "POST",
+					dataType: "JSON",
+					success: function (json) {
+						if (json.state == 200) {
+							$("#goodsCount"+cid).val(json.data);//字符串+整数cid后结果为字符串
+
+							//更新该商品总价
+							/*
+                                        html()方法:
+                                        不传参:是获取某个标签内部的内容(文本或标签)
+                                        传参:将参数放到标签里面替换掉该标签原有内容
+                                        * */
+							var price = $("#goodsPrice"+cid).html();
+							var totalPrice = price * json.data;
+
+							//将商品总价更新到控件中
+							$("#goodsCast"+cid).html(totalPrice);
+							if (totalPrice==0){
+								deletebyCid(cid);
+							}
+						} else {
+							alert("减少购物车商品数量失败"+json.message);
+						}
+					},
+					error: function (xhr) {
+						alert("减少购物车商品数量时产生未知的异常!"+xhr.message);
+					}
+				});
+			}
+
+			function deletebyCid(cid) {
+				$.ajax({
+					url: "/carts/"+cid+"/delete",
+					type: "POST",
+					dataType: "JSON",
+					success: function (json) {
+						location.href = "cart.html";
+					},
+					error: function (xhr) {
+						alert("删除时产生未知的异常!"+xhr.message);
 					}
 				});
 			}

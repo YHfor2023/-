@@ -42,10 +42,25 @@ public class CartController extends BaseController {
         return new JsonResult<Integer>(OK, data);
     }
 
+    @RequestMapping("{cid}/num/sub")
+    public JsonResult<Integer> subNum(@PathVariable("cid") Integer cid, HttpSession session) {
+        Integer data = cartService.subNum(
+                cid,
+                getUidFromSession(session),
+                getUsernameFromSession(session));
+        return new JsonResult<Integer>(OK, data);
+    }
+
     @RequestMapping("list")
     public JsonResult<List<CartVO>> findVOByCids(Integer[] cids, HttpSession session) {
         List<CartVO> data = cartService.getVOByCids(getUidFromSession(session), cids);
         return new JsonResult<>(OK, data);
+    }
+
+    @RequestMapping("{cid}/delete")
+    public JsonResult<Integer> delete(@PathVariable("cid") Integer cid, HttpSession session) {
+        cartService.deletebyCid(cid,getUidFromSession(session));
+        return new JsonResult<Integer>(OK);
     }
 
 }

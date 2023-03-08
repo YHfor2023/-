@@ -23,6 +23,12 @@ public class ProductController extends BaseController {
         return new JsonResult<List<Product>>(OK, data);
     }
 
+    @RequestMapping("new_list")
+    public JsonResult<List<Product>> getNewList() {
+        List<Product> data = productService.findNewList();
+        return new JsonResult<List<Product>>(OK, data);
+    }
+
     @GetMapping("{id}/details")
     public JsonResult<Product> getById(@PathVariable("id") Integer id) {
         Product data = productService.findById(id);

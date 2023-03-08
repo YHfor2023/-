@@ -28,6 +28,20 @@ public class ProductServiceImpl implements IProductService {
         }
         return list;
     }
+
+    @Override
+    public List<Product> findNewList() {
+        List<Product> list = productMapper.findNewList();
+        for (Product product : list) {
+            product.setPriority(null);
+            product.setCreatedUser(null);
+            product.setCreatedTime(null);
+            product.setModifiedUser(null);
+            product.setModifiedTime(null);
+        }
+        return list;
+    }
+
     @Override
     public Product findById(Integer id) {
         Product product = productMapper.findById(id);

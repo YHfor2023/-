@@ -33,5 +33,17 @@ public class AddressServiceTests {
         addressService.setDefault(1,14,"管理员");
     }
 
+    @Test
+    public void updateUserAddressByAid(){
+        Address address =new Address();
+        address.setAid(7);
+        address.setName("更新测试2");
+        addressService.changeInfo(14,"更新测试员",address);
+    }
+
+    @Test
+    public void delAddressByAid(){
+        addressService.deleteAddressByAid(8);
+    }
 }
 

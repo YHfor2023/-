@@ -183,8 +183,48 @@ public class AddressServiceImpl implements IAddressService {
         return address;
     }
 
+    @Override
+    public void changeInfo(Integer uid, String username, Address address) {
+        Address result = addressMapper.findByAid(address.getAid());
 
+        if (result == null ) {
+            throw new AddressNotFoundException("地址信息不存在");
+        }
+        address.setUid(uid);
+        address.setModifiedUser(username);
+        address.setModifiedTime(new Date());
 
+        String provinceName = districtService.getNameByCode(address.getProvinceCode());
+        String cityName = districtService.getNameByCode(address.getCityCode());
+        String areaName = districtService.getNameByCode(address.getAreaCode());
+        address.setProvinceName(provinceName);
+        address.setCityName(cityName);
+        address.setAreaName(areaName);
+        address.setModifiedUser(username);
+        address.setModifiedTime(new Date());
 
+//        System.out.println("address ="+address);
+
+        Integer rows = addressMapper.updateUserAddressByAid(address);
+        if (rows!=1) {
+            throw new UpdateException("更新数据时产生异常");
+        }
+    }
+
+    @Override
+    public int deleteAddressByAid(Integer aid) {
+        Address address = addressMapper.findByAid(aid);
+        if(address==null){
+            throw new AddressNotFoundException("地址信息不存在");
+
+        }else {
+            int row = addressMapper.deleteAddressByAid(aid);
+            if (row==1){
+                return row;
+            }else {
+                throw new DeleteException("删除地址失败");
+            }
+        }
+    }
 }
 

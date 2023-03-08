@@ -293,18 +293,19 @@
 										'<td>#{name}</td>\n' +
 										'<td>#{address}</td>\n' +
 										'<td>#{phone}</td>\n' +
-										'<td><a class="btn btn-xs btn-info"><span class="fa fa-edit"></span> 修改</a></td>\n' +
+										'<td><a class="btn btn-xs btn-info" href="updateAddress.html?aid=#{aid}"><span class=fa fa-edit"></span> 修改</a></td>\n' +
 										'<td><a onclick="deletebyAid(#{aid})" class="btn btn-xs add-del btn-info"><span class="fa fa-trash-o"></span> 删除</a></td>\n' +
 										'<td><a onclick="setDefault(#{aid})" class="btn btn-xs add-def btn-default">设为默认</a></td>\n' +
 										'</tr>';
 								//下面用正则表达式更改字符串,上面的#{tag}#{name}等等只
 								//是占位符,没有任何意义,我也可以把#{tag}写成任何想写的东西
 								//replace的第一个参数/占位符/g可以,"占位符"也可以
-								tr = tr.replace(/#{tag}/g,list[i].tag);
-								tr = tr.replace(/#{name}/g,list[i].name);
-								tr = tr.replace("#{address}",list[i].address);
-								tr = tr.replace("#{phone}",list[i].phone);
-								tr = tr.replace("#{aid}",list[i].aid);
+								//replaceAll才可以将所有替换掉，否则指替换第一个，凸(艹皿艹 )
+								tr = tr.replaceAll(/#{tag}/g,list[i].tag);
+								tr = tr.replaceAll(/#{name}/g,list[i].name);
+								tr = tr.replaceAll("#{address}",list[i].address);
+								tr = tr.replaceAll("#{phone}",list[i].phone);
+								tr = tr.replaceAll("#{aid}",list[i].aid);
 
 								$("#address-list").append(tr);
 							}
@@ -345,7 +346,6 @@
 				$.ajax({
 					url: "/addresses/"+aid+"/delete",
 					type: "POST",
-					//data: $("#form-change-password").serialize(),
 					dataType: "JSON",
 					success: function (json) {
 						if (json.state == 200) {

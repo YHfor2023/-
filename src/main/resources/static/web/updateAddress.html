@@ -141,9 +141,9 @@
 						<!--新增收货地址表单开始-->
 						<form id="form-add-new-address" class="form-horizontal" role="form">
 							<div class="form-group">
-								<label class="col-md-2 control-label"><span class="txtred">*</span>收货人：</label>
+								<label  class="col-md-2 control-label"><span class="txtred">*</span>收货人：</label>
 								<div class="col-md-8">
-									<input name="name" type="text" class="form-control" placeholder="请输入收货人姓名">
+									<input id="name" name="name" type="text" class="form-control" placeholder="请输入收货人姓名">
 								</div>
 							</div>
 							<div class="address_content" data-toggle="distpicker">
@@ -164,36 +164,36 @@
 									</div>
 									<label class="col-md-2 control-label">邮政编码：</label>
 									<div class="col-md-3">
-										<input name="zip" type="text" class="form-control" placeholder="请输入邮政编码">
+										<input id="zip" name="zip" type="text" class="form-control" placeholder="请输入邮政编码">
 									</div>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-md-2 control-label"><span class="txtred">*</span>详细地址：</label>
 								<div class="col-md-8">
-									<textarea name="address" class="form-control" rows="3" placeholder="输入详细的收货地址，小区名称、门牌号等"></textarea>
+									<textarea id="address" name="address" class="form-control" rows="3" placeholder="输入详细的收货地址，小区名称、门牌号等"></textarea>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-md-2 control-label"><span class="txtred">*</span>手机：</label>
 								<div class="col-md-3">
-									<input name="phone" type="text" class="form-control" placeholder="请输入手机号码">
+									<input id="phone" name="phone" type="text" class="form-control" placeholder="请输入手机号码">
 								</div>
 								<label class="col-md-2 control-label">固话：</label>
 								<div class="col-md-3">
-									<input name="tel" type="text" class="form-control" placeholder="请输入固定电话号码">
+									<input id="tel" name="tel" type="text" class="form-control" placeholder="请输入固定电话号码">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-md-2 control-label">地址类型：</label>
 								<div class="col-md-8">
-									<input name="tag" type="text" class="form-control" placeholder="请输入地址类型，如：家、公司或者学校">
+									<input id="tag" name="tag" type="text" class="form-control" placeholder="请输入地址类型，如：家、公司或者学校">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-md-2 control-label"><a href="address.html">返回</a>&nbsp;&nbsp;&nbsp;</label>
 								<div class="col-sm-10">
-									<input id="btn-add-new-address" type="button" class="col-md-1 btn btn-primary" value="保存" />
+									<input id="btn-update-address" type="button" class="col-md-1 btn btn-primary" value="更新" />
 									<input type="reset" class="col-md-offset-1 col-md-1 btn btn-primary" value="重置" />
 								</div>
 							</div>
@@ -288,22 +288,57 @@
 		</footer>
 		<!--页脚结束-->
 		<script>
-			$("#btn-add-new-address").click(function () {
+			//调用jquery-getUrlParam.js文件的getUrlParam方法获取商品id
+			url = window.location.href; /* 获取完整URL */
+			urlaid = url.substring(url.indexOf("=")+1)
+			// alert(urlid);
+			// var id = $.getUrlParam("id");
+			// console.log("id=" + id);
+			$(document).ready(function() {
 				$.ajax({
-					url: "/addresses/add_new_address",
+					url: "/addresses/" + urlaid + "/show",
+					type: "GET",
+					dataType: "JSON",
+					success: function(json) {
+						if (json.state == 200) {
+							console.log("title=" + json.data.title);
+
+							// alert($("#province-list").value())
+							//将查询到的信息写入下拉框
+
+							$("#name").val(json.data.name);
+							$("#zip").val(json.data.zip);
+							$("#address").val(json.data.address);
+							$("#phone").val(json.data.phone);
+							$("#tel").val(json.data.tel);
+							$("#tag").val(json.data.tag);
+
+						} else if (json.state == 4004) { // 地址数据不存在的异常
+							location.href = "index.html";
+						} else {
+							alert("获取地址信息失败！" + json.message);
+						}
+					}
+				});
+			});
+
+
+			$("#btn-update-address").click(function () {
+				$.ajax({
+					url: "/addresses/"+urlaid+"/update",
 					type: "POST",
 					data: $("#form-add-new-address").serialize(),
 					dataType: "JSON",
 					success: function (json) {
 						if (json.state == 200) {
-							alert("新增收货地址成功")
+							alert("修改收货地址成功")
 							location.href = "address.html";
 						} else {
-							alert("新增收货地址失败")
+							alert("修改收货地址失败")
 						}
 					},
 					error: function (xhr) {
-						alert("新增收货地址时产生未知的异常!"+xhr.message);
+						alert("修改收货地址时产生未知的异常!"+xhr.message);
 					}
 				});
 			});
@@ -327,6 +362,7 @@
 				$("#city-list").append(defaultOption);
 				$("#area-list").append(defaultOption);
 			});
+
 
 			//省的下拉列表数据展示
 			function showProvinceList() {
@@ -425,6 +461,8 @@
 			});
 
 		</script>
+		<script type="text/javascript" src="../js/jquery-getUrlParam.js"></script>
+
 
 	</body>
 

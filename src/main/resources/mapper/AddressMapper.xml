@@ -67,4 +67,33 @@
         order by modified_time DESC limit 0,1
     </select>
 
+    <update id="updateUserAddressByAid">
+        update t_address
+        set
+        <if test="name!=null">name = #{name},</if>
+        <if test="provinceName!=null">province_name = #{provinceName},</if>
+        <if test="provinceCode!=null">province_code = #{provinceCode},</if>
+        <if test="cityName!=null">city_name = #{cityName},</if>
+        <if test="cityCode!=null">city_code = #{cityCode},</if>
+        <if test="areaName!=null">area_name = #{areaName},</if>
+        <if test="areaCode!=null">area_code = #{areaCode},</if>
+        <if test="zip!=null">zip = #{zip},</if>
+        <if test="address!=null">address = #{address},</if>
+        <if test="phone!=null">phone = #{phone},</if>
+        <if test="tel!=null">tel = #{tel},</if>
+        <if test="tag!=null">tag = #{tag},</if>
+        modified_user = #{modifiedUser},
+        modified_time = #{modifiedTime}
+        where aid=#{aid}
+    </update>
+    <delete id="deleteAddressByAid">
+        delete from t_address
+        where aid = #{aid}
+    </delete>
+
+
+
+
+
+
 </mapper>

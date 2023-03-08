@@ -29,8 +29,11 @@ public interface ICartService {
      * @return 增加成功后新的数量
      */
     Integer addNum(Integer cid,Integer uid, String username);
+    Integer subNum(Integer cid,Integer uid, String username);
 
     List<CartVO> getVOByCids(Integer uid, Integer[] cids);//uid是为了判断数据归属是否正确
+
+    void deletebyCid(Integer cid,Integer uid);
 
 
 

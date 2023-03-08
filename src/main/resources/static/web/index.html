@@ -151,7 +151,7 @@
 						<div class="panel-heading">
 							<p class="panel-title">新到好货</p>
 						</div>
-						<div class="panel-body panel-item">
+						<div id="new-list" class="panel-body panel-item">
 							<div class="col-md-12">
 								<div class="col-md-7 text-row-2"><a href="product.html">齐心（COMIX）C5902 A5优品商务笔记本子记事本日记本122张</a></div>
 								<div class="col-md-2">¥18</div>
@@ -293,9 +293,37 @@
 
 		<script type="text/javascript">
 			$(document).ready(function() {
+				showNewList();
 				showHotList();
+
 			});
 
+			function showNewList() {
+				$("#new-list").empty();
+				$.ajax({
+					url: "/products/new_list",
+					type: "GET",
+					dataType: "JSON",
+					success: function(json) {
+						var list = json.data;
+						for (var i = 0; i < list.length; i++) {
+							console.log(list[i].title);//调试用
+							var html = '<div class="col-md-12">'
+									+ '<div class="col-md-7 text-row-2"><a href="product.html?id=#{id}">#{title}</a></div>'
+									+ '<div class="col-md-2">¥#{price}</div>'
+									+ '<div class="col-md-3"><img src="..#{image}collect.png" class="img-responsive" /></div>'
+									+ '</div>';
+
+							html = html.replace(/#{id}/g, list[i].id);
+							html = html.replace(/#{title}/g, list[i].title);
+							html = html.replace(/#{price}/g, list[i].price);
+							html = html.replace(/#{image}/g, list[i].image);
+
+							$("#new-list").append(html);
+						}
+					}
+				});
+			}
 			function showHotList() {
 				$("#hot-list").empty();
 				$.ajax({

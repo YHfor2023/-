@@ -63,6 +63,21 @@ public interface AddressMapper {
      */
     Address findLastModified(Integer uid);
 
+    //更新用户地址信息
+    int updateUserAddressByAid(Address address);
+
+    /**
+     * 删除地址
+     * @param aid
+     * @param modifiedUser
+     * @param modifiedTime
+     * @return
+     */
+    int deleteAddressByAid(Integer aid);
+
+
+
+
 
 
 

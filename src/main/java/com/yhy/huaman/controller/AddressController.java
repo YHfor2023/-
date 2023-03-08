@@ -25,6 +25,8 @@ public class AddressController extends BaseController{
         return new JsonResult<>(OK);
     }
 
+
+
     @RequestMapping({"","/"})
     public JsonResult<List<Address>> getByUid(HttpSession session) {
         Integer uid = getUidFromSession(session);
@@ -43,12 +45,28 @@ public class AddressController extends BaseController{
         return new JsonResult<>(OK);
     }
 
+    @RequestMapping("{aid}/show")
+    public JsonResult<Address> show(@PathVariable("aid") Integer aid,HttpSession session) {
+        Address address=  addressService.getByAid(aid,getUidFromSession(session));
+        return new JsonResult<Address>(OK,address);
+    }
+
+    @RequestMapping("{aid}/update")
+    public JsonResult<Void> updateInfo(@PathVariable("aid") Integer aid,Address address,HttpSession session) {
+        address.setAid(aid);
+        addressService.changeInfo(getUidFromSession(session),getUsernameFromSession(session),address);
+        return new JsonResult<>(OK);
+    }
+    @RequestMapping("test")
+    public JsonResult<Void> test(Integer aid,Address address){
+        System.out.println("aid="+aid);
+        System.out.println("address ="+address);
+        return new JsonResult<>(OK);
+    }
+
     @RequestMapping("{aid}/delete")
-    public JsonResult<Void> delete(@PathVariable("aid") Integer aid,HttpSession session) {
-        addressService.delete(
-                aid,
-                getUidFromSession(session),
-                getUsernameFromSession(session));
+    public JsonResult<Void> deleteInfo(@PathVariable("aid") Integer aid) {
+        addressService.deleteAddressByAid(aid);
         return new JsonResult<>(OK);
     }
 
