@@ -349,7 +349,7 @@
 					dataType: "JSON",
 					success: function(json) {
 						if (json.state == 200) {
-							location.href = "payment.html";
+							location.href = "payment.html?oid="+json.data.oid;
 						} else {
 							alert("创建订单失败！" + json.message);
 						}

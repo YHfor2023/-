@@ -4,6 +4,40 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yhy.huaman.mapper.OrderMapper">
 
+    <resultMap id="queryOrder" type="com.yhy.huaman.entity.Order">
+        <id property="oid" column="oid"/>
+        <result property="uid" column="uid"/>
+        <result property="aid" column="aid"/>
+        <result property="recvName" column="recv_name"/>
+        <result property="recvPhone" column="recv_phone"/>
+        <result property="recvProvince" column="recv_province"/>
+        <result property="recvCity" column="recv_city"/>
+        <result property="recvArea" column="recv_area"/>
+        <result property="recvAddress" column="recv_address"/>
+        <result property="totalPrice" column="total_price"/>
+        <result property="status" column="status"/>
+        <result property="orderTime" column="order_time"/>
+        <result property="payTime" column="pay_time"/>
+        <result property="createdUser" column="created_user"/>
+        <result property="createdTime" column="created_time"/>
+        <result property="modifiedUser" column="modified_user"/>
+        <result property="modifiedTime" column="modified_time"/>
+    </resultMap>
+
+    <resultMap id="queryOrderItem" type="com.yhy.huaman.entity.OrderItem">
+        <id property="id" column="id"/>
+        <result property="oid" column="oid"/>
+        <result property="pid" column="pid"/>
+        <result property="title" column="title"/>
+        <result property="image" column="image"/>
+        <result property="price" column="price"/>
+        <result property="num" column="num"/>
+        <result property="createdUser" column="created_user"/>
+        <result property="createdTime" column="created_time"/>
+        <result property="modifiedUser" column="modified_user"/>
+        <result property="modifiedTime" column="modified_time"/>
+    </resultMap>
+
     <!-- 插入订单数据 -->
     <insert id="insertOrder" useGeneratedKeys="true" keyProperty="oid">
         insert into t_order (
@@ -27,4 +61,25 @@
         #{createdTime}, #{modifiedUser}, #{modifiedTime}
         )
     </insert>
+
+
+    <!--    #根据订单号查询订单-->
+    <select id="queryOrderByOid" resultMap="queryOrder">
+        select * from t_order where oid = #{oid}
+    </select>
+
+    <!--    #根据订单号修改状态-->
+    <update id="updateStatusByOidInt">
+        update t_order set status = #{status},pay_time = #{payTime} where oid = #{oid}
+    </update>
+
+    <!--    #根据oid能从order_item表中找到对应的orderItem信息-->
+    <select id="queryOrderItemByOid" resultMap="queryOrderItem">
+        SELECT * FROM t_order_item WHERE oid = #{oid}
+    </select>
+
+    <!--    #根据uid和pid删除对应的t_cart表中的数据-->
+    <delete id="deleteCartByUidAndPid">
+        DELETE FROM t_cart WHERE uid = #{uid} AND pid = #{pid}
+    </delete>
 </mapper>

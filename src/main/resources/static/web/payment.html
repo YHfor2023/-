@@ -20,7 +20,7 @@
 		<link rel="stylesheet" type="text/css" href="../css/top.css" />
 		<link rel="stylesheet" type="text/css" href="../css/footer.css" />
 		<link rel="stylesheet" type="text/css" href="../css/orderConfirm.css" />
-		<script src="../js/orderConfirm.js" type="text/javascript" charset="utf-8"></script>
+<!--		<script src="../js/orderConfirm.js" type="text/javascript" charset="utf-8"></script>-->
 	</head>
 
 	<body>
@@ -52,7 +52,7 @@
 									<li><a href="password.html">修改密码</a></li>
 									<li><a href="userdata.html">个人资料</a></li>
 									<li><a href="upload.html">上传头像</a></li>
-									<li><a href="address.html">收货管理	</a></li>
+									<li><a href="addjsons.html">收货管理	</a></li>
 								</ul>
 							</div>
 						</li>
@@ -111,7 +111,7 @@
 				<div class="col-md-12">
 					<form role="form">
 						<div class="form-group">
-							<label for="name">
+							<label >
 								<p>选择支付方式：</p>
 							</label>
 							<div class="text-center">
@@ -129,10 +129,10 @@
 								</label>
 							</div>
 						</div>
-						<div>订单号：1101000301，支付金额¥5298，收款方圆心电脑商城</div>
+						<div id="order"></div>
 						<div class="pay-bar">
 							<a href="cart.html">返回购物车</a>
-							<span class="pull-right">¥5298.00 <input type="button" value="确认付款" class="btn btn-primary btn-lg link-success"/></span>
+							<span class="pull-right"><input type="button" id="pay" value="确认付款" class="btn btn-primary btn-lg link-success"/></span>
 						</div>
 					</form>
 				</div>
@@ -148,7 +148,7 @@
 					<p>品质保障</p>
 				</div>
 				<div class="col-md-2">
-					<span class="fa fa-address-card-o"></span>
+					<span class="fa fa-addjsons-card-o"></span>
 					<p>私人订制</p>
 				</div>
 				<div class="col-md-2">
@@ -223,6 +223,56 @@
 			</div>
 		</footer>
 		<!--页脚结束-->
+		<script type="text/javascript">
+			$(document).ready(function (){
+				getOrderByOid();
+			})
+			function getOrderByOid(){
+				// alert(location.search.substr(1));
+				$.ajax({
+					url : "/orders/queryOrder",
+					type: "get",
+					data: location.search.substr(1),
+					dataType: "json",
+					success: function (json) {
+						if (json.state == 200){
+							alert(json.data.oid);
+							//修改订单号和支付金额
+							var ordershow = '订单号：<span style="color: red;font-weight: bold" >#{oid}</span>&nbsp;，\n' +
+									'支付金额¥&nbsp;<span style="color: red;font-weight: bold">#{totalPrice}</span>&nbsp;，收款方xx商城';
+							ordershow = ordershow.replace("#{oid}",json.data.oid);
+							ordershow = ordershow.replace("#{totalPrice}",json.data.totalPrice);
+							$("#order").append(ordershow);
+						}else {
+							alert("???");
+						}
+					},
+					error: function (xhr) {
+						alert("在查询订单时发生未知的异常"+xhr.status);
+					}
+				});
+			}
+			var oiditem = location.search.substr(1);
+			var oid = oiditem.substring(oiditem.indexOf('=')+1);
+			$("#pay").click(function () {
+				$.ajax({
+					url : "/orders/updateStatus?status=1&oid="+oid,
+					type: "get",
+					dataType: "json",
+					success: function (json) {
+						if (json.state == 200){
+							// alert(json.data);
+							location.href = "paySuccess.html";
+						}else {
+							alert("???");
+						}
+					},
+					error: function (xhr) {
+						alert("在确认支付时发生未知的异常"+xhr.status);
+					}
+				});
+			})
+		</script>
 	</body>
 
 </html>

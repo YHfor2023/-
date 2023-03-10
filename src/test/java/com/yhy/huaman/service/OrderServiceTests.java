@@ -22,4 +22,11 @@ public class OrderServiceTests {
         Order order = orderService.create(13, cids, 11, "小红");
         System.out.println(order);
     }
+
+    @Test
+    public void test() {
+//        System.out.println(orderService.queryOrderItemByOid(1));
+//        System.out.println(orderService.deleteCartByUidAndPid(14,10000000));
+        System.out.println(orderService.updateOrderStatusByOid(26,14,1));
+    }
 }
