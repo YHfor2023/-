@@ -78,9 +78,12 @@
 				</ul>
 			</div>
 			<div class="col-md-6">
-				<form action="search.html" class="form-inline pull-right" role="form">
+				<form action="search.html"  onsubmit="return checkIfHaveVal()" class="form-inline pull-right" role="form">
 					<div class="form-group">
-						<input type="text" class="form-control" id="search" name="search" placeholder="请输入商品名称进行搜索">
+<!--						http://localhost:8080/web/search.html?title=1&pageNum=1&pageSize=12-->
+						<input type="text" class="form-control" id="search" name="title" placeholder="请输入商品名称进行搜索">
+						<input type="hidden"  id="pageNum" name="pageNum" value="1">
+						<input type="hidden"  id="pageSize" name="pageSize" value="12">
 					</div>
 					<button type="submit" class="btn btn-default btn-sm"><span class="fa fa-search"></span></button>
 				</form>
@@ -297,6 +300,13 @@
 				showHotList();
 
 			});
+			function checkIfHaveVal(){
+				let val = $("#search").val()
+				if (val === '') {
+					alert("请先输入搜索内容！")
+					return false;
+				}
+			}
 
 			function showNewList() {
 				$("#new-list").empty();

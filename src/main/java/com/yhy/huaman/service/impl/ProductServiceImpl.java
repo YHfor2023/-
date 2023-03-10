@@ -1,6 +1,8 @@
 package com.yhy.huaman.service.impl;
 
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.yhy.huaman.entity.Product;
 import com.yhy.huaman.mapper.ProductMapper;
 import com.yhy.huaman.service.IProductService;
@@ -57,6 +59,16 @@ public class ProductServiceImpl implements IProductService {
         product.setModifiedTime(null);
 
         return product;
+    }
+
+    @Override
+    public PageInfo<Product> queryProductByTitle(Integer pageNum, Integer pageSize, String title) {
+        //开启分页功能
+        PageHelper.startPage(pageNum,pageSize);
+        //调用持久层方法进行查询
+        List<Product> products = productMapper.queryProductByTitle(title);
+        //返回分页数据
+        return new PageInfo<>(products);
     }
 
 }

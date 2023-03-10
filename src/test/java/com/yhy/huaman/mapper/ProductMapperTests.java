@@ -23,6 +23,11 @@ public class ProductMapperTests {
         List<Product> products = productMapper.findNewList();
         System.out.println(products);
     }
+    @Test
+    public void searchforProducts(){
+        List<Product> products=productMapper.queryProductByTitle("戴尔");
+        System.out.println(products);
+    }
 
 
 

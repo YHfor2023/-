@@ -1,5 +1,6 @@
 package com.yhy.huaman.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.yhy.huaman.entity.Product;
 import com.yhy.huaman.service.IProductService;
 import com.yhy.huaman.util.JsonResult;
@@ -34,6 +35,17 @@ public class ProductController extends BaseController {
         Product data = productService.findById(id);
         return new JsonResult<Product>(OK, data);
     }
+
+    // 处理根据产品关键字进行模糊查询的请求
+    @GetMapping("/{pageNum}/{pageSize}/{title}")
+    public JsonResult<PageInfo<Product>> quertByTitle(@PathVariable("pageNum") Integer pageNum,
+                                                      @PathVariable("pageSize") Integer pageSize,
+                                                      @PathVariable("title") String title){
+        PageInfo<Product> lists = productService.queryProductByTitle(pageNum, pageSize, title);
+        return new JsonResult<>(OK,lists);
+    }
+
+
 
 }
 
