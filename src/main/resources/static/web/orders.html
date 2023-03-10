@@ -128,14 +128,14 @@
 				</div>
 			</div>
 			<!--左侧导航结束-->
-			<div class="col-md-10">
+			<div class="col-md-10" id="orderTitalAndContent">
 				<div class="panel panel-default">
-					<div class="panel-heading">
+					<div class="panel-heading" id="orderTital">
 						<p class="panel-title">
 							订单号：1101000001，下单时间：2018-12-1 17:50:30 ，收货人：八戒
 						</p>
 					</div>
-					<div class="panel-body">
+					<div class="panel-body" id="orderContent">
 						<table class="orders-table" width="100%">
 							<thead>
 								<tr>
@@ -326,9 +326,98 @@
 		<!--页脚结束-->
 		<script>
 			$(document).ready(function (){
-				// showOrdersList();
+				showOrdersList();
 			})
+			function showOrdersList() {
+				$("#orderTitalAndContent").empty();
+				$.ajax({
+					url: "/orders/queryOrderByUid",
+					type: "GET",
+					dataType: "JSON",
+					success: function(json) {
+						const list = json.data;
+						var ordersall = '';
+						var contentall = '';
+						for (var i = 0; i < list.length; i++) {
+							var tital ='<div class="panel panel-default">\n' +
+									'<div class="panel-heading" id="orderTital">\n' +
+									'<p class="panel-title">\n' +
+									'订单号：#{oid}，下单时间：#{createdTime} ，收货人：#{recvName}\n' +
+									'</p>\n' +
+									'</div>\n' +
+									'<div class="panel-body" id="orderContent">\n' +
+									'<table class="orders-table" width="100%">\n' +
+									'<thead>\n' +
+									'<tr>\n' +
+									'<th width="15%"></th>\n' +
+									'<th width="30%">商品</th>\n' +
+									'<th width="8%">单价</th>\n' +
+									'<th width="8%">数量</th>\n' +
+									'<th width="9%">小计</th>\n' +
+									'<th width="10%">售后</th>\n' +
+									'<th width="10%">状态</th>\n' +
+									'<th width="10%">操作</th>\n' +
+									'</tr>\n' +
+									'</thead>\n' +
+									'<tbody class="orders-body" id="content#{oid}">\n' +
+									'</tbody>\n' +
+									'</table>\n' +
+									'<div>\n' +
+									'<span class="pull-right">订单总金额：#{totalPrice}</span>\n' +
+									'</div>\n' +
+									'</div>\n' +
+									'</div>';
+							tital = tital.replaceAll(/#{oid}/g, list[i].oid);
+							tital = tital.replaceAll(/#{createdTime}/g, list[i].createdTime);
+							tital = tital.replaceAll(/#{recvName}/g, list[i].recvName);
+							tital = tital.replaceAll(/#{totalPrice}/g, list[i].totalPrice);
+							showOrderItemsList( list[i].oid);
+							$("#orderTitalAndContent").append(tital);
+						}
+					},
+					error: function (xhr) {
+						alert("加载购物车列表数据时产生未知的异常"+xhr.status);
+					}
+				});
+			}
 
+			function showOrderItemsList(oid) {
+				//内部详细商品信息开始
+				$.ajax({
+					url: "/orders/queryOrderItem?oid="+oid,
+					type: "GET",
+					dataType: "JSON",
+					success: function(json2) {
+						var list2 = json2.data;
+						var contentall='';
+						for (var i = 0; i < list2.length; i++) {
+							var content ='<tr>\n' +
+									'<td><img src="..#{image}collect.png" class="img-responsive" /></td>\n' +
+									'<td>#{title}</td>\n' +
+									'<td>¥<span>#{price}</span></td>\n' +
+									'<td>#{num}件</td>\n' +
+									'<td>¥<span>#{totalprice}</span></td>\n' +
+									'<td><a href="#">申请售后</a></td>\n' +
+									'<td>\n' +
+									'<div>已发货</div>\n' +
+									'<div><a href="orderInfo.html">订单详情</a></div>\n' +
+									'</td>\n' +
+									'<td><a href="#" class="btn btn-default btn-xs">确认收货</a></td>\n' +
+									'</tr>';
+							content = content.replaceAll(/#{image}/g, list2[i].image);
+							content = content.replaceAll(/#{title}/g, list2[i].title);
+							content = content.replaceAll(/#{price}/g, list2[i].price);
+							content = content.replaceAll(/#{num}/g, list2[i].num);
+							content = content.replaceAll(/#{totalprice}/g, list2[i].price*list2[i].num);
+							contentall=contentall+content;
+						}
+						$("#content"+oid).append(contentall);
+					},
+					error: function (xhr) {
+						alert("加载订单列表数据时产生未知的异常"+xhr.status);
+					}
+				});
+			}
 		</script>
 	</body>
 

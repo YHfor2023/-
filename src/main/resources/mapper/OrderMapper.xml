@@ -67,6 +67,10 @@
     <select id="queryOrderByOid" resultMap="queryOrder">
         select * from t_order where oid = #{oid}
     </select>
+    <!--    #根据用户id号查询订单-->
+    <select id="queryOrderByUid" resultMap="queryOrder">
+        select * from t_order where uid = #{uid}
+    </select>
 
     <!--    #根据订单号修改状态-->
     <update id="updateStatusByOidInt">

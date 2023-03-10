@@ -15,6 +15,8 @@ public interface IOrderService {
     //根据oid能从order_item表中找到对应的OrderItem信息的抽象方法
     List<OrderItem> queryOrderItemByOid(Integer oid);
 
+    List<Order> queryOrderByUid(Integer uid);
+
 
     Order queryOrderByOid(Integer oid);
 

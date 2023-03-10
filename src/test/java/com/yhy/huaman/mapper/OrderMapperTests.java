@@ -36,10 +36,11 @@ public class OrderMapperTests {
 
     @Test
     public void test() {
-        System.out.println(orderMapper.queryOrderByOid(1));
-        System.out.println(orderMapper.queryOrderItemByOid(2));
-        System.out.println(orderMapper.updateStatusByOidInt(1,1,new Date()));
-        System.out.println(orderMapper.deleteCartByUidAndPid(14,10000000));
+//        System.out.println(orderMapper.queryOrderByOid(1));
+//        System.out.println(orderMapper.queryOrderItemByOid(2));
+//        System.out.println(orderMapper.updateStatusByOidInt(1,1,new Date()));
+//        System.out.println(orderMapper.deleteCartByUidAndPid(14,10000000));
+        System.out.println(orderMapper.queryOrderByUid(14));
 
     }
 }

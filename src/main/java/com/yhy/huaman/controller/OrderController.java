@@ -43,6 +43,12 @@ public class OrderController extends BaseController {
         return new JsonResult<>(OK,orderItems);
     }
 
+    @GetMapping("/queryOrderByUid")
+    public JsonResult<List<Order>> queryOrderItemByOid(HttpSession session){
+        List<Order>  orders = orderService.queryOrderByUid(getUidFromSession(session));
+        return new JsonResult<>(OK,orders);
+    }
+
     // 处理根据订单oid修改订单状态的请求
     @GetMapping("/updateStatus")
     public JsonResult<Void> updateStatusByOid(Integer oid,Integer status,HttpSession session){

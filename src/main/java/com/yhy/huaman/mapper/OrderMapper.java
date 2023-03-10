@@ -45,6 +45,13 @@ public interface OrderMapper {
     List<OrderItem> queryOrderItemByOid(Integer oid);
 
     /**
+     * //根据uid能从order_item表中找到对应的pid信息
+     * @param uid 用户id
+     * @return 订单 列表
+     */
+    List<Order> queryOrderByUid(Integer uid);
+
+    /**
      * //根据uid和pid删除对应的t_cart表中的数据
      * @param uid 用户id
      * @param pid 商品id

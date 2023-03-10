@@ -124,6 +124,15 @@ public class OrderServiceImpl implements IOrderService {
         return orderItems;
     }
 
+    @Override
+    public List<Order> queryOrderByUid(Integer uid) {
+        List<Order> orders = orderMapper.queryOrderByUid(uid);
+        if (orders.size() == 0){
+            throw new OrderNotExistsException("订单不存在！！！");
+        }
+        return orders;
+    }
+
     //根据订单oid查询order信息的具体逻辑
     @Override
     public Order queryOrderByOid(Integer oid) {
