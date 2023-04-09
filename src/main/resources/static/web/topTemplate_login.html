@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="UTF-8">
     <!--edge浏览器H5兼容设置-->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!--360浏览器H5兼容设置-->
     <meta name="renderer" content="webkit"/>
-    <title>花漫|购物车</title>
+    <title>花漫</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--导入核心文件-->
     <script src="../bootstrap3/js/holder.js"></script>
@@ -18,9 +17,6 @@
     <link rel="stylesheet" href="../bootstrap3/font-awesome-4.7.0/css/font-awesome.css"/>
     <link rel="stylesheet" type="text/css" href="../css/layout.css"/>
     <link rel="stylesheet" type="text/css" href="../css/top.css"/>
-    <link rel="stylesheet" type="text/css" href="../css/footer.css"/>
-    <link rel="stylesheet" type="text/css" href="../css/cart.css"/>
-    <!--		<script src="../js/cart.js" type="text/javascript" charset="utf-8"></script>-->
 </head>
 <style>
 
@@ -51,12 +47,6 @@
         width: 120px;
         margin-right: 40px;
         /*background-color: #d3d3d3;*/
-    }
-    .logo img{
-        margin-top: -1px;
-        margin-left: -1px;
-        height: 42px;
-        width: 122px;
     }
 
     .leading_items {
@@ -188,7 +178,6 @@
     }
 </style>
 <body>
-<!--头部-->
 <div class="leading">
     <div class="leading_content">
         <div class="logo">
@@ -392,14 +381,16 @@
         </div>
 
         <div class="leading_buns">
-            <input value="登录" type="button"
-                   onclick="javascript:window.location.href='login.html'"
-                   style="height: 40px;width: 75px;border: 1px solid white;background-color: transparent">
-            <input value="注册" type="button"
-                   onclick="javascript:window.location.href='register.html'"
-                   style="height: 40px;width: 75px;border: 1px solid white;background-color: #3c3c3c;color: white">
-        </div>
+            <!--            <input value="购物车" type="button"-->
+            <!--                   onclick="javascript:window.location.href='login.html'"-->
+            <!--                   style="height: 40px;width: 75px;">-->
+            <!--            <div style="float:right;border-radius: 100%;height: 40px;width: 40px;background-color: #5bc0de">-->
 
+            <!--            </div>-->
+            <button class="leading_bun-2"></button>
+            <button class="leading_bun-2"></button>
+            <button class="leading_bun-2"></button>
+        </div>
         <div class="search">
             <form action="search.html"  onsubmit="return checkIfHaveVal()" class="form-inline pull-right" role="form">
                 <div class="form-group">
@@ -418,269 +409,6 @@
         </div>
     </div>
 </div>
-<!--头部结束-->
-<!--主题内容开始-->
-<div style="height: 600px;">
-    <div style="float:left;height: 600px;width: 70%;">
-        <div class="container" style="margin-top: 50px;padding:0;width: 100%">
-            <div class="col-md-offset-1 col-md-10" style="width: 100%;margin: 0 auto">
-                <div class="panel panel-primary"
-                     style="border: 1px solid white">
-                    <div class="panel-heading"
-                         style="background-color: #3c3c3c;border: 1px solid white">
-                        <p class="panel-title"><span class="fa fa-shopping-cart"></span> 购物车</p>
-                    </div>
-                    <div class="panel-body">
-                        <form action="orderConfirm.html" role="form">
-                            <!--购物车表格开始-->
-                            <table class="cart-table" width="100%">
-                                <thead>
-                                <tr>
-                                    <th width="8%">
-                                        <input type="checkbox" class="ckall" onclick="checkall(this)"/>全选
-                                    </th>
-                                    <th width="120"></th>
-                                    <th width="25%">商品</th>
-                                    <th width="25%">详细信息</th>
-                                    <th width="15%">数量</th>
-                                    <th width="11%">金额</th>
-                                </tr>
-                                </thead>
-                                <tbody id="cart-list" class="cart-body">
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" class="ckitem"/>
-                                    </td>
-                                    <td><img src="../images/portal/10000001/collect.png"
-                                             class="img-responsive"/></td>
-                                    <td style="">针织短裤</td>
-                                    <td><li>颜色：红色</li>
-                                        <li>尺码：M</li>
-                                        <li>面料：纯棉</li>
-                                        <li>等级：亲肤</li></td>
-                                    <td>
-                                        <div>
-                                            <input type="button" value="-" class="num-btn" onclick="reduceNum(1)"/>
-                                            <input type="text" size="2" readonly="readonly"
-                                                   class="num-text" value="1">
-                                            <input class="num-btn" type="button" value="+" onclick="addNum(1)"/>
-
-                                        </div>
-                                        <div style="width: 100%;border: 1px solid white;margin-top: 10px">
-                                            <input type="button" onclick=""
-                                                   class="cart-del btn btn-default btn-xs" value="修改"
-                                                    style="width: 70%;margin: 0 auto"/>
-                                        </div>
-                                        <div style="width: 100%;border: 1px solid white;margin-top: 5px">
-                                            <input type="button" onclick="delCartItem(this)"
-                                                   class="cart-del btn btn-default btn-xs" value="删除"
-                                                   style="width: 70%;margin: 0 auto"/>
-                                        </div>
-                                    </td>
-                                    <td><li>单价：98<span>¥</span></li>
-                                        <li>小计：98<span>¥</span></li></td>
-                                </tr>
-                                </tbody>
-                            </table>
-                            <div class="total-bar"
-                                 style="height: 50px;background-color: #fdf9fb ">
-                                <a href="javascript:selDelCart()"
-                                   class="cart-del-sel btn btn-default btn-xs"
-                                   style="float: right;margin-right: 30px;
-                                   border: 1px solid #3c3c3c;background-color:#3c3c3c;color: white">删除所选商品</a>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div style="float:left;height: 600px;width: 30%;">
-        <div style="height: 400px;width: 70%;margin: 120px auto">
-            <div class="total-bar" style="margin: 10px 0; background-color: #fdf9fb ">订单小结
-                <span class="pull-right">已经选择
-				<span id="selectCount">0</span>件服装
-				</span>
-            </div>
-            <div class="total-bar" style="margin: 10px 0;background-color: #fdf9fb ">服装总计
-                <span class="pull-right">
-				<span id="selectTotal">0</span>￥
-				</span>
-            </div>
-            <div class="total-bar" style="margin: 10px 0;background-color: #fdf9fb ">运输费用
-                <span class="pull-right">
-				<span>0</span>￥
-				</span>
-            </div>
-            <div class="total-bar" style="margin: 10px 0;background-color: #fdf9fb ">合计
-                <span class="pull-right">
-				<span>0</span>￥
-				</span>
-            </div>
-            <div class="total-bar" style="margin: 0;padding: 0">
-                <input type="submit"
-                       style="width: 100%;color:white;background-color: #3c3c3c ;border: white 1px solid"
-                       value="  结  算  " class="btn btn-primary btn-lg link-account"/>
-                </span>
-            </div>
-            <div class="total-bar" style="margin: 10px 0;">付款方式
-                <span class="pull-right">
-				微信支付
-				</span>
-            </div>
-        </div>
-    </div>
-</div>
-<!--页脚开始-->
-<div class="footer1"
-     style="background-color: #ffedf3;height: 100px;width: 100%;">
-    <h5 style="padding-top: 20px;margin: 0;text-align: center">
-        京ICP备11017824号-4 / 京ICP证130164号 北京市公安局朝阳分局备案编号:110105000501</h5>
-    <h5 style="padding-top: 20px;margin: 0;text-align: center">
-        Copyright © 2006-2023 ZCOOL 中文 English</h5>
-</div>
-<!--页脚结束-->
-<!--		<script type="text/javascript">-->
-<!--			$(document).ready(function() {-->
-<!--				showCartList();-->
-<!--			});-->
-
-<!--			//展示购物车列表数据-->
-<!--			function showCartList() {-->
-<!--				$("#cart-list").empty();-->
-<!--				$.ajax({-->
-<!--					url: "/carts",-->
-<!--					type: "GET",-->
-<!--					dataType: "JSON",-->
-<!--					success: function(json) {-->
-<!--						var list = json.data;-->
-<!--						// var totalnum=0;-->
-<!--						// var totalprice=0;-->
-<!--						for (var i = 0; i < list.length; i++) {-->
-<!--							var tr = '<tr>\n' +-->
-<!--									'<td>\n' +-->
-<!--									'<input name="cids" value="#{cid}" type="checkbox" class="ckitem" />\n' +-->
-<!--									'</td>\n' +-->
-<!--									'<td><img src="..#{image}collect.png" class="img-responsive" /></td>\n' +-->
-<!--									'<td>#{title}#{msg}</td>\n' +-->
-<!--									'<td>¥<span id="goodsPrice#{cid}">#{singlePrice}</span></td>\n' +-->
-<!--									'<td>\n' +-->
-<!--									'<input type="button" value="-" class="num-btn" onclick="subNum(#{cid})" />\n' +-->
-<!--									'<input id="goodsCount#{cid}" type="text" size="2" readonly="readonly" class="num-text" value="#{num}">\n' +-->
-<!--									'<input class="num-btn" type="button" value="+" onclick="addNum(#{cid})" />\n' +-->
-<!--									'</td>\n' +-->
-<!--									'<td><span id="goodsCast#{cid}">#{totalPrice}</span></td>\n' +-->
-<!--									'<td>\n' +-->
-<!--									'<input type="button" onclick="deletebyCid(#{cid})" class="cart-del btn btn-default btn-xs" value="删除" />\n' +-->
-<!--									'</td>\n' +-->
-<!--                                    '<td>\n' +-->
-<!--                                    '<input type="button" onclick="deletebyCid(#{cid})" class="cart-del btn btn-default btn-xs" value="修改" />\n' +-->
-<!--                                    '</td>\n' +-->
-<!--									'</tr>';-->
-<!--							tr = tr.replaceAll(/#{cid}/g, list[i].cid);-->
-<!--							tr = tr.replaceAll(/#{image}/g, list[i].image);-->
-<!--							tr = tr.replaceAll(/#{title}/g, list[i].title);-->
-<!--							tr = tr.replaceAll(/#{singlePrice}/g, list[i].realPrice);-->
-<!--							tr = tr.replaceAll(/#{num}/g, list[i].num);-->
-<!--							tr = tr.replaceAll(/#{totalPrice}/g, list[i].realPrice * list[i].num);-->
-<!--							// totalnum=totalnum+1;-->
-<!--							// totalprice = totalprice +list[i].price*list[i].num;-->
-<!--							if (list[i].realPrice < list[i].price) {-->
-<!--								tr = tr.replace(/#{msg}/g, "比加入时降价" + (list[i].price - list[i].realPrice) + "元");-->
-<!--							} else {-->
-<!--								tr = tr.replace(/#{msg}/g, "");-->
-<!--							}-->
-<!--							$("#cart-list").append(tr);-->
-<!--						}-->
-<!--						// $("#selectCount").html(totalnum);-->
-<!--						// $("#selectTotal").html(totalprice);-->
-<!--					},-->
-<!--					error: function (xhr) {-->
-<!--						alert("加载购物车列表数据时产生未知的异常"+xhr.status);-->
-<!--					}-->
-<!--				});-->
-<!--			}-->
-
-<!--			function addNum(cid) {-->
-<!--				$.ajax({-->
-<!--					url: "/carts/"+cid+"/num/add",-->
-<!--					type: "POST",-->
-<!--					dataType: "JSON",-->
-<!--					success: function (json) {-->
-<!--						if (json.state == 200) {-->
-<!--							$("#goodsCount"+cid).val(json.data);//字符串+整数cid后结果为字符串-->
-
-<!--							//更新该商品总价-->
-<!--							/*-->
-<!--                                        html()方法:-->
-<!--                                        不传参:是获取某个标签内部的内容(文本或标签)-->
-<!--                                        传参:将参数放到标签里面替换掉该标签原有内容-->
-<!--                                        * */-->
-<!--							var price = $("#goodsPrice"+cid).html();-->
-<!--							var totalPrice = price * json.data;-->
-
-<!--							//将商品总价更新到控件中-->
-<!--							$("#goodsCast"+cid).html(totalPrice);-->
-<!--						} else {-->
-<!--							alert("增加购物车商品数量失败"+json.message);-->
-<!--						}-->
-<!--					},-->
-<!--					error: function (xhr) {-->
-<!--						alert("增加购物车商品数量时产生未知的异常!"+xhr.message);-->
-<!--					}-->
-<!--				});-->
-<!--			}-->
-
-<!--			function subNum(cid) {-->
-<!--				$.ajax({-->
-<!--					url: "/carts/"+cid+"/num/sub",-->
-<!--					type: "POST",-->
-<!--					dataType: "JSON",-->
-<!--					success: function (json) {-->
-<!--						if (json.state == 200) {-->
-<!--							$("#goodsCount"+cid).val(json.data);//字符串+整数cid后结果为字符串-->
-
-<!--							//更新该商品总价-->
-<!--							/*-->
-<!--                                        html()方法:-->
-<!--                                        不传参:是获取某个标签内部的内容(文本或标签)-->
-<!--                                        传参:将参数放到标签里面替换掉该标签原有内容-->
-<!--                                        * */-->
-<!--							var price = $("#goodsPrice"+cid).html();-->
-<!--							var totalPrice = price * json.data;-->
-
-<!--							//将商品总价更新到控件中-->
-<!--							$("#goodsCast"+cid).html(totalPrice);-->
-<!--							if (totalPrice==0){-->
-<!--								deletebyCid(cid);-->
-<!--							}-->
-<!--						} else {-->
-<!--							alert("减少购物车商品数量失败"+json.message);-->
-<!--						}-->
-<!--					},-->
-<!--					error: function (xhr) {-->
-<!--						alert("减少购物车商品数量时产生未知的异常!"+xhr.message);-->
-<!--					}-->
-<!--				});-->
-<!--			}-->
-
-<!--			function deletebyCid(cid) {-->
-<!--				$.ajax({-->
-<!--					url: "/carts/"+cid+"/delete",-->
-<!--					type: "POST",-->
-<!--					dataType: "JSON",-->
-<!--					success: function (json) {-->
-<!--						location.href = "cart.html";-->
-<!--					},-->
-<!--					error: function (xhr) {-->
-<!--						alert("删除时产生未知的异常!"+xhr.message);-->
-<!--					}-->
-<!--				});-->
-<!--			}-->
-
-
-<!--		</script>-->
 
 </body>
-
 </html>

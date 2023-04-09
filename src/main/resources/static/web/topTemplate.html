@@ -1,88 +1,968 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<!--edge浏览器H5兼容设置-->
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<!--360浏览器H5兼容设置-->
-		<meta name="renderer" content="webkit" />
-		<title>电脑商城</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<!--导入核心文件-->
-		<script src="../bootstrap3/js/holder.js"></script>
-		<link href="../bootstrap3/css/bootstrap.css" rel="stylesheet" type="text/css">
-		<script src="../bootstrap3/jquery-1.9.1.min.js"></script>
-		<script src="../bootstrap3/js/bootstrap.js"></script>
-		<!-- 字体图标 -->
-		<link rel="stylesheet" href="../bootstrap3/font-awesome-4.7.0/css/font-awesome.css" />
-		<link rel="stylesheet" type="text/css" href="../css/layout.css" />
-		<link rel="stylesheet" type="text/css" href="../css/top.css" />
-	</head>
-	<body>
-		<!--头部-->
-		<header class="header">
-			<!--电脑商城logo-->
-			<div class="row">
-				<div class="col-md-3">
-					<a href="index.html">
-						<img src="../images/index/stumalllogo.png" />
-					</a>
-				</div>
-				<!--快捷选项-->
-				<div class="col-md-9 top-item">
-					<ul class="list-inline pull-right">
-						<li><a href="favorites.html"><span class="fa fa-heart"></span>&nbsp;收藏</a></li>
-						<li class="li-split">|</li>
-						<li><a href="orders.html"><span class="fa fa-file-text"></span>&nbsp;订单</a></li>
-						<li class="li-split">|</li>
-						<li><a href="cart.html"><span class="fa fa-cart-plus"></span>&nbsp;购物车</a></li>
-						<li class="li-split">|</li>
-						<li>
-							<!--下列列表按钮 ：管理-->
-							<div class="btn-group">
-								<button type="button" class="btn btn-link dropdown-toggle" data-toggle="dropdown">
-									<span id="top-dropdown-btn"><span class="fa fa-gears"></span>&nbsp;管理 <span class="caret"></span></span>
-								</button>
-								<ul class="dropdown-menu top-dropdown-ul" role="menu">
-									<li><a href="password.html">修改密码</a></li>
-									<li><a href="userdata.html">个人资料</a></li>
-									<li><a href="upload.html">上传头像</a></li>
-									<li><a href="address.html">收货管理	</a></li>
-								</ul>
-							</div>
-						</li>
-						<li class="li-split">|</li>
-						<li><a href="login.html"><span class="fa fa-user"></span>&nbsp;登录</a></li>
-					</ul>
-				</div>
-			</div>
-		</header>
-		<!--导航 -->
-		<!--分割导航和顶部-->
-		<div class="row top-nav">
-			<div class="col-md-6">
-				<ul class="nav nav-pills">
-					<li>
-						<a href="#"></a>
-					</li>
-					<li class="active"><a href="index.html"><span class="fa fa-home"></span></a></li>
-					<li><a href="#">秒杀</a></li>
-					<li><a href="#">优惠券</a></li>
-					<li><a href="#">电脑VIP</a></li>
-					<li><a href="#">外卖</a></li>
-					<li><a href="#">超市</a></li>
-				</ul>
-			</div>
-			<div class="col-md-6">
-				<form action="search.html" class="form-inline pull-right" role="form">
-					<div class="form-group">
-						<input type="text" class="form-control" id="search" name="search" placeholder="请输入商品名称进行搜索">
-					</div>
-					<button type="submit" class="btn btn-default btn-sm"><span class="fa fa-search"></span></button>
-				</form>
-			</div>
-		</div>
-		<!--头部结束-->
-		<!--导航结束-->
-	</body>
-</html>
+<style>
+
+
+    body {
+        overflow-x: hidden;
+    }
+
+    .leading {
+        padding: 0;
+        margin: 0;
+        width: 100%;
+        height: 60px;
+        background-color: #ffedf3;
+        border: 1px solid #ffedf3;
+    }
+
+    .leading_content {
+        margin: 10px 2%;
+        width: 96%;
+        height: 40px;
+        /*background-color: #c9c9c9;*/
+    }
+
+    .logo {
+        float: left;
+        height: 40px;
+        width: 120px;
+        margin-right: 40px;
+        /*background-color: #d3d3d3;*/
+    }
+    .logo img{
+        margin-top: -1px;
+        margin-left: -1px;
+        height: 42px;
+        width: 122px;
+    }
+
+    .leading_items {
+        float: left;
+        height: 40px;
+        width: 400px;
+        /*background-color: #a6a4a4;*/
+    }
+    .leading_items a{
+        color: #050505;
+    }
+    #top-dropdown-btn {
+        color: #050505;
+    }
+    .leading_buns {
+        float: right;
+        height: 40px;
+        width: 160px;
+        margin-left: 50px;
+        /*background-color: #525151;*/
+    }
+    .leading_bun-2 {
+        float: right;
+        height: 40px;
+        width: 40px;
+        border-radius: 100%;
+        margin-left: 10px;
+        border: 0;
+        background-color: #dadada;
+    }
+
+    .search {
+        float: right;
+        height: 40px;
+        width: 400px;
+        /*background-color: #525151;*/
+    }
+
+    .menu1 {
+        width: 800px;
+        height: 500px;
+        background-color: #ffedf3;
+        margin: -5px auto;
+
+    }
+    .menu-left {
+        float: left;
+        width: 180px;
+        height: 400px;
+        /*background-color: #a0a2a2;*/
+        border: 1px solid #ffedf3;
+    }
+    .menu-left a{
+        color: white;
+        font-weight: bolder;
+    }
+
+    .menu-left li {
+        width: 160px;
+        height: 45px;
+        margin: 5px auto;
+        background-color: #3c3c3c;
+        border: 1px solid #ffffff;
+        border-radius: 8px;
+    }
+
+    .menu-mid {
+        float: left;
+        margin-left: 20px;
+        width: 280px;
+        height: 500px;
+        /*background-color: #a0a2a2;*/
+        border: 1px solid #ffedf3;
+    }
+
+    .menu-mid-1 {
+        width: 90px;
+        height: 45px;
+        margin-top: 30px;
+        background-color: transparent;
+    }
+
+    .menu-mid-2 {
+        width: 276px;
+        height: 300px;
+        margin-top: 30px;
+        /*background-color: #e3e1e1;*/
+    }
+
+    .menu-mid-2 li {
+        float: left;
+        width: 135px;
+        height: 45px;
+        margin: 5px auto;
+        background-color: #ffffff;
+        border: 1px solid #bebebe;
+        border-radius: 4px;
+    }
+    .menu-mid-2 li a{
+        color: #333333;
+    }
+
+    .menu-right {
+        float: left;
+        margin-left: 80px;
+        width: 180px;
+        height: 500px;
+        /*background-color: #a0a2a2;*/
+    }
+    .menu-right-1{
+        margin-top: 30px;
+        height: 200px;
+        width: 180px;
+        background-color: #a9a9a9;
+    }
+    .menu-right-1 img{
+        height: 200px;
+        width: 180px;
+    }
+    .menu-right-2{
+        margin-top: 30px;
+        height: 180px;
+        width: 180px;
+        background-color: #a9a9a9;
+    }
+    .menu-right-2 img{
+        height: 180px;
+        width: 180px;
+    }
+</style>
+<div class="leading">
+    <div class="leading_content">
+        <div class="logo">
+            <img src="../images/index/huamanlogo.png">
+        </div>
+        <div class="leading_items">
+            <div class="col-md-9 top-item"
+                 style="padding:0;margin: 0;float: left;width: 100%">
+                <ul class="list-inline pull-left"
+                    style="margin-left: 5px">
+                    <li style="width: 40px">
+                        <a href="index.html">首页</a></li>
+                    <li class="li-split">|</li>
+                    <li style="width: 60px;padding-right: 0;padding-left: 0;">
+                        <!--下列列表按钮 ：管理-->
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-link dropdown-toggle"
+                                    data-toggle="dropdown"
+                                    style="padding: 6px 0">
+                                <span id="top-dropdown-btn">女大童<span class="caret"></span></span>
+                            </button>
+                            <ul class="dropdown-menu top-dropdown-ul" role="menu">
+                                <div class="menu1">
+                                    <div class="menu-left">
+                                        <li><a href="search.html?title=上装&pageNum=1&pageSize=12">上装</a></li>
+                                        <li><a href="search.html?title=下装&pageNum=1&pageSize=12">下装</a></li>
+                                        <li><a href="search.html?title=套装&pageNum=1&pageSize=12">套装</a></li>
+                                        <li><a href="search.html?title=鞋子&pageNum=1&pageSize=12">鞋子</a></li>
+                                    </div>
+                                    <div class="menu-mid">
+                                        <div class="menu-mid-1">
+                                            <h2 style="font-weight: bolder;text-align: center">女大童</h2></div>
+                                        <div class="menu-mid-2">
+                                            <li><a href="search.html?title=背心&pageNum=1&pageSize=12">背心</a></li>
+                                            <li><a href="search.html?title=T恤&pageNum=1&pageSize=12">T恤</a></li>
+                                            <li><a href="search.html?title=外套&pageNum=1&pageSize=12">外套</a></li>
+                                            <li><a href="search.html?title=毛衣&pageNum=1&pageSize=12">毛衣</a></li>
+                                            <li><a href="search.html?title=连衣裙&pageNum=1&pageSize=12">连衣裙</a></li>
+                                            <li><a href="search.html?title=打底裤&pageNum=1&pageSize=12">打底裤</a></li>
+                                            <li><a href="search.html?title=长裤&pageNum=1&pageSize=12">长裤</a></li>
+                                            <li><a href="search.html?title=短裤&pageNum=1&pageSize=12">短裤</a></li>
+                                            <li><a href="search.html?title=短裙&pageNum=1&pageSize=12">短裙</a></li>
+                                            <li><a href="search.html?title=长袖套装&pageNum=1&pageSize=12">长袖套装</a></li>
+                                            <li><a href="search.html?title=短袖套装&pageNum=1&pageSize=12">短袖套装</a></li>
+                                        </div>
+                                    </div>
+                                    <div class="menu-right">
+                                        <div class="menu-right-1">
+                                            <img src="../images/index/leading_right_5.png">
+                                        </div>
+                                        <div class="menu-right-2">
+                                            <img src="../images/index/leading_right_6.png">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="li-split">|</li>
+                    <li style="width: 60px;padding-right: 0;padding-left: 0;">
+                        <!--下列列表按钮 ：管理-->
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-link dropdown-toggle"
+                                    data-toggle="dropdown"
+                                    style="padding: 6px 0">
+                                <span id="top-dropdown-btn">女中童<span class="caret"></span></span>
+                            </button>
+                            <ul class="dropdown-menu top-dropdown-ul" role="menu">
+                                <div class="menu1">
+                                    <div class="menu-left">
+                                        <li><a href="search.html?title=女中童上装&pageNum=1&pageSize=12">上装</a></li>
+                                        <li><a href="search.html?title=女中童下装&pageNum=1&pageSize=12">下装</a></li>
+                                        <li><a href="search.html?title=女中童套装&pageNum=1&pageSize=12">套装</a></li>
+                                        <li><a href="search.html?title=女中童鞋子&pageNum=1&pageSize=12">鞋子</a></li>
+                                    </div>
+                                    <div class="menu-mid">
+                                        <div class="menu-mid-1">
+                                            <h2 style="font-weight: bolder;text-align: center">女中童</h2></div>
+                                        <div class="menu-mid-2">
+                                            <li><a href="search.html?title=女中童背心&pageNum=1&pageSize=12">背心</a></li>
+                                            <li><a href="search.html?title=女中童T恤&pageNum=1&pageSize=12">T恤</a></li>
+                                            <li><a href="search.html?title=女中童外套&pageNum=1&pageSize=12">外套</a></li>
+                                            <li><a href="search.html?title=女中童毛衣&pageNum=1&pageSize=12">毛衣</a></li>
+                                            <li><a href="search.html?title=女中童连衣裙&pageNum=1&pageSize=12">连衣裙</a></li>
+                                            <li><a href="search.html?title=女中童打底裤&pageNum=1&pageSize=12">打底裤</a></li>
+                                            <li><a href="search.html?title=女中童长裤&pageNum=1&pageSize=12">长裤</a></li>
+                                            <li><a href="search.html?title=女中童短裤&pageNum=1&pageSize=12">短裤</a></li>
+                                            <li><a href="search.html?title=女中童短裙&pageNum=1&pageSize=12">短裙</a></li>
+                                            <li><a href="search.html?title=女中童长袖套装&pageNum=1&pageSize=12">长袖套装</a></li>
+                                            <li><a href="search.html?title=女中童短袖套装&pageNum=1&pageSize=12">短袖套装</a></li>
+                                        </div>
+                                    </div>
+                                    <div class="menu-right">
+                                        <div class="menu-right-1">
+                                            <img src="../images/index/leading_right_7.png">
+                                        </div>
+                                        <div class="menu-right-2">
+                                            <img src="../images/index/leading_right_8.png">
+                                        </div>
+                                    </div>
+                                </div>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="li-split">|</li>
+                    <li style="width: 60px;padding-right: 0;padding-left: 0;">
+                        <!--下列列表按钮 ：管理-->
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-link dropdown-toggle"
+                                    data-toggle="dropdown"
+                                    style="padding: 6px 0">
+                                <span id="top-dropdown-btn">女小童<span class="caret"></span></span>
+                            </button>
+                            <ul class="dropdown-menu top-dropdown-ul" role="menu">
+                                <div class="menu1">
+                                    <div class="menu-left">
+                                        <li><a href="search.html?title=女小童上装&pageNum=1&pageSize=12">上装</a></li>
+                                        <li><a href="search.html?title=女小童下装&pageNum=1&pageSize=12">下装</a></li>
+                                        <li><a href="search.html?title=女小童套装&pageNum=1&pageSize=12">套装</a></li>
+                                        <li><a href="search.html?title=女小童鞋子&pageNum=1&pageSize=12">鞋子</a></li>
+                                    </div>
+                                    <div class="menu-mid">
+                                        <div class="menu-mid-1">
+                                            <h2 style="font-weight: bolder;text-align: center">女小童</h2></div>
+                                        <div class="menu-mid-2">
+                                            <li><a href="search.html?title=女小童背心&pageNum=1&pageSize=12">背心</a></li>
+                                            <li><a href="search.html?title=女小童T恤&pageNum=1&pageSize=12">T恤</a></li>
+                                            <li><a href="search.html?title=女小童外套&pageNum=1&pageSize=12">外套</a></li>
+                                            <li><a href="search.html?title=女小童毛衣&pageNum=1&pageSize=12">毛衣</a></li>
+                                            <li><a href="search.html?title=女小童连衣裙&pageNum=1&pageSize=12">连衣裙</a></li>
+                                            <li><a href="search.html?title=女小童打底裤&pageNum=1&pageSize=12">打底裤</a></li>
+                                            <li><a href="search.html?title=女小童长裤&pageNum=1&pageSize=12">长裤</a></li>
+                                            <li><a href="search.html?title=女小童短裤&pageNum=1&pageSize=12">短裤</a></li>
+                                            <li><a href="search.html?title=女小童短裙&pageNum=1&pageSize=12">短裙</a></li>
+                                            <li><a href="search.html?title=女小童长袖套装&pageNum=1&pageSize=12">长袖套装</a></li>
+                                            <li><a href="search.html?title=女小童短袖套装&pageNum=1&pageSize=12">短袖套装</a></li>
+                                        </div>
+                                    </div>
+                                    <div class="menu-right">
+                                        <div class="menu-right-1">
+                                            <img src="../images/index/leading_right_3.png">
+                                        </div>
+                                        <div class="menu-right-2">
+                                            <img src="../images/index/leading_right_4.png">
+                                        </div>
+                                    </div>
+                                </div>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="li-split">|</li>
+                    <li style="width: 60px;padding-right: 0;padding-left: 0;">
+                        <!--下列列表按钮 ：管理-->
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-link dropdown-toggle"
+                                    data-toggle="dropdown"
+                                    style="padding: 6px 0">
+                                <span id="top-dropdown-btn">女婴童<span class="caret"></span></span>
+                            </button>
+                            <ul class="dropdown-menu top-dropdown-ul" role="menu">
+                                <div class="menu1">
+                                    <div class="menu-left">
+                                        <li><a href="search.html?title=女婴童上装&pageNum=1&pageSize=12">上装</a></li>
+                                        <li><a href="search.html?title=女婴童下装&pageNum=1&pageSize=12">下装</a></li>
+                                        <li><a href="search.html?title=女婴童套装&pageNum=1&pageSize=12">套装</a></li>
+                                        <li><a href="search.html?title=女婴童鞋子&pageNum=1&pageSize=12">鞋子</a></li>
+                                    </div>
+                                    <div class="menu-mid">
+                                        <div class="menu-mid-1">
+                                            <h2 style="font-weight: bolder;text-align: center">女婴童</h2></div>
+                                        <div class="menu-mid-2">
+                                            <li><a href="search.html?title=女婴童背心&pageNum=1&pageSize=12">背心</a></li>
+                                            <li><a href="search.html?title=女婴童T恤&pageNum=1&pageSize=12">T恤</a></li>
+                                            <li><a href="search.html?title=女婴童外套&pageNum=1&pageSize=12">外套</a></li>
+                                            <li><a href="search.html?title=女婴童毛衣&pageNum=1&pageSize=12">毛衣</a></li>
+                                            <li><a href="search.html?title=女婴童连衣裙&pageNum=1&pageSize=12">连衣裙</a></li>
+                                            <li><a href="search.html?title=女婴童打底裤&pageNum=1&pageSize=12">打底裤</a></li>
+                                            <li><a href="search.html?title=女婴童长裤&pageNum=1&pageSize=12">长裤</a></li>
+                                            <li><a href="search.html?title=女婴童短裤&pageNum=1&pageSize=12">短裤</a></li>
+                                            <li><a href="search.html?title=女婴童短裙&pageNum=1&pageSize=12">短裙</a></li>
+                                            <li><a href="search.html?title=女婴童长袖套装&pageNum=1&pageSize=12">长袖套装</a></li>
+                                            <li><a href="search.html?title=女婴童短袖套装&pageNum=1&pageSize=12">短袖套装</a></li>
+                                        </div>
+                                    </div>
+                                    <div class="menu-right">
+                                        <div class="menu-right-1">
+                                            <img src="../images/index/leading_right_1.png">
+                                        </div>
+                                        <div class="menu-right-2">
+                                            <img src="../images/index/leading_right_2.png">
+                                        </div>
+                                    </div>
+                                </div>
+                            </ul>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+
+        <div class="leading_buns">
+            <input value="登录" type="button"
+                   onclick="javascript:window.location.href='login.html'"
+            style="height: 40px;width: 75px;border: 1px solid white;background-color: transparent">
+            <input value="注册" type="button"
+                   onclick="javascript:window.location.href='register.html'"
+                   style="height: 40px;width: 75px;border: 1px solid white;background-color: #3c3c3c;color: white">
+        </div>
+
+        <div class="search">
+            <form action="search.html"  onsubmit="return checkIfHaveVal()" class="form-inline pull-right" role="form">
+                <div class="form-group">
+                    <!--						http://localhost:8080/web/search.html?title=1&pageNum=1&pageSize=12-->
+                    <input type="text" class="form-control" name="title"
+                           style="width: 350px;height: 40px;border: 1px solid white"
+                           placeholder="请输入商品名称进行搜索">
+                    <input type="hidden"  id="pageNum" name="pageNum" value="1">
+                    <input type="hidden"  id="pageSize" name="pageSize" value="12">
+                </div>
+                <button type="submit" class="btn btn-default btn-sm"
+                        style="width: 40px;height: 40px;margin-right: 5px;
+                        border: 1px solid white;background-color: transparent">
+                    <span class="fa fa-search"></span></button>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="footer1"
+     style="background-color: #ffedf3;height: 100px;width: 100%;">
+    <h5 style="padding-top: 20px;margin: 0;text-align: center">
+        京ICP备11017824号-4 / 京ICP证130164号 北京市公安局朝阳分局备案编号:110105000501</h5>
+    <h5 style="padding-top: 20px;margin: 0;text-align: center">
+        Copyright © 2006-2023 ZCOOL 中文 English</h5>
+</div>
+
+
+<style>
+
+
+    body {
+        overflow-x: hidden;
+    }
+
+    .leading {
+        padding: 0;
+        margin: 0;
+        width: 100%;
+        height: 60px;
+        background-color: #ffedf3;
+        border: 1px solid #ffedf3;
+    }
+
+    .leading_content {
+        margin: 10px 2%;
+        width: 96%;
+        height: 40px;
+        /*background-color: #c9c9c9;*/
+    }
+
+    .logo {
+        float: left;
+        height: 40px;
+        width: 120px;
+        margin-right: 40px;
+        /*background-color: #d3d3d3;*/
+    }
+    .logo img{
+        margin-top: -1px;
+        margin-left: -1px;
+        height: 42px;
+        width: 122px;
+    }
+
+    .leading_items {
+        float: left;
+        height: 40px;
+        width: 400px;
+        /*background-color: #a6a4a4;*/
+    }
+    .leading_items a{
+        color: #050505;
+    }
+    #top-dropdown-btn {
+        color: #050505;
+    }
+    .leading_buns {
+        float: right;
+        height: 40px;
+        width: 160px;
+        margin-left: 50px;
+        /*background-color: #525151;*/
+    }
+    .leading_bun-2 {
+        float: right;
+        height: 40px;
+        width: 40px;
+        border-radius: 100%;
+        margin-left: 10px;
+        border: 0;
+        background-color: #dadada;
+    }
+
+    .search {
+        float: right;
+        height: 40px;
+        width: 400px;
+        /*background-color: #525151;*/
+    }
+
+    .menu1 {
+        width: 800px;
+        height: 500px;
+        background-color: #ffedf3;
+        margin: -5px auto;
+
+    }
+    .menu-left {
+        float: left;
+        width: 180px;
+        height: 400px;
+        /*background-color: #a0a2a2;*/
+        border: 1px solid #ffedf3;
+    }
+    .menu-left a{
+        color: white;
+        font-weight: bolder;
+    }
+
+    .menu-left li {
+        width: 160px;
+        height: 45px;
+        margin: 5px auto;
+        background-color: #3c3c3c;
+        border: 1px solid #ffffff;
+        border-radius: 8px;
+    }
+
+    .menu-mid {
+        float: left;
+        margin-left: 20px;
+        width: 280px;
+        height: 500px;
+        /*background-color: #a0a2a2;*/
+        border: 1px solid #ffedf3;
+    }
+
+    .menu-mid-1 {
+        width: 90px;
+        height: 45px;
+        margin-top: 30px;
+        background-color: transparent;
+    }
+
+    .menu-mid-2 {
+        width: 276px;
+        height: 300px;
+        margin-top: 30px;
+        /*background-color: #e3e1e1;*/
+    }
+
+    .menu-mid-2 li {
+        float: left;
+        width: 135px;
+        height: 45px;
+        margin: 5px auto;
+        background-color: #ffffff;
+        border: 1px solid #bebebe;
+        border-radius: 4px;
+    }
+    .menu-mid-2 li a{
+        color: #333333;
+    }
+
+    .menu-right {
+        float: left;
+        margin-left: 80px;
+        width: 180px;
+        height: 500px;
+        /*background-color: #a0a2a2;*/
+    }
+    .menu-right-1{
+        margin-top: 30px;
+        height: 200px;
+        width: 180px;
+        background-color: #a9a9a9;
+    }
+    .menu-right-1 img{
+        height: 200px;
+        width: 180px;
+    }
+    .menu-right-2{
+        margin-top: 30px;
+        height: 180px;
+        width: 180px;
+        background-color: #a9a9a9;
+    }
+    .menu-right-2 img{
+        height: 180px;
+        width: 180px;
+    }
+</style>
+<style>
+    .panel-body a{
+        margin-left: 30%;
+        color: #3c3c3c;
+    }
+    body{
+        background-color: #ffedf3;
+    }
+</style>
+<body>
+<!--头部-->
+<div class="leading">
+    <div class="leading_content">
+        <div class="logo">
+            <img src="../images/index/huamanlogo.png">
+        </div>
+        <div class="leading_items">
+            <div class="col-md-9 top-item"
+                 style="padding:0;margin: 0;float: left;width: 100%">
+                <ul class="list-inline pull-left"
+                    style="margin-left: 5px">
+                    <li style="width: 40px">
+                        <a href="index.html">首页</a></li>
+                    <li class="li-split">|</li>
+                    <li style="width: 60px;padding-right: 0;padding-left: 0;">
+                        <!--下列列表按钮 ：管理-->
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-link dropdown-toggle"
+                                    data-toggle="dropdown"
+                                    style="padding: 6px 0">
+                                <span id="top-dropdown-btn">女大童<span class="caret"></span></span>
+                            </button>
+                            <ul class="dropdown-menu top-dropdown-ul" role="menu">
+                                <div class="menu1">
+                                    <div class="menu-left">
+                                        <li><a href="search.html?title=上装&pageNum=1&pageSize=12">上装</a></li>
+                                        <li><a href="search.html?title=下装&pageNum=1&pageSize=12">下装</a></li>
+                                        <li><a href="search.html?title=套装&pageNum=1&pageSize=12">套装</a></li>
+                                        <li><a href="search.html?title=鞋子&pageNum=1&pageSize=12">鞋子</a></li>
+                                    </div>
+                                    <div class="menu-mid">
+                                        <div class="menu-mid-1">
+                                            <h2 style="font-weight: bolder;text-align: center">女大童</h2></div>
+                                        <div class="menu-mid-2">
+                                            <li><a href="search.html?title=背心&pageNum=1&pageSize=12">背心</a></li>
+                                            <li><a href="search.html?title=T恤&pageNum=1&pageSize=12">T恤</a></li>
+                                            <li><a href="search.html?title=外套&pageNum=1&pageSize=12">外套</a></li>
+                                            <li><a href="search.html?title=毛衣&pageNum=1&pageSize=12">毛衣</a></li>
+                                            <li><a href="search.html?title=连衣裙&pageNum=1&pageSize=12">连衣裙</a></li>
+                                            <li><a href="search.html?title=打底裤&pageNum=1&pageSize=12">打底裤</a></li>
+                                            <li><a href="search.html?title=长裤&pageNum=1&pageSize=12">长裤</a></li>
+                                            <li><a href="search.html?title=短裤&pageNum=1&pageSize=12">短裤</a></li>
+                                            <li><a href="search.html?title=短裙&pageNum=1&pageSize=12">短裙</a></li>
+                                            <li><a href="search.html?title=长袖套装&pageNum=1&pageSize=12">长袖套装</a></li>
+                                            <li><a href="search.html?title=短袖套装&pageNum=1&pageSize=12">短袖套装</a></li>
+                                        </div>
+                                    </div>
+                                    <div class="menu-right">
+                                        <div class="menu-right-1">
+                                            <img src="../images/index/leading_right_5.png">
+                                        </div>
+                                        <div class="menu-right-2">
+                                            <img src="../images/index/leading_right_6.png">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="li-split">|</li>
+                    <li style="width: 60px;padding-right: 0;padding-left: 0;">
+                        <!--下列列表按钮 ：管理-->
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-link dropdown-toggle"
+                                    data-toggle="dropdown"
+                                    style="padding: 6px 0">
+                                <span id="top-dropdown-btn">女中童<span class="caret"></span></span>
+                            </button>
+                            <ul class="dropdown-menu top-dropdown-ul" role="menu">
+                                <div class="menu1">
+                                    <div class="menu-left">
+                                        <li><a href="search.html?title=女中童上装&pageNum=1&pageSize=12">上装</a></li>
+                                        <li><a href="search.html?title=女中童下装&pageNum=1&pageSize=12">下装</a></li>
+                                        <li><a href="search.html?title=女中童套装&pageNum=1&pageSize=12">套装</a></li>
+                                        <li><a href="search.html?title=女中童鞋子&pageNum=1&pageSize=12">鞋子</a></li>
+                                    </div>
+                                    <div class="menu-mid">
+                                        <div class="menu-mid-1">
+                                            <h2 style="font-weight: bolder;text-align: center">女中童</h2></div>
+                                        <div class="menu-mid-2">
+                                            <li><a href="search.html?title=女中童背心&pageNum=1&pageSize=12">背心</a></li>
+                                            <li><a href="search.html?title=女中童T恤&pageNum=1&pageSize=12">T恤</a></li>
+                                            <li><a href="search.html?title=女中童外套&pageNum=1&pageSize=12">外套</a></li>
+                                            <li><a href="search.html?title=女中童毛衣&pageNum=1&pageSize=12">毛衣</a></li>
+                                            <li><a href="search.html?title=女中童连衣裙&pageNum=1&pageSize=12">连衣裙</a></li>
+                                            <li><a href="search.html?title=女中童打底裤&pageNum=1&pageSize=12">打底裤</a></li>
+                                            <li><a href="search.html?title=女中童长裤&pageNum=1&pageSize=12">长裤</a></li>
+                                            <li><a href="search.html?title=女中童短裤&pageNum=1&pageSize=12">短裤</a></li>
+                                            <li><a href="search.html?title=女中童短裙&pageNum=1&pageSize=12">短裙</a></li>
+                                            <li><a href="search.html?title=女中童长袖套装&pageNum=1&pageSize=12">长袖套装</a></li>
+                                            <li><a href="search.html?title=女中童短袖套装&pageNum=1&pageSize=12">短袖套装</a></li>
+                                        </div>
+                                    </div>
+                                    <div class="menu-right">
+                                        <div class="menu-right-1">
+                                            <img src="../images/index/leading_right_7.png">
+                                        </div>
+                                        <div class="menu-right-2">
+                                            <img src="../images/index/leading_right_8.png">
+                                        </div>
+                                    </div>
+                                </div>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="li-split">|</li>
+                    <li style="width: 60px;padding-right: 0;padding-left: 0;">
+                        <!--下列列表按钮 ：管理-->
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-link dropdown-toggle"
+                                    data-toggle="dropdown"
+                                    style="padding: 6px 0">
+                                <span id="top-dropdown-btn">女小童<span class="caret"></span></span>
+                            </button>
+                            <ul class="dropdown-menu top-dropdown-ul" role="menu">
+                                <div class="menu1">
+                                    <div class="menu-left">
+                                        <li><a href="search.html?title=女小童上装&pageNum=1&pageSize=12">上装</a></li>
+                                        <li><a href="search.html?title=女小童下装&pageNum=1&pageSize=12">下装</a></li>
+                                        <li><a href="search.html?title=女小童套装&pageNum=1&pageSize=12">套装</a></li>
+                                        <li><a href="search.html?title=女小童鞋子&pageNum=1&pageSize=12">鞋子</a></li>
+                                    </div>
+                                    <div class="menu-mid">
+                                        <div class="menu-mid-1">
+                                            <h2 style="font-weight: bolder;text-align: center">女小童</h2></div>
+                                        <div class="menu-mid-2">
+                                            <li><a href="search.html?title=女小童背心&pageNum=1&pageSize=12">背心</a></li>
+                                            <li><a href="search.html?title=女小童T恤&pageNum=1&pageSize=12">T恤</a></li>
+                                            <li><a href="search.html?title=女小童外套&pageNum=1&pageSize=12">外套</a></li>
+                                            <li><a href="search.html?title=女小童毛衣&pageNum=1&pageSize=12">毛衣</a></li>
+                                            <li><a href="search.html?title=女小童连衣裙&pageNum=1&pageSize=12">连衣裙</a></li>
+                                            <li><a href="search.html?title=女小童打底裤&pageNum=1&pageSize=12">打底裤</a></li>
+                                            <li><a href="search.html?title=女小童长裤&pageNum=1&pageSize=12">长裤</a></li>
+                                            <li><a href="search.html?title=女小童短裤&pageNum=1&pageSize=12">短裤</a></li>
+                                            <li><a href="search.html?title=女小童短裙&pageNum=1&pageSize=12">短裙</a></li>
+                                            <li><a href="search.html?title=女小童长袖套装&pageNum=1&pageSize=12">长袖套装</a></li>
+                                            <li><a href="search.html?title=女小童短袖套装&pageNum=1&pageSize=12">短袖套装</a></li>
+                                        </div>
+                                    </div>
+                                    <div class="menu-right">
+                                        <div class="menu-right-1">
+                                            <img src="../images/index/leading_right_3.png">
+                                        </div>
+                                        <div class="menu-right-2">
+                                            <img src="../images/index/leading_right_4.png">
+                                        </div>
+                                    </div>
+                                </div>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="li-split">|</li>
+                    <li style="width: 60px;padding-right: 0;padding-left: 0;">
+                        <!--下列列表按钮 ：管理-->
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-link dropdown-toggle"
+                                    data-toggle="dropdown"
+                                    style="padding: 6px 0">
+                                <span id="top-dropdown-btn">女婴童<span class="caret"></span></span>
+                            </button>
+                            <ul class="dropdown-menu top-dropdown-ul" role="menu">
+                                <div class="menu1">
+                                    <div class="menu-left">
+                                        <li><a href="search.html?title=女婴童上装&pageNum=1&pageSize=12">上装</a></li>
+                                        <li><a href="search.html?title=女婴童下装&pageNum=1&pageSize=12">下装</a></li>
+                                        <li><a href="search.html?title=女婴童套装&pageNum=1&pageSize=12">套装</a></li>
+                                        <li><a href="search.html?title=女婴童鞋子&pageNum=1&pageSize=12">鞋子</a></li>
+                                    </div>
+                                    <div class="menu-mid">
+                                        <div class="menu-mid-1">
+                                            <h2 style="font-weight: bolder;text-align: center">女婴童</h2></div>
+                                        <div class="menu-mid-2">
+                                            <li><a href="search.html?title=女婴童背心&pageNum=1&pageSize=12">背心</a></li>
+                                            <li><a href="search.html?title=女婴童T恤&pageNum=1&pageSize=12">T恤</a></li>
+                                            <li><a href="search.html?title=女婴童外套&pageNum=1&pageSize=12">外套</a></li>
+                                            <li><a href="search.html?title=女婴童毛衣&pageNum=1&pageSize=12">毛衣</a></li>
+                                            <li><a href="search.html?title=女婴童连衣裙&pageNum=1&pageSize=12">连衣裙</a></li>
+                                            <li><a href="search.html?title=女婴童打底裤&pageNum=1&pageSize=12">打底裤</a></li>
+                                            <li><a href="search.html?title=女婴童长裤&pageNum=1&pageSize=12">长裤</a></li>
+                                            <li><a href="search.html?title=女婴童短裤&pageNum=1&pageSize=12">短裤</a></li>
+                                            <li><a href="search.html?title=女婴童短裙&pageNum=1&pageSize=12">短裙</a></li>
+                                            <li><a href="search.html?title=女婴童长袖套装&pageNum=1&pageSize=12">长袖套装</a></li>
+                                            <li><a href="search.html?title=女婴童短袖套装&pageNum=1&pageSize=12">短袖套装</a></li>
+                                        </div>
+                                    </div>
+                                    <div class="menu-right">
+                                        <div class="menu-right-1">
+                                            <img src="../images/index/leading_right_1.png">
+                                        </div>
+                                        <div class="menu-right-2">
+                                            <img src="../images/index/leading_right_2.png">
+                                        </div>
+                                    </div>
+                                </div>
+                            </ul>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+
+        <div class="leading_buns">
+            <input value="登录" type="button"
+                   onclick="javascript:window.location.href='login.html'"
+                   style="height: 40px;width: 75px;border: 1px solid white;background-color: transparent">
+            <input value="注册" type="button"
+                   onclick="javascript:window.location.href='register.html'"
+                   style="height: 40px;width: 75px;border: 1px solid white;background-color: #3c3c3c;color: white">
+        </div>
+
+        <div class="search">
+            <form action="search.html"  onsubmit="return checkIfHaveVal()" class="form-inline pull-right" role="form">
+                <div class="form-group">
+                    <!--						http://localhost:8080/web/search.html?title=1&pageNum=1&pageSize=12-->
+                    <input type="text" class="form-control" name="title"
+                           style="width: 350px;height: 40px;border: 1px solid white"
+                           placeholder="请输入商品名称进行搜索">
+                    <input type="hidden"  id="pageNum" name="pageNum" value="1">
+                    <input type="hidden"  id="pageSize" name="pageSize" value="12">
+                </div>
+                <button type="submit" class="btn btn-default btn-sm"
+                        style="width: 40px;height: 40px;margin-right: 5px;
+                        border: 1px solid white;background-color: transparent">
+                    <span class="fa fa-search"></span></button>
+            </form>
+        </div>
+    </div>
+</div>
+<!--头部结束-->
+<div class="container"
+     style="width: 94%;height: 700px;margin-top: 30px;border-radius: 10px;
+			 border: 10px solid white">
+    <div class="col-md-2"
+         style="height:500px;margin-top: 70px;
+				 border:10px solid white;border-radius :10px;background-color: #f0f9ff">
+        <!--左侧导航开始-->
+        <div class="panel-group" id="accordion">
+            <div class="panel panel-default" style="border: white;background-color: #f0f9ff">
+                <div style="height: 70px;margin-bottom: 30px;
+						background-color: #3c3c3c">
+                    <h4 style="color: white;font-weight: bolder;
+							text-align: center;padding-top: 22px">花漫账户信息</h4>
+                </div>
+                <div class="panel-heading" style="margin: 0;padding: 0">
+                    <!--主选项：我的订单-->
+                    <div style="height: 70px;
+						background-color: #3c3c3c">
+                        <h4 class="panel-title" style="color: white;font-weight: bolder;
+							text-align: center;padding-top: 22px">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">修改资料</a>
+                        </h4>
+                    </div>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <div><a href="password.html">修改密码</a></div>
+                        <div><a href="userdata.html">个人资料</a></div>
+                        <div><a href="upload.html"><b>上传头像</b></a></div>
+                        <div><a href="address.html">收货管理</a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading" style="margin: 0;padding: 0">
+                    <!--主选项：资料修改-->
+                    <div style="height: 70px;
+						background-color: #3c3c3c">
+                        <h4 class="panel-title" style="color: white;font-weight: bolder;
+							text-align: center;padding-top: 22px">
+                            <a href="orders.html">资料修改</a>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--左侧导航结束-->
+    </div>
+
+    <div class="col-md-10	"style="width: 75%;margin-top: 50px;margin-left: 70px">
+        <!--右侧文字提醒内容-->
+        <div>
+            <h1 style="font-weight: bolder">上传头像</h1>
+            <hr style="width: 100%;height: 2px;background-color: #3c3c3c">
+        </div>
+        <!--上传头像内容-->
+        <div class="panel panel-default" style="border-radius:10px; border:5px solid white;background-color: transparent;height: 250px">
+
+            <div class="panel-body"
+                 style="height: 200px;width: 350px;margin-left: 30px;">
+                <!--上传头像表单开始-->
+                <form id="form-change-avatar" class="form-horizontal" role="form">
+                    <div class="form-group" >
+                        <div style="width:150px;float: left">
+                            <h3>选择头像:</h3></div>
+
+                        <div class="col-md-5" style="height:150px;width:150px;
+									border-radius:10px; border:5px solid white;background-color: #2aabd2;">
+                            <img id="img-avatar" src="../images/index/user.jpg" class="img-responsive" />
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-md-offset-2 col-md-4" style="margin-left: -10px;margin-top: -40px">
+                            <input type="file" name="file" style="">
+                        </div>
+                    </div>
+                    <div class="form-group" >
+                        <div class="col-sm-offset-2 col-sm-10" >
+                            <input id="btn-change-avatar" type="button"
+                                   style="width: 100px; background-color: #3c3c3c;color: white;margin-left: 120px; border: white"
+                                   class="btn btn-primary" value="上传" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--页脚开始-->
+<div class="footer1"
+     style="background-color: #ffedf3;height: 100px;width: 100%;">
+    <h5 style="padding-top: 20px;margin: 0;text-align: center">
+        京ICP备11017824号-4 / 京ICP证130164号 北京市公安局朝阳分局备案编号:110105000501</h5>
+    <h5 style="padding-top: 20px;margin: 0;text-align: center">
+        Copyright © 2006-2023 ZCOOL 中文 English</h5>
+</div>
+<!--页脚结束-->
+
+<div class="panel-body">
+    <!--新增收货地址表单开始-->
+    <form id="form-add-new-address" class="form-horizontal" role="form">
+        <div class="form-group">
+            <label  class="col-md-2 control-label"><span class="txtred">*</span>收货人：</label>
+            <div class="col-md-8">
+                <input id="name" name="name" type="text" class="form-control" placeholder="请输入收货人姓名">
+            </div>
+        </div>
+        <div class="address_content" data-toggle="distpicker">
+            <div class="form-group">
+                <label class="col-md-2 control-label"><span class="txtred">*</span>省/直辖市：</label>
+                <div class="col-md-3">
+                    <select id="province-list" name="provinceCode" class="form-control" data-province="---- 选择省 ----"></select>
+                </div>
+                <label class="col-md-2 control-label"><span class="txtred">*</span>城市：</label>
+                <div class="col-md-3">
+                    <select id="city-list" name="cityCode" class="form-control" data-city="---- 选择市 ----"></select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label"><span class="txtred">*</span>区县：</label>
+                <div class="col-md-3">
+                    <select id="area-list" name="areaCode" class="form-control" data-district="---- 选择区 ----"></select>
+                </div>
+                <label class="col-md-2 control-label">邮政编码：</label>
+                <div class="col-md-3">
+                    <input id="zip" name="zip" type="text" class="form-control" placeholder="请输入邮政编码">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label"><span class="txtred">*</span>详细地址：</label>
+            <div class="col-md-8">
+                <textarea id="address" name="address" class="form-control" rows="3" placeholder="输入详细的收货地址，小区名称、门牌号等"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label"><span class="txtred">*</span>手机：</label>
+            <div class="col-md-3">
+                <input id="phone" name="phone" type="text" class="form-control" placeholder="请输入手机号码">
+            </div>
+            <label class="col-md-2 control-label">固话：</label>
+            <div class="col-md-3">
+                <input id="tel" name="tel" type="text" class="form-control" placeholder="请输入固定电话号码">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">地址类型：</label>
+            <div class="col-md-8">
+                <input id="tag" name="tag" type="text" class="form-control" placeholder="请输入地址类型，如：家、公司或者学校">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label"><a href="address.html">返回</a>&nbsp;&nbsp;&nbsp;</label>
+            <div class="col-sm-10">
+                <input id="btn-update-address" type="button" class="col-md-1 btn btn-primary" value="更新" />
+                <input type="reset" class="col-md-offset-1 col-md-1 btn btn-primary" value="重置" />
+            </div>
+        </div>
+    </form>
+</div>

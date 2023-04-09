@@ -1,209 +1,307 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<!--edge浏览器H5兼容设置-->
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<!--360浏览器H5兼容设置-->
-		<meta name="renderer" content="webkit" />
-		<title>电脑商城</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<!--导入核心文件-->
-		<script src="../bootstrap3/js/holder.js"></script>
-		<link href="../bootstrap3/css/bootstrap.css" rel="stylesheet" type="text/css">
-		<script src="../bootstrap3/jquery-1.9.1.min.js"></script>
-		<script src="../bootstrap3/js/bootstrap.js"></script>
-		<!-- 字体图标 -->
-		<link rel="stylesheet" href="../bootstrap3/font-awesome-4.7.0/css/font-awesome.css" />
-		<link rel="stylesheet" type="text/css" href="../css/top.css" />
-		<link rel="stylesheet" type="text/css" href="../css/index.css" />
-		<link rel="stylesheet" type="text/css" href="../css/layout.css" />
-		<link rel="stylesheet" type="text/css" href="../css/login.css" />
-		<link rel="stylesheet" type="text/css" href="../css/footer.css" />
-		<script src="../bootstrap3/js/jquery.cookie.js" type="text/javascript" charset="utf-8"></script>
-		<script src="../js/autoLogin.js" type="text/javascript"></script>
-	</head>
-	<body>
-		<!--头部-->
-		<header class="header">
-			<img src="../images/index/stumalllogo.png" alt="" />
-			<span class="pull-right"><small>欢迎访问</small><b>电脑商城</b></span>
-		</header>
-		<!--主体-->
-		<div class="container mycontent text-left">
-			<!--透明层 -->
-			<div class="loginDiv">
-				<p>用户登录</p>
-				<!--表单开始-->
-				<form id="form-login" action="index.html"  class="form-horizontal" role="form">
-					<!--用户名-->
-					<div class="form-group">
-						<label for="username" class="col-md-3 control-label">名字：</label>
-						<div class="col-md-8">
-							<input name="username" type="text" class="form-control" id="username"  placeholder="请输入用户名">
-						</div>
-					</div>
-					<!--密码-->
-					<div class="form-group">
-						<label for="password" class="col-md-3 control-label"> 密码：</label>
-						<div class="col-md-8">
-							<input name="password" type="text" class="form-control" id="password"  placeholder="请输入密码">
-						</div>
-					</div>
-					<!-- 记住我-->
-					<div class="form-group">
-						<div class="col-md-offset-3 col-md-6">
-							<div class="checkbox">
-								<label>
-									<input type="checkbox" id="auto">自动登录
-								</label>
-							</div>
-						</div>
-					</div>
-					<!--提交按钮-->
-					<div class="form-group">
-						<label class="col-md-3 control-label"></label>
-						<div class="col-md-8">
-							<input id="btn-login" class="btn btn-primary" type="button" value="登录" />
-							<span class="pull-right"><small>还没有账号？</small><a href="register.html">注册</a></span>
-						</div>
-					</div>
-				</form>
-			</div>
-		</div>
-		<!--页脚开始-->
-		<footer class="footer">
-			<!-- 品质保障，私人定制等-->
-			<div class="text-center rights container">
-				<div class="col-md-offset-2 col-md-2">
-					<span class="fa fa-thumbs-o-up"></span>
-					<p>品质保障</p>
-				</div>
-				<div class="col-md-2">
-					<span class="fa fa-address-card-o"></span>
-					<p>私人订制</p>
-				</div>
-				<div class="col-md-2">
-					<span class="fa fa-graduation-cap"></span>
-					<p>学生特供</p>
-				</div>
-				<div class="col-md-2">
-					<span class="fa fa-bitcoin"></span>
-					<p>专属特权</p>
-				</div>
-			</div>
-			<!--联系我们、下载客户端等-->
-			<div class="container beforeBottom">
-				<div class="col-md-offset-1 col-md-3">
-					<div><img src="../images/index/stumalllogo.png" alt="" class="footLogo" /></div>
-					<div><img src="../images/index/footerFont.png" alt="" /></div>
-				</div>
-				<div class="col-md-4 callus text-center">
-					<div class="col-md-4">
-						<ul>
-							<li><a href="#"><p>买家帮助</p></a></li>
-							<li><a href="#">新手指南</a></li>
-							<li><a href="#">服务保障</a></li>
-							<li><a href="#">常见问题</a></li>
-						</ul>
-					</div>
-					<div class="col-md-4">
-						<ul>
-							<li><a href="#"><p>商家帮助</p></a></li>
-							<li><a href="#">商家入驻</a></li>
-							<li><a href="#">商家后台</a></li>
-						</ul>
-					</div>
-					<div class="col-md-4">
-						<ul>
-							<li><a href="#"><p>关于我们</p></a></li>
-							<li><a href="#">关于圆心</a></li>
-							<li><a href="#">联系我们</a></li>
-							<li>
-								<span class="fa fa-wechat"></span>
-								<span class="fa fa-weibo"></span>
-							</li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="col-md-5">
-						<p>电脑商城客户端</p>
-						<img src="../images/index/ios.png" class="lf">
-						<img src="../images/index/android.png" alt="" class="lf" />
-					</div>
-					<div class="col-md-6">
-						<img src="../images/index/erweima.png">
-					</div>
-				</div>
-			</div>
-			<!-- 页面底部-备案号 #footer -->
-			<div class="col-md-12 text-center bottom">
-				Copyright © 2022 dnsc.cn All Rights Reserved 京ICP备08963888号-45 <a target="_blank" href="http://www.dnsc.cn/">圆心科技集团有限公司</a> 版权所有
-			</div>
-		</footer>
-		<!--页脚结束-->
-		<script>
-			//编写自动登录：在上一次登录时勾选了自动登录，会将账号密码记录在cookie
-			$(document).ready(function () {
-				if ($.cookie("auto")==1){
-					$.ajax({
-						url: "/users/login",
-						type: "POST",
-						data: $.cookie("login"),
-						dataType: "JSON",
-						success: function (json) {
-							if (json.state == 200) {
-								alert("自动登录成功")
-								//跳转到系统主页index.html
-								//index和login在同一个目录结构下,所以可以用相对路
-								// 径index.html来确定跳转的页面,index.html和./ind
-								// ex.html完全一样,因为./就是表示当前目录
-								// 结构,也可以用../web/index.html
-								location.href = "index.html";
-							} else {
-								alert("自动登录失败")
-							}
-						},
-						error: function (xhr) {
-							//xhr.message可以获取未知异常的信息
-							alert("登录时产生未知的异常!"+xhr.message);
-						}
-					});
-				}
-			})
-			$("#btn-login").click(function () {
-				$.ajax({
-					url: "/users/login",
-					type: "POST",
-					data: $("#form-login").serialize(),
-					dataType: "JSON",
-					success: function (json) {
-						if (json.state == 200) {
-							alert("登录成功")
-							//跳转到系统主页index.html
-							//index和login在同一个目录结构下,所以可以用相对路
-							// 径index.html来确定跳转的页面,index.html和./ind
-							// ex.html完全一样,因为./就是表示当前目录
-							// 结构,也可以用../web/index.html
-							$.cookie("avatar",json.data.avatar,{expires: 7});
-							if ($("#auto").prop("checked")==true){
-								alert("已勾选自动登录");
-								$.cookie("auto",1,{expires: 7})
-								$.cookie("login",$("#form-login").serialize(),{expires: 7})
-							}
-							location.href = "index.html";
-						} else {
-							alert("登录失败")
-						}
-					},
-					error: function (xhr) {
-						//xhr.message可以获取未知异常的信息
-						alert("登录时产生未知的异常!"+xhr.message);
-					}
-				});
-			});
-		</script>
+<head>
+    <meta charset="UTF-8">
+    <!--edge浏览器H5兼容设置-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--360浏览器H5兼容设置-->
+    <meta name="renderer" content="webkit"/>
+    <title>花漫|登录</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--导入核心文件-->
+    <script src="../bootstrap3/js/holder.js"></script>
+    <link href="../bootstrap3/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <script src="../bootstrap3/jquery-1.9.1.min.js"></script>
+    <script src="../bootstrap3/js/bootstrap.js"></script>
+    <!-- 字体图标 -->
+    <link rel="stylesheet" href="../bootstrap3/font-awesome-4.7.0/css/font-awesome.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/top.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/layout.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/login.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/footer.css"/>
+    <script src="../bootstrap3/js/jquery.cookie.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../js/autoLogin.js" type="text/javascript"></script>
+</head>
+<style>
+    .header {
+        padding: 0 !important;
+        background-color: #ffedf3;
+    }
 
-	</body>
+    .header1 {
+        padding: 0;
+        margin: 0 auto;
+        width: 63%;
+        height: 110px;
+        border: 1px solid #ffedf3;
+
+    }
+
+    .header2 {
+        height: 50px;
+        margin-top: 30px;
+        /*background-color: #a1a2a2;*/
+    }
+
+    .logo {
+        height: 50px;
+        width: 160px;
+        background-color:  #ffedf3;
+        float: left;
+    }
+    .logo img{
+        height: 50px;
+        width: 160px;
+
+    }
+
+    .logoname {
+        height: 50px;
+        width: 100px;
+        margin-left: 10px;
+        /*background-color: #caccca;*/
+        float: left;
+    }
+
+    .logoname h3 {
+        margin-top: 5px;
+
+        font-weight: bolder;
+        font-size: 28px;
+    }
+
+    .goto {
+        height: 50px;
+        width: 140px;
+        margin-left: 10px;
+        /*background-color: #e5e2e2;*/
+        float: right;
+    }
+
+    .goto h4 {
+        margin-top: 15px;
+        float: right;
+    }
+    .mycontent {
+        background-image: none;
+        background-color: #ffedf3;
+        height: 530px;
+        margin-bottom: 0;
+    }
+    .mylogin{
+        padding: 0;
+        margin: 0 auto;
+        width: 64%;
+        height: 520px;
+        border: 10px solid white;
+        /*background-color: #efecec;*/
+    }
+    .loginDiv{
+        padding: 0;
+        margin: 0;
+        float: left;
+        height: 500px;
+        width: 100%;
+    }
+    .login2 {
+        padding: 0;
+        margin: 0;
+        height: 80px;
+        background-color: #3c3c3c;
+    }
+
+    .login2 h2 {
+        padding-top: 20px;
+        margin: 0;
+        color: white;
+        text-align: center;
+        /*background-color: #fcfcff;*/
+        font-weight: bolder;
+    }
+    .login3 {
+        padding: 0;
+        margin: 0 auto;
+        width: 35%;
+        height: 400px;
+        border: 1px solid white;
+    }
+    a{
+        color: #3c3c3c;
+    }
+    a:hover{
+        font-weight: bolder;
+        color: #d9d7d7;
+    }
+</style>
+<body>
+
+<!--头部开始-->
+<header class="header">
+    <div class="header1">
+        <div class="header2">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="../images/index/huamanlogo.png"></a>
+            </div>
+            <div class="logoname">
+                <h3>通行证</h3>
+            </div>
+            <div class="goto">
+                <h4>|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="index.html">回到首页</a></h4>
+
+            </div>
+            <div class="goto">
+                <a href="register.html"><h4>还未注册账号？</h4></a>
+            </div>
+
+        </div>
+    </div>
+</header>
+<!--头部结束-->
+
+    <!--主体-->
+    <div class="container mycontent text-left">
+        <!--透明层 -->
+        <div class="mylogin">
+            <div class="loginDiv">
+                <div class="login2">
+                    <h2>会员登陆</h2>
+                </div>
+                <div class="login3">
+                    <!--表单开始-->
+                    <form id="form-login" action="index.html" class="form-horizontal" role="form">
+                        <!--用户名-->
+                        <div class="form-group" style="padding-top: 40px">
+                            <label for="username" class="col-md-3 control-label"
+                                   style="padding-top: 10px">名字：</label>
+                            <div class="col-md-8">
+                                <input name="username" type="text" class="form-control" id="username"
+                                       placeholder="请输入用户名" style="width: 250px;height: 35px">
+                            </div>
+                        </div>
+                        <!--密码-->
+                        <div class="form-group" >
+                            <label for="password" class="col-md-3 control-label"  style="padding-top: 10px"> 密码：</label>
+                            <div class="col-md-8">
+                                <input name="password" class="form-control" id="password"
+                                       placeholder="请输入密码" type="password"
+                                       style="width: 250px;height: 35px">
+                            </div>
+                        </div>
+                        <!-- 记住我-->
+                        <div class="form-group">
+                            <div class="col-md-offset-3 col-md-6"
+                                 style="margin-left: 5%;width: 100%">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" id="auto">&nbsp;&nbsp;自动登录
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label >
+                                        <input type="checkbox" id="agree">&nbsp;&nbsp;我已阅读和接受 用户协议 和 隐私政策
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <!--提交按钮-->
+                        <div class="form-group">
+                            <div class="col-md-8"
+                                 style="width: 100%;padding-top: 10px;margin-left: 3%">
+                                <input id="btn-login" class="btn btn-primary"
+                                       type="button" value="登录"
+                                style="width: 100%;background-color: #ffedf3;color: #3c3c3c;border: 1px solid #3c3c3c"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-3 col-md-6"
+                                 style="margin-left: 0%;width: 100%">
+                                <div class="checkbox">
+                                    <label style="padding-top: 10px">
+                                        登录或注册即代表同意 用户协议 和 隐私政策
+                                    </label>
+                                    <label style="padding-top: 10px">
+                                        未满18周岁未成年人请勿自行注册，其注册、登录帐号及使用服务需征得监护人同意
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+<div class="footer1"
+style="background-color: #ffedf3;height: 100px;width: 100%;">
+    <h5 style="padding-top: 20px;margin: 0;text-align: center">
+        京ICP备11017824号-4 / 京ICP证130164号 北京市公安局朝阳分局备案编号:110105000501</h5>
+    <h5 style="padding-top: 20px;margin: 0;text-align: center">
+        Copyright © 2006-2023 ZCOOL 中文 English</h5>
+</div>
+
+    <script>
+        //编写自动登录：在上一次登录时勾选了自动登录，会将账号密码记录在cookie
+        $(document).ready(function () {
+            if ($.cookie("auto") == 1) {
+                $.ajax({
+                    url: "/users/login",
+                    type: "POST",
+                    data: $.cookie("login"),
+                    dataType: "JSON",
+                    success: function (json) {
+                        if (json.state == 200) {
+                            alert("自动登录成功")
+                            //跳转到系统主页index.html
+                            //index和login在同一个目录结构下,所以可以用相对路
+                            // 径index.html来确定跳转的页面,index.html和./ind
+                            // ex.html完全一样,因为./就是表示当前目录
+                            // 结构,也可以用../web/index.html
+                            location.href = "index.html";
+                        } else {
+                            alert("自动登录失败")
+                        }
+                    },
+                    error: function (xhr) {
+                        //xhr.message可以获取未知异常的信息
+                        alert("登录时产生未知的异常!" + xhr.message);
+                    }
+                });
+            }
+        })
+        $("#btn-login").click(function () {
+            $.ajax({
+                url: "/users/login",
+                type: "POST",
+                data: $("#form-login").serialize(),
+                dataType: "JSON",
+                success: function (json) {
+                    if (json.state == 200) {
+                        alert("登录成功")
+                        //跳转到系统主页index.html
+                        //index和login在同一个目录结构下,所以可以用相对路
+                        // 径index.html来确定跳转的页面,index.html和./ind
+                        // ex.html完全一样,因为./就是表示当前目录
+                        // 结构,也可以用../web/index.html
+                        $.cookie("avatar", json.data.avatar, {expires: 7});
+                        if ($("#auto").prop("checked") == true) {
+                            alert("已勾选自动登录");
+                            $.cookie("auto", 1, {expires: 7})
+                            $.cookie("login", $("#form-login").serialize(), {expires: 7})
+                        }
+                        location.href = "index.html";
+                    } else {
+                        alert("登录失败")
+                    }
+                },
+                error: function (xhr) {
+                    //xhr.message可以获取未知异常的信息
+                    alert("登录时产生未知的异常!" + xhr.message);
+                }
+            });
+        });
+    </script>
+
+</body>
 </html>

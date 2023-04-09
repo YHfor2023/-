@@ -6,7 +6,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<!--360浏览器H5兼容设置-->
 		<meta name="renderer" content="webkit" />
-		<title>电脑商城</title>
+		<title>花漫|注册</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<!--导入核心文件-->
 		<script src="../bootstrap3/js/holder.js"></script>
@@ -21,122 +21,227 @@
 		<link rel="stylesheet" type="text/css" href="../css/reg.css" />
 		<link rel="stylesheet" type="text/css" href="../css/footer.css" />
 	</head>
+	<style>
+		.header {
+			padding: 0 !important;
+			background-color: #ffedf3;
+		}
+
+		a{
+			color: #3c3c3c;
+		}
+		a:hover{
+			color: white;
+		}
+		.header1 {
+			padding: 0;
+			margin: 0 auto;
+			width: 63%;
+			height: 110px;
+			border: 1px solid #ffedf3;
+			/*background-color: #c2c7c7;*/
+		}
+
+		.header2 {
+			height: 50px;
+			margin-top: 30px;
+			/*background-color: #a1a2a2;*/
+		}
+
+		.logo {
+			height: 50px;
+			width: 160px;
+			background-color: #5b5959;
+			float: left;
+		}
+		.logo img {
+			margin-left: -1px;
+			height: 50px;
+			width: 161px;
+		}
+
+		.logoname {
+			height: 50px;
+			width: 100px;
+			margin-left: 10px;
+			/*background-color: #caccca;*/
+			float: left;
+		}
+
+		.logoname h3 {
+			margin-top: 5px;
+			font-weight: bolder;
+			font-size: 28px;
+		}
+
+		.goto {
+			height: 50px;
+			width: 140px;
+			margin-left: 10px;
+			/*background-color: #e5e2e2;*/
+			float: right;
+		}
+
+		.goto h4 {
+			margin-top: 15px;
+			float: right;
+		}
+		.mycontent {
+			background-image: none;
+			background-color: #ffedf3;
+			height: 530px;
+			margin-bottom: 0;
+		}
+		.myreg{
+			padding: 0;
+			margin: 0 auto;
+			width: 64%;
+			height: 520px;
+			border: 10px solid white;
+		}
+		.regDiv{
+			padding: 0;
+			margin: 0;
+			float: left;
+			height: 500px;
+			width: 100%;
+		}
+		.reg2 {
+			padding: 0;
+			margin: 0;
+			height: 80px;
+			background-color: #3c3c3c;
+		}
+
+		.reg2 h2 {
+			padding-top: 20px;
+			margin: 0;
+			text-align: center;
+			/*background-color: #fcfcff;*/
+			font-weight: bolder;
+			color: white;
+		}
+
+		.reg3 {
+			padding: 0;
+			margin: 0 auto;
+			width: 35%;
+			height: 400px;
+			/*background-color: #eeebeb;*/
+			border: 1px solid white;
+		}
+	</style>
 	<body>
 		<!--头部-->
 		<header class="header">
-			<img src="../images/index/stumalllogo.png" alt="" />
-			<span class="pull-right"><small>欢迎访问</small><b>电脑商城</b></span>
+			<div class="header1">
+				<div class="header2">
+					<div class="logo">
+						<img src="../images/index/huamanlogo.png">
+					</div>
+					<div class="logoname">
+						<h3>通行证</h3>
+					</div>
+					<div class="goto">
+						<h4>|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="index.html">回到首页</a></h4>
+					</div>
+					<div class="goto">
+						<a href="login.html"><h4>已有账号？</h4></a>
+
+					</div>
+
+				</div>
+			</div>
 		</header>
 		<!--主体-->
 		<div class="container mycontent text-left">
 			<!--透明层 -->
-			<div class="regDiv">
-				<p>新用户注册</p>
-				<!--表单开始-->
-				<form id="form-reg" class="form-horizontal" role="form">
-					<!--用户名-->
-					<div class="form-group">
-						<label class="col-md-3 control-label">名字：</label>
-						<div class="col-md-8">
-							<input name="username" type="text" class="form-control" placeholder="请输入用户名">
-						</div>
+			<div class="myreg">
+				<div class="regDiv">
+					<div class="reg2">
+						<h2>会员注册</h2>
 					</div>
-					<!--密码-->
-					<div class="form-group">
-						<label class="col-md-3 control-label"> 密码：</label>
-						<div class="col-md-8">
-							<input name="password" type="text" class="form-control" placeholder="请输入密码">
-						</div>
+					<!--表单开始-->
+					<div class="reg3">
+						<form id="form-reg" class="form-horizontal" role="form">
+							<!--用户名-->
+							<div class="form-group" style="padding-top: 40px">
+								<label class="col-md-3 control-label"
+									   style="padding-top: 10px">名字：</label>
+								<div class="col-md-8">
+									<input name="username" type="text" class="form-control"
+										   style="width: 250px;height: 35px"
+										   placeholder="请输入用户名">
+								</div>
+							</div>
+							<!--密码-->
+							<div class="form-group">
+								<label class="col-md-3 control-label"
+									   style="padding-top: 10px"> 密码：</label>
+								<div class="col-md-8">
+									<input name="password" type="text" class="form-control"
+										   style="width: 250px;height: 35px"
+										   placeholder="请输入密码">
+								</div>
+							</div>
+							<!--确认密码-->
+							<div class="form-group">
+								<label class="col-md-3 control-label"
+									   style="padding-top: 10px"> 确认：</label>
+								<div class="col-md-8">
+									<input type="text" class="form-control"
+										   style="width: 250px;height: 35px"
+										   placeholder="请再次输入密码">
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-md-offset-3 col-md-6"
+									 style="margin-left: 5%;width: 100%">
+
+									<div class="checkbox">
+										<label >
+											<input type="checkbox" id="agree">&nbsp;&nbsp;我已阅读和接受 用户协议 和 隐私政策
+										</label>
+									</div>
+								</div>
+							</div>
+							<!--提交按钮-->
+							<div class="form-group">
+								<div class="col-md-8"
+									 style="width: 100%;padding-top: 10px;margin-left: 3%">
+									<input id="btn-reg" class="btn btn-primary" type="button"
+										   style="width: 100%;border: #3c3c3c 1px solid;
+										   background-color: #ffedf3;color: #3c3c3c"
+										   value="立即注册" />
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-md-offset-3 col-md-6"
+									 style="margin-left: 0%;width: 100%">
+									<div class="checkbox">
+										<label style="padding-top: 10px">
+											登录或注册即代表同意 用户协议 和 隐私政策
+										</label>
+										<label style="padding-top: 10px">
+											未满18周岁未成年人请勿自行注册，其注册、登录帐号及使用服务需征得监护人同意
+										</label>
+									</div>
+								</div>
+							</div>
+						</form>
+
 					</div>
-					<!--确认密码-->
-					<div class="form-group">
-						<label class="col-md-3 control-label"> 确认密码：</label>
-						<div class="col-md-8">
-							<input type="text" class="form-control" placeholder="请再次输入密码">
-						</div>
-					</div>
-					<!--提交按钮-->
-					<div class="form-group">
-						<label class="col-md-3 control-label"></label>
-						<div class="col-md-8">
-							<input id="btn-reg" class="btn btn-primary" type="button" value="立即注册" />
-							<span class="pull-right"><small>已经有账号？</small><a href="login.html">登录</a></span>
-						</div>
-					</div>
-				</form>
+				</div>
 			</div>
 		</div>
 		<!--页脚开始-->
-		<footer class="footer">
-			<!-- 品质保障，私人定制等-->
-			<div class="text-center rights container">
-				<div class="col-md-offset-2 col-md-2">
-					<span class="fa fa-thumbs-o-up"></span>
-					<p>品质保障</p>
-				</div>
-				<div class="col-md-2">
-					<span class="fa fa-address-card-o"></span>
-					<p>私人订制</p>
-				</div>
-				<div class="col-md-2">
-					<span class="fa fa-graduation-cap"></span>
-					<p>学生特供</p>
-				</div>
-				<div class="col-md-2">
-					<span class="fa fa-bitcoin"></span>
-					<p>专属特权</p>
-				</div>
-			</div>
-			<!--联系我们、下载客户端等-->
-			<div class="container beforeBottom">
-				<div class="col-md-offset-1 col-md-3">
-					<div><img src="../images/index/stumalllogo.png" alt="" class="footLogo" /></div>
-					<div><img src="../images/index/footerFont.png" alt="" /></div>
-				</div>
-				<div class="col-md-4 callus text-center">
-					<div class="col-md-4">
-						<ul>
-							<li><a href="#"><p>买家帮助</p></a></li>
-							<li><a href="#">新手指南</a></li>
-							<li><a href="#">服务保障</a></li>
-							<li><a href="#">常见问题</a></li>
-						</ul>
-					</div>
-					<div class="col-md-4">
-						<ul>
-							<li><a href="#"><p>商家帮助</p></a></li>
-							<li><a href="#">商家入驻</a></li>
-							<li><a href="#">商家后台</a></li>
-						</ul>
-					</div>
-					<div class="col-md-4">
-						<ul>
-							<li><a href="#"><p>关于我们</p></a></li>
-							<li><a href="#">关于圆心</a></li>
-							<li><a href="#">联系我们</a></li>
-							<li>
-								<span class="fa fa-wechat"></span>
-								<span class="fa fa-weibo"></span>
-							</li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="col-md-5">
-						<p>电脑商城客户端</p>
-						<img src="../images/index/ios.png" class="lf">
-						<img src="../images/index/android.png" alt="" class="lf" />
-					</div>
-					<div class="col-md-6">
-						<img src="../images/index/erweima.png">
-					</div>
-				</div>
-			</div>
-			<!-- 页面底部-备案号 #footer -->
-			<div class="col-md-12 text-center bottom">
-				Copyright © 2022 dnsc.cn All Rights Reserved 京ICP备08963888号-45 <a target="_blank" href="http://www.dnsc.cn/">圆心科技集团有限公司</a> 版权所有
-			</div>
-		</footer>
+		<div class="footer1"
+			 style="background-color: #ffedf3;height: 100px;width: 100%;">
+			<h5 style="padding-top: 20px;margin: 0;text-align: center">
+				京ICP备11017824号-4 / 京ICP证130164号 北京市公安局朝阳分局备案编号:110105000501</h5>
+			<h5 style="padding-top: 20px;margin: 0;text-align: center">
+				Copyright © 2006-2023 ZCOOL 中文 English</h5>
+		</div>
 		<!--页脚结束-->
 		<script>
 			//1.监听注册按钮是否被点击,如果被点击可以执行一个方法(这里不能像ajax函数那样删去function()只留下{},这是官方规定的!)
