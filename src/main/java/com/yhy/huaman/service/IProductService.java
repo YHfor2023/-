@@ -2,10 +2,17 @@ package com.yhy.huaman.service;
 
 import com.github.pagehelper.PageInfo;
 import com.yhy.huaman.entity.Product;
+import com.yhy.huaman.entity.User;
 
 import java.util.List;
 
 public interface IProductService {
+    /**
+     * 管理员修改服装信息
+     * @param product
+     */
+    void changeInfo(Product product);
+    Integer insert(Product product);
     /**
      * 查询热销商品的前四名
      * @return 热销商品前四名的集合

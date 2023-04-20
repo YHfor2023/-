@@ -72,10 +72,23 @@ public class UserController extends BaseController{
         session.setAttribute("avatar",data.getAvatar());
 
         //测试能否正常获取session中存储的数据
-//        System.out.println(getUidFromSession(session));
-//        System.out.println(getUsernameFromSession(session));
+        System.out.println(getUidFromSession(session));
+        System.out.println(getUsernameFromSession(session));
 
         return new JsonResult<User>(OK,data);
+    }
+    @RequestMapping("logout")
+    public JsonResult<Void> logout(HttpSession session) {
+        //向session对象中完成数据的绑定(这个session是全局的,项目的任何位置都可以访问)
+        session.setAttribute("uid",null);
+        session.setAttribute("username",null);
+        session.setAttribute("avatar",null);
+
+        //测试能否正常获取session中存储的数据
+        System.out.println(getUidFromSession(session));
+        System.out.println(getUsernameFromSession(session));
+
+        return new JsonResult<Void>(OK);
     }
     @RequestMapping("change_password")
     public JsonResult<Void> changePassword(String oldPassword,
@@ -207,6 +220,8 @@ public class UserController extends BaseController{
         //返回用户头像的路径给前端页面,将来用于头像展示使用
         return new JsonResult<>(OK,avatar);
     }
+
+
 
 
 

@@ -44,6 +44,10 @@
         select * from t_user where username=#{username}
     </select>
 
+    <select id="findall" resultMap="UserEntityMap">
+        select * from t_user ORDER BY uid DESC
+    </select>
+
     <update id="updatePasswordByUid">
         update t_user set `password`=#{password},
                           modified_user=#{modifiedUser},

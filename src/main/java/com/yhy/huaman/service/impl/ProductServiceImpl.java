@@ -10,6 +10,7 @@ import com.yhy.huaman.service.ex.ProductNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /** 处理商品数据的业务层实现类 */
@@ -17,6 +18,17 @@ import java.util.List;
 public class ProductServiceImpl implements IProductService {
     @Autowired
     private ProductMapper productMapper;
+
+    @Override
+    public Integer insert(Product product){
+        product.setStatus(1);
+        product.setPriority(10);
+        product.setCreatedUser("管理员");
+        product.setCreatedTime(new Date());
+        product.setModifiedUser("管理员");
+        product.setModifiedTime(new Date());
+        return  productMapper.insert(product);
+    }
 
     @Override
     public List<Product> findHotList() {
@@ -42,6 +54,13 @@ public class ProductServiceImpl implements IProductService {
             product.setModifiedTime(null);
         }
         return list;
+    }
+
+    @Override
+    public void changeInfo(Product product) {
+        product.setModifiedUser("管理员");
+        product.setModifiedTime(new Date());
+        productMapper.updateInfoByPid(product);
     }
 
     @Override

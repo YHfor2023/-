@@ -1,0 +1,139 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>后台管理系统</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link href="assets/css/dpl-min.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/bui-min.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/main-min.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+
+<div class="header">
+
+    <div class="dl-title">
+        <!--<img src="/chinapost/Public/assets/img/top.png">-->
+    </div>
+
+    <div class="dl-log">欢迎您，<span class="dl-log-user">管理员</span><a href="../login.html"
+                                                                         onclick="logout()"  title="退出系统" class="dl-log-quit">[退出]</a>
+    </div>
+</div>
+<div class="content">
+    <div class="dl-main-nav">
+        <div class="dl-inform">
+            <div class="dl-inform-title"><s class="dl-inform-icon dl-up"></s></div>
+        </div>
+        <ul id="J_Nav" class="nav-list ks-clear">
+            <li class="nav-item dl-selected">
+                <div class="nav-item-inner nav-home">系统管理</div>
+            </li>
+            <li class="nav-item dl-selected">
+                <div class="nav-item-inner nav-order">婴童服装管理</div>
+            </li>
+            <li class="nav-item dl-selected">
+                <div class="nav-item-inner nav-order">小童服装管理</div>
+            </li>
+            <li class="nav-item dl-selected">
+                <div class="nav-item-inner nav-order">中童服装管理</div>
+            </li>
+            <li class="nav-item dl-selected">
+                <div class="nav-item-inner nav-order">大童服装管理</div>
+            </li>
+        </ul>
+    </div>
+    <ul id="J_NavContent" class="dl-tab-conten">
+
+    </ul>
+</div>
+<script type="text/javascript" src="assets/js/jquery-1.8.1.min.js"></script>
+<script type="text/javascript" src="assets/js/bui-min.js"></script>
+<script type="text/javascript" src="assets/js/common/main-min.js"></script>
+<script type="text/javascript" src="assets/js/config-min.js"></script>
+<script>
+    BUI.use('common/main', function () {
+        var config = [
+            {
+                id: '1',
+                menu: [{
+                    text: '系统管理',
+                    items: [
+                        {id: '12', text: '花漫用户管理', href: 'User2/index.html'},
+                        {id: '13', text: '花漫订单管理', href: 'order2/index.html'},
+                    ]
+                }]
+            },
+            {
+                id: '91',
+                homePage: '9',
+                menu: [{text: '婴童服装管理', items: [
+                        {id: '9',  text: '所有', href: 'product2/index.html?title=女大童'},
+                        {id: '41', text: '短裤', href: 'product2/index.html?title=女大童%23下装%23短裤'},
+                        {id: '42', text: '长裤', href: 'product2/index.html?title=女大童%23下装%23长裤'},
+                        {id: '43', text: '短裙', href: 'product2/index.html?title=女大童%23下装%23短裙'},
+                        {id: '44', text: 'T恤', href: 'product2/index.html?title=女大童%23上装%23T恤'},
+                        {id: '47', text: '卫衣', href: 'product2/index.html?title=女大童%23上装%23卫衣'},
+                        {id: '48', text: '连衣裙', href: 'product2/index.html?title=女大童%23上装%23连衣裙'},
+                        {id: '47', text: '长袖套装', href: 'product2/index.html?title=女大童%23套装%23长袖套装'},
+                        {id: '48', text: '短袖套装', href: 'product2/index.html?title=女大童%23套装%23短袖套装'},
+                    ]}]
+            }, {
+                id: '92',
+                homePage: '9',
+                menu: [{text: '小童服装管理', items: [
+                        {id: '9',  text: '所有', href: 'product2/index.html?title=女大童'},
+                        {id: '41', text: '短裤', href: 'product2/index.html?title=女大童%23下装%23短裤'},
+                        {id: '42', text: '长裤', href: 'product2/index.html?title=女大童%23下装%23长裤'},
+                        {id: '43', text: '短裙', href: 'product2/index.html?title=女大童%23下装%23短裙'},
+                        {id: '44', text: 'T恤', href: 'product2/index.html?title=女大童%23上装%23T恤'},
+                        {id: '47', text: '卫衣', href: 'product2/index.html?title=女大童%23上装%23卫衣'},
+                        {id: '48', text: '连衣裙', href: 'product2/index.html?title=女大童%23上装%23连衣裙'},
+                        {id: '47', text: '长袖套装', href: 'product2/index.html?title=女大童%23套装%23长袖套装'},
+                        {id: '48', text: '短袖套装', href: 'product2/index.html?title=女大童%23套装%23短袖套装'},
+                    ]}]
+            }, {
+                id: '93',
+                homePage: '9',
+                menu: [{text: '中童服装管理', items: [
+                        {id: '9',  text: '所有', href: 'product2/index.html?title=女中童'},
+                        {id: '51', text: '短裤', href: 'product2/index.html?title=女中童%23下装%23短裤'},
+                        {id: '52', text: '七分裤',  href: 'product2/index.html?title=女中童%23下装%23七分裤'},
+                        {id: '53', text: '短裙', href: 'product2/index.html?title=女中童%23下装%23短裙'},
+                        {id: '54',  text: 'T恤',href: 'product2/index.html?title=女中童%23上装%23T恤'},
+                        {id: '55', text: '卫衣', href: 'product2/index.html?title=女中童%23上装%23卫衣'},
+                        {id: '56', text: '针织衫', href: 'product2/index.html?title=女中童%23上装%23针织衫'},
+                        {id: '57', text: '连衣裙', href: 'product2/index.html?title=女中童%23上装%23连衣裙'},
+                    ]}]
+            },
+            {
+                id: '94',
+                homePage: '9',
+                menu: [{text: '大童服装管理', items: [
+                        {id: '9',  text: '所有', href: 'product2/index.html?title=女大童'},
+                        {id: '41', text: '短裤', href: 'product2/index.html?title=女大童%23下装%23短裤'},
+                        {id: '42', text: '长裤', href: 'product2/index.html?title=女大童%23下装%23长裤'},
+                        {id: '43', text: '短裙', href: 'product2/index.html?title=女大童%23下装%23短裙'},
+                        {id: '44', text: 'T恤', href: 'product2/index.html?title=女大童%23上装%23T恤'},
+                        {id: '47', text: '卫衣', href: 'product2/index.html?title=女大童%23上装%23卫衣'},
+                        {id: '48', text: '连衣裙', href: 'product2/index.html?title=女大童%23上装%23连衣裙'},
+                        {id: '47', text: '长袖套装', href: 'product2/index.html?title=女大童%23套装%23长袖套装'},
+                        {id: '48', text: '短袖套装', href: 'product2/index.html?title=女大童%23套装%23短袖套装'},
+
+                    ]}]
+            }
+        ];
+        new PageUtil.MainPage({
+            modulesConfig: config
+        });
+    });
+    function logout(){
+        $.cookie("now_uid", null, {expires: 7});
+        $.cookie("now_username",null, {expires: 7});
+        $.cookie("avatar", null, {expires: 7});
+        $.cookie("auto", null, {expires: 7});
+        $.cookie("login", null, {expires: 7});
+        history.go(0);
+    }
+</script>
+</body>
+</html>

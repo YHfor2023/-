@@ -1,5 +1,8 @@
 package com.yhy.huaman.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.yhy.huaman.entity.Product;
 import com.yhy.huaman.entity.User;
 import com.yhy.huaman.mapper.UserMapper;
 import com.yhy.huaman.service.IUserService;
@@ -9,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 @Service
 //因为要将这个实现类交给spring管理,所以需要在类上加@Service
@@ -173,9 +177,23 @@ public class UserServiceImpl implements IUserService {
             throw new UpdateException("更新用户头像时产生未知异常");
         }
     }
+    @Override
+    public PageInfo<User> findall(Integer pageNum, Integer pageSize){
+        PageHelper.startPage(pageNum,pageSize);
+        List<User> users= userMapper.findall();
+        return new PageInfo<>(users);
+    }
 
 
-
+//    @Override
+//    public PageInfo<Product> queryProductByTitle(Integer pageNum, Integer pageSize, String title) {
+//        //开启分页功能
+//        PageHelper.startPage(pageNum,pageSize);
+//        //调用持久层方法进行查询
+//        List<Product> products = productMapper.queryProductByTitle(title);
+//        //返回分页数据
+//        return new PageInfo<>(products);
+//    }
 
     private String getMD5Password(String password,String salt) {
         for (int i = 0; i < 3; i++) {
@@ -183,5 +201,7 @@ public class UserServiceImpl implements IUserService {
         }
         return password;
     }
+
+
 
 }

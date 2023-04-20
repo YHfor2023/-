@@ -15,13 +15,13 @@ function reduceNum(rid) {
 /*全选全不选*/
 function checkall(ckbtn) {
 	$(".ckitem").prop("checked", $(ckbtn).prop("checked"));
-	//calcTotal();
+	calcTotal();
 }
 //删除按钮
 function delCartItem(btn) {
 	
 	$(btn).parents("tr").remove();
-	//calcTotal();
+	calcTotal();
 }
 //批量删除按钮
 function selDelCart() {
@@ -33,15 +33,15 @@ function selDelCart() {
 			$($(".ckitem")[i]).parents("tr").remove();
 		}
 	}
-	//calcTotal();
+	calcTotal();
 }
 $(function() {
 	//单选一个也得算价格
 	$(".ckitem").click(function() {
-			//calcTotal();
+			calcTotal();
 		})
 		//开始时计算价格
-		//calcTotal();
+		calcTotal();
 })
 //计算单行小计价格的方法
 function calcRow(rid) {
@@ -55,7 +55,7 @@ function calcRow(rid) {
 	$("#goodsCast"+rid).html("¥" + vtotal);
 }
 //计算总价格的方法
-/*
+
 function calcTotal() {
 	//选中商品的数量
 	var vselectCount = 0;
@@ -86,6 +86,7 @@ function calcTotal() {
 		}
 		//将选中的数量和价格赋值
 		$("#selectTotal").html(vselectTotal);
+		$("#selectTotal2").html(vselectTotal);
 		$("#selectCount").html(vselectCount);
 	}
-}*/
+}

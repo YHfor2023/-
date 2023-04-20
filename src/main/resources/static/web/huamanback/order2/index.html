@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../Css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="../Css/bootstrap-responsive.css"/>
+    <link rel="stylesheet" type="text/css" href="../Css/style.css"/>
+    <script type="text/javascript" src="../Js/jquery.js"></script>
+    <script type="text/javascript" src="../Js/jquery.sorted.js"></script>
+    <script type="text/javascript" src="../Js/bootstrap.js"></script>
+    <script type="text/javascript" src="../Js/ckform.js"></script>
+    <script type="text/javascript" src="../Js/common.js"></script>
+
+
+    <style type="text/css">
+        body {
+            padding-bottom: 40px;
+        }
+
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+
+        @media (max-width: 980px) {
+            /* Enable use of floated navbar text */
+            .navbar-text.pull-right {
+                float: none;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+<!--<form class="form-inline definewidth m20" action="index.html" method="get">-->
+<!--    用户名称：-->
+<!--    <input type="text" name="username" id="username" class="abc input-default" placeholder="" value="">&nbsp;&nbsp;-->
+<!--    <button type="submit" class="btn btn-primary">查询</button>&nbsp;&nbsp;-->
+<!--</form>-->
+<table class="table table-bordered table-hover definewidth m10">
+    <thead>
+    <tr>
+        <th>订单编号</th>
+        <th>订单客户</th>
+        <th>联系电话</th>
+        <th>地址</th>
+        <th>详细地址</th>
+        <th>总金额</th>
+        <th>订单状态</th>
+        <th>创建时间</th>
+        <th>支付时间</th>
+        <th>详情</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody id="order_list">
+    <tr >
+        <td>2</td>
+        <td>admin</td>
+        <td>管理员</td>
+        <td></td>
+        <td></td>
+        <td>2</td>
+        <td>admin</td>
+        <td>管理员</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    </tbody>
+
+</table>
+<div class="col-md-offset-1 col-md-10">
+    <p id="PaginationList" align="center">
+        <!--待填充内容-->
+    </p>
+</div>
+</body>
+</html>
+<script>
+    //为了查询设置的全局参数
+    var pageNum = 0;
+    var pageSize = 10;
+    var prePage = 0;
+    var nextPage = 0;
+    var navigatepageNums = [];
+    var num=1;
+
+    $(document).ready(function () {
+        // alert(title+"__"+num);
+        findall(num,12);
+
+    });
+    function findall(pageNum,pageSize){
+        $.ajax({
+            url: "/back/findallorders/" + pageNum + "/" + pageSize ,
+            dataType: "json",
+            success: function (res) {
+                if (res.data.list.length !== 0){
+                    addData(res);
+                }else{ //表示搜索没有内容
+                }
+
+            }
+        })
+    }
+    function addData(res) {
+        //在填充数据之前必须先将这两个div标签内的所有元素清空，不然会出现叠加情况
+        $("#order_list").empty();
+        var list = res.data.list;
+        // alert(list);//调试用
+        for (var i = 0; i < list.length; i++) {
+            //先写一个var tr = ''; 然后去上面的地址展示中找一个tr标签复制粘贴到单引号里面,再删去多余的制表符
+            /**
+             * <th>订单编号</th>
+             *         <th>订单地址</th>
+             *         <th>联系电话</th>
+             *         <th>地址</th>
+             *         <th>详细地址</th>
+             *         <th>总金额</th>
+             *         <th>订单状态</th>
+             *         <th>创建时间</th>
+             *         <th>支付时间</th>
+             *         <th>操作</th>
+             * @type {string}
+             */
+            var tr = '<tr>\n' +
+                '        <td>#{oid}</td>\n' +
+                '        <td>#{recvName}</td>\n' +
+                '        <td>#{recvPhone}</td>\n' +
+                '        <td>#{dizhi}</td>\n' +
+                '        <td>#{recvAddress}</td>\n' +
+                '        <td>#{totalPrice}</td>\n' +
+                '        <td>#{status}</td>\n' +
+                '        <td>#{orderTime}</td>\n' +
+                '        <td>#{payTime}</td>\n' +
+                '        <td><a href="details.html?oid=#{oid}">详情</a></td>\n' +
+                '        <td>#{content}</td>\n' +
+                '    </tr>';
+            //下面用正则表达式更改字符串,上面的#{oid}#{name}等等只
+            //是占位符,没有任何意义,我也可以把#{oid}写成任何想写的东西
+            //replace的第一个参数/占位符/g可以,"占位符"也可以
+            //replaceAll才可以将所有替换掉，否则指替换第一个，凸(艹皿艹 )
+            tr = tr.replaceAll(/#{oid}/g,list[i].oid);
+            tr = tr.replaceAll(/#{recvName}/g,list[i].recvName);
+            tr = tr.replaceAll("#{recvPhone}",list[i].recvPhone);
+            tr = tr.replaceAll("#{dizhi}",list[i].recvProvince+list[i].recvCity+list[i].recvArea);
+            tr = tr.replaceAll("#{recvAddress}",list[i].recvAddress);
+            tr = tr.replaceAll(/#{totalPrice}/g,list[i].totalPrice);
+
+
+            //0-未支付，1-已支付,待发货，2-已发货，3-已签收，4-已完成
+            // "<a onclick=\'editstatus(#{oid},#{nextstatus})\'>#{edittype}</a>"
+            var statusname='';
+            var content_in ='';
+            if(list[i].status===0){
+                statusname="未支付";
+                content_in = "等待中";
+                }
+            else if(list[i].status===1){
+                statusname="已支付,待发货";
+                content_in = "<a onclick=\'editstatus( "+ list[i].oid +",2)\'>确认发货</a>";
+            }
+            else if(list[i].status===2){
+                statusname="等待用户收货";
+                content_in = "等待中";
+            }
+            else if(list[i].status===3){
+                statusname="已签收";
+                content_in = "<a onclick=\'editstatus( "+ list[i].oid +",4)\'>结束订单</a>";
+            }
+            else if(list[i].status===4){
+                statusname="已完成";
+            }
+            tr = tr.replaceAll(/#{status}/g,statusname);
+            tr = tr.replaceAll(/#{content}/g,content_in);
+
+            tr = tr.replaceAll("#{orderTime}",list[i].orderTime);
+            tr = tr.replaceAll("#{payTime}",list[i].payTime);
+            tr = tr.replaceAll("#{isDelete}",list[i].isDelete);
+
+
+            $("#order_list").append(tr);
+        }
+        //填充分页条信息
+        addPaginationData(res);
+    }
+    function editstatus(oid,status) {
+        $.ajax({
+            url: "/back/updateStatus?oid=" + oid + "&status=" + status ,
+            dataType: "json",
+            success: function (res) {
+                if (res.state == 200){
+                    alert("修改成功");
+                    history.go(0)
+                }else{ //表示搜索没有内容
+                }
+            }
+        })
+    }
+    function PaginationListSelect(num,size,res) {
+        //进行查询的关键字
+        let title =  $("#search").val()
+        location.href = "/web/search.html?title=" + title + "&pageNum=" + num + "&pageSize=" + size
+        //填充分页条信息
+        addPaginationData(res);
+    }
+    function addPaginationData(res) {
+        //重新填充分页条
+        //将数据返回的部分需要数据进行填充至全局参数
+        pageNum = res.data.pageNum //当前页
+        pageSize = res.data.pageSize  //每页显示数
+        prePage =  res.data.prePage //上一页
+        nextPage = res.data.nextPage //下一页
+        navigatepageNums = res.data.navigatepageNums //分页栏的数字
+
+        let firstPage = "<a id='first' href='#' onclick='PaginationListSelect(prePage,pageSize)' style='padding-right: 8px'>上一页</a>"
+        let lastPage = "<a id='end' href='javascript:void(0)' onclick='PaginationListSelect(nextPage,pageSize)' style='padding-right: 8px'>下一页</a>"
+        let PaginationListStr = "";
+        //判断是否是第一页
+        if (res.data.isFirstPage){ //为true表示当前是第一页
+            firstPage = "<a id='first' href='javascript:void(0)' "
+                + "style='opacity: 0.2;padding-right: 8px;color: black'>上一页</a>"
+            PaginationListStr += firstPage;
+        }else { //为false表示当前不是第一页
+            PaginationListStr += firstPage;
+        }
+        //填充分页的页码数
+        for (let i = 0; i < navigatepageNums.length; i++) {
+            //当前页的页码
+            let nowNum = navigatepageNums[i]
+            if (nowNum === pageNum){ //相等表示i的次数和当前也相同，对页数显示做变化
+                PaginationListStr += "<a href='javascript:void(0)' " +
+                    "style='padding-right: 8px;color: black' disabled='disabled'>" + "【"  + nowNum + "】" +"</a>"
+            }else {
+                PaginationListStr += "<a href='javascript:void(0)' onclick='PaginationListSelect(#{nowNum},pageSize)' " +
+                    "style='padding-right: 8px'>" + nowNum +"</a>"
+            }
+            PaginationListStr = PaginationListStr.replaceAll("#{nowNum}",nowNum)
+
+        }
+        //判断是否是末页
+        if (!res.data.isLastPage){ //取反为false表示当前是末页
+            PaginationListStr += lastPage;
+        }else { //为true表示当前是末页
+            lastPage =  "<a id='end' href='javascript:void(0)' style='opacity: 0.2;padding-right: 8px;color: black'>下一页</a>"
+            PaginationListStr += lastPage;
+        }
+        //将拼接的str串插入指定id处
+        $("#PaginationList").append(PaginationListStr)
+    }
+
+
+    $(function () {
+
+
+        $('#addnew').click(function () {
+
+            window.location.href = "add.html";
+        });
+
+
+    });
+
+    function del(id) {
+
+
+        if (confirm("确定要删除吗？")) {
+
+            var url = "index.html";
+
+            window.location.href = url;
+
+        }
+
+
+    }
+</script>

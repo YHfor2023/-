@@ -1,11 +1,14 @@
 package com.yhy.huaman.service;
 
+import com.github.pagehelper.PageInfo;
 import com.yhy.huaman.entity.Order;
 import com.yhy.huaman.entity.OrderItem;
 
 import java.util.List;
 
 public interface IOrderService {
+
+    PageInfo<Order> findall(Integer pageNum, Integer pageSize);
     Order create(Integer aid, Integer[] cids, Integer uid, String username);
 
 

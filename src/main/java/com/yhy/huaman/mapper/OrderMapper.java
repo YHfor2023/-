@@ -7,6 +7,8 @@ import java.util.Date;
 import java.util.List;
 
 public interface OrderMapper {
+
+    List<Order> findall ();
     /**
      * 插入订单数据
      * @param order 订单数据

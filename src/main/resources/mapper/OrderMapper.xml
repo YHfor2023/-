@@ -38,6 +38,10 @@
         <result property="modifiedTime" column="modified_time"/>
     </resultMap>
 
+    <select id="findall" resultMap="queryOrder">
+        select * from t_order ORDER BY oid DESC
+    </select>
+
     <!-- 插入订单数据 -->
     <insert id="insertOrder" useGeneratedKeys="true" keyProperty="oid">
         insert into t_order (

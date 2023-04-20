@@ -1,6 +1,9 @@
 package com.yhy.huaman.service;
 
+import com.github.pagehelper.PageInfo;
 import com.yhy.huaman.entity.User;
+
+import java.util.List;
 
 /**用户模块业务层接口*/
 public interface IUserService {
@@ -53,6 +56,10 @@ public interface IUserService {
                       String avatar,
                       String username);//业务层一般叫username而不叫modifiedUser,因
     // 为业务层并没有直接和数据库关联
+
+
+    //后台查询所有
+    PageInfo<User> findall(Integer pageNum, Integer pageSize);
 
 
 }

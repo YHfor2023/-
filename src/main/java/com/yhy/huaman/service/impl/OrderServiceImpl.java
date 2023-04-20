@@ -1,5 +1,8 @@
 package com.yhy.huaman.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.sun.org.apache.xpath.internal.operations.Or;
 import com.yhy.huaman.entity.Address;
 import com.yhy.huaman.entity.Order;
 import com.yhy.huaman.entity.OrderItem;
@@ -22,6 +25,7 @@ import java.util.List;
 @Service
 public class OrderServiceImpl implements IOrderService {
 
+
     @Autowired
     private OrderMapper orderMapper;
 
@@ -37,6 +41,12 @@ public class OrderServiceImpl implements IOrderService {
     @Autowired
     private IUserService userService;
 
+    @Override
+    public PageInfo<Order> findall(Integer pageNum, Integer pageSize){
+        PageHelper.startPage(pageNum,pageSize);
+        List<Order> orders= orderMapper.findall();
+        return new PageInfo<>(orders);
+    }
     @Override
     public Order create(Integer aid, Integer[] cids, Integer uid, String username) {
 

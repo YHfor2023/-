@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../Css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="../Css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" href="../Css/style.css" />
+    <script type="text/javascript" src="../Js/jquery.js"></script>
+    <script type="text/javascript" src="../Js/jquery.sorted.js"></script>
+    <script type="text/javascript" src="../Js/bootstrap.js"></script>
+    <script type="text/javascript" src="../Js/ckform.js"></script>
+    <script type="text/javascript" src="../Js/common.js"></script>
+    <style type="text/css">
+        body {
+            padding-bottom: 40px;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+
+        @media (max-width: 980px) {
+            /* Enable use of floated navbar text */
+            .navbar-text.pull-right {
+                float: none;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        }
+
+
+    </style>
+</head>
+<form id="productdata">
+<table class="table table-bordered table-hover definewidth m10">
+    <tr>
+        <td width="10%" class="tableleft">服装id</td>
+        <td><input type="text" name="id" id="product-id" /></td>
+    </tr>
+    <tr>
+        <td width="10%" class="tableleft">服装名称</td>
+        <td><input type="text" name="title" id="product-title" style="width: 500px"/></td>
+    </tr>
+    <tr>
+        <td class="tableleft">服装卖点</td>
+        <td><input type="text" name="sellPoint" id="product-sell_point" style="width: 500px"/></td>
+    </tr>
+    <tr>
+        <td class="tableleft">服装颜色</td>
+        <td><input type="text" name="colors" id="product-color"/></td>
+    </tr>
+    <tr>
+        <td class="tableleft">服装尺码</td>
+        <td><input type="text" name="sizes" id="product-size"/></td>
+    </tr>
+    <tr>
+        <td class="tableleft">服装材质</td>
+        <td><input type="text" name="madeof" id="product-madeof"/></td>
+    </tr>
+    <tr>
+        <td class="tableleft">适合季节</td>
+        <td><input type="text" name="season" id="product-season"/></td>
+    </tr>
+    <tr>
+        <td class="tableleft">安全等级</td>
+        <td><input type="text" name="safety"  id="product-safety"/></td>
+    </tr>
+    <tr>
+        <td class="tableleft">服装价格</td>
+        <td><input type="text" name="price" id="product-price"/></td>
+    </tr>
+    <tr>
+        <td class="tableleft">库存数量</td>
+        <td><input type="text" name="num" id="product-num"/></td>
+    </tr>
+    <tr>
+        <td class="tableleft">图片地址</td>
+        <td><input type="text" name="image" id="product-image"/></td>
+    </tr>
+<!--    <tr>-->
+<!--        <td class="tableleft">是否下架</td>-->
+<!--        <td><input type="text" name="image" id="product-image"/></td>-->
+<!--    </tr>-->
+<!--    <tr>-->
+<!--        <td class="tableleft">是否下架</td>-->
+<!--        <td id="status"> -->
+<!--            <input type="radio" name="status" value="1" checked /> 上架-->
+<!--            <input type="radio" name="status" value="2" /> 下架-->
+<!--            <input type="radio" name="status" value="3"/> 删除-->
+<!--        </td>-->
+<!--    </tr>-->
+    <tr>
+        <td class="tableleft"></td>
+        <td>
+            <button type="submit" class="btn btn-primary" type="button" id="setproduct">保存</button>&nbsp;&nbsp;
+            <button type="button" class="btn btn-success" name="backid" id="backid">返回列表</button>
+        </td>
+    </tr>
+</table>
+</form>
+</body>
+</html>
+<script>
+    var title = getOne();
+    title = title.substring(0,title.indexOf("&"))
+    //获取上个页面传来的title
+    var product_title = getUrlParam("title");
+    var pid = getUrlParam("id");
+
+    function getOne(){
+        var result;
+        //返回字符串从url的?处开始
+        var url = decodeURI(window.location.search);
+        //如果等于-1，代表没有找到，即网页连接没有携带任何参数
+        if (url.indexOf("?") != -1){
+            //返回一个新的字符串，从url连接=符号处索引+1的位置开始返回
+            result = url.substr(url.indexOf("=")+1);
+        }
+        return result;
+    }
+
+    //根据指定得name获取参数值
+    function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null)
+            return unescape(r[2]);
+        return null;
+    }
+    $(document).ready(function () {
+        var url ="/products/" + pid + "/details";
+        // alert(url)
+        $.ajax({
+            url: url,
+            type: "GET",
+            dataType: "JSON",
+            success: function (json) {
+                if (json.state == 200) {
+                    console.log("title=" + json.data.title);
+                    //html()方法:
+                    // 假设有个标签<div id="a"></div>
+                    //那么$("#a").html(<p></p>)就是给该div标签加p标签
+                    //$("#a").html("我爱中国")就是给该div标签填充"我爱中国"内容
+                    // var titlecontent = json.data.title.substring(json.data.title.indexOf("%")+1);
+                    $("#product-id").val(json.data.id);
+                    $("#product-title").val(json.data.title);
+                    $("#product-sell_point").val(json.data.sellPoint);
+                    $("#product-price").val(json.data.price);
+                    $("#product-season").val(json.data.season);
+                    $("#product-safety").val(json.data.safety);
+                    $("#product-madeof").val(json.data.madeof);
+                    var colors = json.data.itemType.substring(0,json.data.itemType.indexOf("%"));
+                    var sizes = json.data.itemType.substring(json.data.itemType.indexOf("%")+1);
+                    $("#product-color").val(colors);
+                    $("#product-size").val(sizes);
+                    $("#product-num").val(json.data.num);
+                    $("#product-image").val(json.data.image);
+                    // alert(colors)
+                    // alert(sizes)
+                    // for (var i = 1; i <= 5; i++) {
+                    //     $("#product-image-" + i + "-big").attr("src", ".." + json.data.image + i + "_big.png");
+                    //     $("#product-image-" + i).attr("src", ".." + json.data.image + i + ".png");
+                    // }
+                } else if (json.state == 4006) { // 商品数据不存在的异常
+                    location.href = "index.html";
+                } else {
+                    alert("获取商品信息失败！" + json.message);
+                }
+            }
+        });
+    });
+
+    $("#setproduct").click(function () {
+        $.ajax({
+            url: "/back/change" ,
+            data: $("#productdata").serialize(),
+            type: "post",
+            dataType: "json",
+            success: function (json) {
+                if (json.state == 200) {
+                    alert("修改成功")
+                } else {
+                    alert("修改失败")
+                }
+            },
+        })
+        // alert($("#productdata").serialize())
+
+    });
+</script>
+<script type="text/javascript" src="../js/jquery-getUrlParam.js"></script>

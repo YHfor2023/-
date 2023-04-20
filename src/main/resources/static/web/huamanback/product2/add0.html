@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../Css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="../Css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" href="../Css/style.css" />
+    <script type="text/javascript" src="../Js/jquery.js"></script>
+    <script type="text/javascript" src="../Js/jquery.sorted.js"></script>
+    <script type="text/javascript" src="../Js/bootstrap.js"></script>
+    <script type="text/javascript" src="../Js/ckform.js"></script>
+    <script type="text/javascript" src="../Js/common.js"></script>
+    <style type="text/css">
+        body {
+            padding-bottom: 40px;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+
+        @media (max-width: 980px) {
+            /* Enable use of floated navbar text */
+            .navbar-text.pull-right {
+                float: none;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        }
+
+
+    </style>
+</head>
+<form id="productdata">
+<table class="table table-bordered table-hover definewidth m10">
+    <tr>
+        <td width="10%" class="tableleft">服装名称</td>
+        <td><input type="text" name="titlelast"/></td>
+    </tr>
+    <tr>
+        <td class="tableleft">服装卖点</td>
+        <td><input type="text" name="sellPoint"/></td>
+    </tr>
+    <tr>
+        <td class="tableleft">服装颜色</td>
+        <td><input type="text" name="colors"/></td>
+    </tr>
+    <tr>
+        <td class="tableleft">服装尺码</td>
+        <td><input type="text" name="sizes"/></td>
+    </tr>
+    <tr>
+        <td class="tableleft">服装材质</td>
+        <td><input type="text" name="madeof"/></td>
+    </tr>
+    <tr>
+        <td class="tableleft">适合季节</td>
+        <td><input type="text" name="season"/></td>
+    </tr>
+    <tr>
+        <td class="tableleft">安全等级</td>
+        <td><input type="text" name="safety"/></td>
+    </tr>
+    <tr>
+        <td class="tableleft">服装价格</td>
+        <td><input type="text" name="price"/></td>
+    </tr>
+    <tr>
+        <td class="tableleft">库存数量</td>
+        <td><input type="text" name="num"/></td>
+    </tr>
+    <tr>
+        <td class="tableleft">图片地址</td>
+        <td><input type="text" name="image"/></td>
+    </tr>
+<!--    <tr>-->
+<!--        <td class="tableleft">是否下架</td>-->
+<!--        <td>-->
+<!--            <input type="radio" name="status" value="1" checked/> 启用-->
+<!--            <input type="radio" name="status" value="0"/> 禁用-->
+<!--        </td>-->
+<!--    </tr>-->
+    <tr>
+        <td class="tableleft"></td>
+        <td>
+            <button class="btn btn-primary" type="button" id="setproduct">保存</button>&nbsp;&nbsp;
+            <button type="button" class="btn btn-success" name="backid" id="backid">返回列表</button>
+        </td>
+    </tr>
+</table>
+</form>
+</body>
+</html>
+<script>
+    function getOne(){
+        var result;
+        //返回字符串从url的?处开始
+        var url = decodeURI(window.location.search);
+        //如果等于-1，代表没有找到，即网页连接没有携带任何参数
+        if (url.indexOf("?") != -1){
+            //返回一个新的字符串，从url连接=符号处索引+1的位置开始返回
+            result = url.substr(url.indexOf("=")+1);
+        }
+        return result;
+    }
+
+    //根据指定得name获取参数值
+    function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null)
+            return unescape(r[2]);
+        return null;
+    }
+    var title = getOne();
+    var product_title = title;
+
+    function getOne(){
+        var result;
+        //返回字符串从url的?处开始
+        var url = decodeURI(window.location.search);
+        //如果等于-1，代表没有找到，即网页连接没有携带任何参数
+        if (url.indexOf("?") != -1){
+            //返回一个新的字符串，从url连接=符号处索引+1的位置开始返回
+            result = url.substr(url.indexOf("=")+1);
+        }
+        return result;
+    }
+
+    //根据指定得name获取参数值
+    function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null)
+            return unescape(r[2]);
+        return null;
+    }
+    $("#setproduct").click(function () {
+        var url="/back/insertproduct?title="+product_title;
+        alert(url);
+        // $.ajax({
+        //     url: url,
+        //     type: "POST",
+        //
+        //     //serialize这个API会自动检测该表单有什么控件,每个控件检测后还会获取每个控
+        //     // 件的值,拿到这个值后并自动拼接成形如username=Tom&password=123的结构
+        //     data: $("#productdata").serialize(),
+        //
+        //     dataType: "JSON",
+        //     success: function (json) { //1.js是弱数据类型,这个地方不用声明json的数据类型
+        //         //2.如果服务器成功响应就会将返回的数据传给形参,比如{state: 4000,message: "用户名
+        //         // 已经被占用",data: null}
+        //         if (json.state === 200) {
+        //             alert("成功")
+        //
+        //         } else {
+        //             alert("失败")
+        //
+        //         }
+        //     }
+        // });
+    });
+</script>

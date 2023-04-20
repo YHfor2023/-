@@ -7,28 +7,14 @@ public class Product extends BaseEntity {
     private String itemType;
     private String title;
     private String sellPoint;
+    private String madeof;
+    private String season;
+    private String safety;
     private Long price;
     private Integer num;
     private String image;
     private Integer status;
     private Integer priority;
-
-
-    @Override
-    public String toString() {
-        return "Product{" +
-                "id=" + id +
-                ", categoryId=" + categoryId +
-                ", itemType='" + itemType + '\'' +
-                ", title='" + title + '\'' +
-                ", sellPoint='" + sellPoint + '\'' +
-                ", price=" + price +
-                ", num=" + num +
-                ", image='" + image + '\'' +
-                ", status=" + status +
-                ", priority=" + priority +
-                '}';
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -47,6 +33,9 @@ public class Product extends BaseEntity {
         if (getTitle() != null ? !getTitle().equals(product.getTitle()) : product.getTitle() != null) return false;
         if (getSellPoint() != null ? !getSellPoint().equals(product.getSellPoint()) : product.getSellPoint() != null)
             return false;
+        if (getMadeof() != null ? !getMadeof().equals(product.getMadeof()) : product.getMadeof() != null) return false;
+        if (getSeason() != null ? !getSeason().equals(product.getSeason()) : product.getSeason() != null) return false;
+        if (getSafety() != null ? !getSafety().equals(product.getSafety()) : product.getSafety() != null) return false;
         if (getPrice() != null ? !getPrice().equals(product.getPrice()) : product.getPrice() != null) return false;
         if (getNum() != null ? !getNum().equals(product.getNum()) : product.getNum() != null) return false;
         if (getImage() != null ? !getImage().equals(product.getImage()) : product.getImage() != null) return false;
@@ -62,6 +51,9 @@ public class Product extends BaseEntity {
         result = 31 * result + (getItemType() != null ? getItemType().hashCode() : 0);
         result = 31 * result + (getTitle() != null ? getTitle().hashCode() : 0);
         result = 31 * result + (getSellPoint() != null ? getSellPoint().hashCode() : 0);
+        result = 31 * result + (getMadeof() != null ? getMadeof().hashCode() : 0);
+        result = 31 * result + (getSeason() != null ? getSeason().hashCode() : 0);
+        result = 31 * result + (getSafety() != null ? getSafety().hashCode() : 0);
         result = 31 * result + (getPrice() != null ? getPrice().hashCode() : 0);
         result = 31 * result + (getNum() != null ? getNum().hashCode() : 0);
         result = 31 * result + (getImage() != null ? getImage().hashCode() : 0);
@@ -70,14 +62,24 @@ public class Product extends BaseEntity {
         return result;
     }
 
-    /**
-     * get,set
-     * equals和hashCode
-     * toString
-     */
-
-
-
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", categoryId=" + categoryId +
+                ", itemType='" + itemType + '\'' +
+                ", title='" + title + '\'' +
+                ", sellPoint='" + sellPoint + '\'' +
+                ", madeof='" + madeof + '\'' +
+                ", season='" + season + '\'' +
+                ", safety='" + safety + '\'' +
+                ", price=" + price +
+                ", num=" + num +
+                ", image='" + image + '\'' +
+                ", status=" + status +
+                ", priority=" + priority +
+                '}';
+    }
 
     public Integer getId() {
         return id;
@@ -117,6 +119,30 @@ public class Product extends BaseEntity {
 
     public void setSellPoint(String sellPoint) {
         this.sellPoint = sellPoint;
+    }
+
+    public String getMadeof() {
+        return madeof;
+    }
+
+    public void setMadeof(String madeof) {
+        this.madeof = madeof;
+    }
+
+    public String getSeason() {
+        return season;
+    }
+
+    public void setSeason(String season) {
+        this.season = season;
+    }
+
+    public String getSafety() {
+        return safety;
+    }
+
+    public void setSafety(String safety) {
+        this.safety = safety;
     }
 
     public Long getPrice() {

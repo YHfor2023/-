@@ -2,11 +2,25 @@ package com.yhy.huaman.mapper;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.yhy.huaman.entity.Cart;
 import com.yhy.huaman.entity.Product;
+import com.yhy.huaman.entity.User;
 
 import java.util.List;
 
 public interface ProductMapper {
+    /**
+     * 根据商品id修改商品信息
+     * @param product
+     * @return
+     */
+    Integer updateInfoByPid(Product product);
+    /**
+     * 新增服装
+     * @param product
+     * @return
+     */
+    Integer insert(Product product);
     /**
      * 查询热销商品的前四名
      * @return 热销商品前四名的集合
@@ -28,6 +42,8 @@ public interface ProductMapper {
 
     //根据指定的名称关键字进行模糊查询
     List<Product> queryProductByTitle(String title);
+
+
 
 
 

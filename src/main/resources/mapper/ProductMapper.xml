@@ -27,7 +27,7 @@
     </select>
 
     <select id="queryProductByTitle" resultMap="ProductEntityMap">
-        SELECT id,title,sell_point,price,image
+        SELECT *
         FROM t_product
         WHERE status = 1
           AND title LIKE '%${title}%'
@@ -35,4 +35,35 @@
 
     </select>
 
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO t_product (
+            category_id,item_type,title,sell_point,madeof,safety,season,price,num,image,status,priority,created_time,modified_time,created_user,modified_user
+        ) VALUES (
+                  #{categoryId},#{itemType},#{title},#{sellPoint},#{madeof},#{safety},#{season},#{price},
+                  #{num},#{image},#{status},#{priority},
+                  #{createdTime},#{modifiedTime},#{createdUser},#{modifiedUser}
+                 )
+    </insert>
+
+    <update id="updateInfoByPid">
+        update t_product
+        set
+        <!--if是条件判断标签,属性test接受的是一个返回值为boolean类型的条件,
+        如果test条件的结果为true则执行if标签内部的语句,注意逗号也要在标签内-->
+        <if test="categoryId!=null">category_id = #{categoryId},</if>
+        <if test="itemType!=null">item_type = #{itemType},</if>
+        <if test="title!=null">title = #{title},</if>
+        <if test="sellPoint!=null">sell_point = #{sellPoint},</if>
+        <if test="madeof!=null">madeof = #{madeof},</if>
+        <if test="safety!=null">safety = #{safety},</if>
+        <if test="season!=null">season = #{season},</if>
+        <if test="price!=null">price = #{price},</if>
+        <if test="num!=null">num = #{num},</if>
+        <if test="image!=null">image = #{image},</if>
+        <if test="status!=null">status = #{status},</if>
+        <if test="priority!=null">priority = #{priority},</if>
+        modified_user = #{modifiedUser},
+        modified_time = #{modifiedTime}
+        where id=#{id}
+    </update>
 </mapper>
