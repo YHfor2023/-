@@ -23,21 +23,25 @@ public class CartServiceImpl implements ICartService {
     private ProductMapper productMapper;
 
     @Override
-    public void addToCart(Integer uid, Integer pid, Integer amount, String username) {
+    public void addToCart(Integer uid, Integer pid, Integer amount, String color,String size,String username) {
 
         //根据参数pid和uid查询购物车中该商品是否已经存在
         Date date = new Date();
-        if (cartMapper.findByUidAndPid(uid, pid) == null) {
+//        if (cartMapper.findByUidAndPid(uid, pid) == null) {
             Cart cart = new Cart();
 
             //封装数据：uid,pid,amount
             cart.setUid(uid);
             cart.setPid(pid);
+            cart.setSize(size);
+            cart.setColor(color);
             cart.setNum(amount);//注意前端传来amount时并没有和数据库商品数量进行求和
 
             //查询商品数据，得到商品价格并封装
             Product product = productMapper.findById(pid);
             cart.setPrice(product.getPrice());
+            cart.setSafety(product.getSafety());
+            cart.setMadeof(product.getMadeof());
 
             //封装数据：4个日志
             cart.setCreatedUser(username);
@@ -49,20 +53,20 @@ public class CartServiceImpl implements ICartService {
             if (rows != 1) {
                 throw new InsertException("插入数据时出现未知异常");
             }
-        } else {
-            Cart result = cartMapper.findByUidAndPid(uid, pid);
-            //从查询结果中取出原数量，与参数amount相加，得到新的数量
-            Integer num = result.getNum() + amount;//加入购物车时只会有+不可能有-
-
-            Integer rows = cartMapper.updateNumByCid(
-                    result.getCid(),
-                    num,
-                    username,
-                    date);
-            if (rows != 1) {
-                throw new InsertException("更新数据时产生未知异常");
-            }
-        }
+//        } else {
+//            Cart result = cartMapper.findByUidAndPid(uid, pid);
+//            //从查询结果中取出原数量，与参数amount相加，得到新的数量
+//            Integer num = result.getNum() + amount;//加入购物车时只会有+不可能有-
+//
+//            Integer rows = cartMapper.updateNumByCid(
+//                    result.getCid(),
+//                    num,
+//                    username,
+//                    date);
+//            if (rows != 1) {
+//                throw new InsertException("更新数据时产生未知异常");
+//            }
+//        }
     }
 
     @Override

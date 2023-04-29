@@ -63,34 +63,21 @@ public class backController extends BaseController {
     public JsonResult<PageInfo<Product>> findProductsByTitle(@PathVariable("pageNum") Integer pageNum,
                                                              @PathVariable("pageSize") Integer pageSize,
                                                              @PathVariable("title") String title) {
-//        String titleNew = totypename(title);
+//        String category_id = totypename(title);
 
         PageInfo<Product> lists = productService.queryProductByTitle(pageNum, pageSize, title);
 //        System.err.println(lists.toString());
-//        System.err.println(title + titleNew);
+//        System.err.println(title + category_id);
         return new JsonResult<>(OK, lists);
     }
 
-    @RequestMapping("insertproduct")
-    //@ResponseBody //表示此方法的响应结果以json格式进行数据的响应给到前端
-//    请求处理方法的参数列表设置为pojo类型:
-//    SpringBoot会将前端的url地址中的参数名和pojo类的属性名进行比较,如果这两个名称相同,则将值注入到pojo类中对应的属性上
-
-//    public JsonResult<Void> insertproduct(Product product,String titlelast,String colors,String sizes) {
-//        String finaltitle =totypename(product.getTitle())+"%"+titlelast;
-//        product.setCategoryId( Integer.parseInt(product.getTitle()));
-//        product.setTitle(finaltitle);
-//        product.setItemType(colors+"%"+sizes);
-////        Date date = new Date();
-//        System.err.println(product.toString());
-//        productService.insert(product);
-//        return new JsonResult<>(OK);
-//    }
-    public JsonResult<Void> insertproduct(Product product,String titlelast,String colors,String sizes) {
-        String finaltitle ="女大童"+"%"+titlelast;
-        product.setCategoryId(0);
+    @RequestMapping("insertProduct")
+    public JsonResult<Void> insertproduct(Product product,String category,String colors,String sizes) {
+        String finaltitle =category.replaceAll("%23","#")+"%"+product.getTitle();
+        product.setCategoryId(nameToId(category.replaceAll("%23","#")));
         product.setTitle(finaltitle);
         product.setItemType(colors+"%"+sizes);
+        product.setStatus(1);
 
         Date date = new Date();
         System.err.println(product.toString()+date);
@@ -109,49 +96,117 @@ public class backController extends BaseController {
     @RequestMapping("change")
     public JsonResult<Void> changeInfo(Product product,String colors,String sizes) {
         System.err.println("???");
-        product.setCategoryId(0);
+//        product.setCategoryId(0);
         product.setItemType(colors+"%"+sizes);
         productService.changeInfo(product);
         System.err.println(product);
         return new JsonResult<>(OK);
     }
 
-    private String totypename(String title){
-        String titleNew = "";
-        if (title.equals("40")) {
-            titleNew = titleNew+"女大童";
-        } else if (title.equals("41")) {
-            titleNew = titleNew+"女大童#下装#短裤";
-        } else if (title.equals("42")) {
-            titleNew = titleNew+"女大童#下装#长裤";
-        } else if (title.equals("43")) {
-            titleNew = titleNew+"女大童#上装#夹克";
-        } else if (title.equals("50")) {
-            titleNew = titleNew+"女中童#下装#短裤";
-        } else if (title.equals("51")) {
-            titleNew = titleNew+"女中童#下装#短裤";
-        } else if (title.equals("52")) {
-            titleNew = titleNew+"女中童#下装#长裤";
-        } else if (title.equals("53")) {
-            titleNew = titleNew+"女中童#上装#夹克";
-        } else if (title.equals("60")) {
-            titleNew = titleNew+"女小童#下装#短裤";
-        } else if (title.equals("61")) {
-            titleNew = titleNew+"女小童#下装#短裤";
-        } else if (title.equals("62")) {
-            titleNew = titleNew+"女小童#下装#长裤";
-        } else if (title.equals("63")) {
-            titleNew = titleNew+"女小童#上装#夹克";
-        } else if (title.equals("70")) {
-            titleNew = titleNew+"女婴童#下装#短裤";
-        } else if (title.equals("71")) {
-            titleNew = titleNew+"女婴童#下装#短裤";
-        } else if (title.equals("72")) {
-            titleNew = titleNew+"女婴童#下装#长裤";
-        } else if (title.equals("73")) {
-            titleNew = titleNew+"女婴童#上装#夹克";
-        }else {titleNew=title;}
-        return titleNew;
+    private Integer nameToId(String title){
+        Integer category_id = 0;
+        if (title.equals("")) {
+            category_id = 0;
+        } else if (title.equals("女大童")) {
+            category_id = 1;
+        } else if (title.equals("女大童#上装")) {
+            category_id = 2;
+        } else if (title.equals("女大童#下装")) {
+            category_id = 3;
+        } else if (title.equals("女大童#套装")) {
+            category_id = 4;
+        } else if (title.equals("女大童#上装#T恤")) {
+            category_id = 5;
+        } else if (title.equals("女大童#上装#卫衣")) {
+            category_id = 6;
+        } else if (title.equals("女大童#上装#连衣裙")) {
+            category_id = 7;
+        } else if (title.equals("女大童#下装#短裤")) {
+            category_id = 8;
+        } else if (title.equals("女大童#下装#长裤")) {
+            category_id = 9;
+        } else if (title.equals("女大童#下装#短裙")) {
+            category_id = 10;
+        } else if (title.equals("女大童#套装#长袖套装")) {
+            category_id = 11;
+        } else if (title.equals("女大童#套装#短袖套装")) {
+            category_id = 12;
+        } else if (title.equals("女中童")) {
+            category_id = 13;
+        } else if (title.equals("女中童#上装")) {
+            category_id = 14;
+        } else if (title.equals("女中童#下装")) {
+            category_id = 15;
+        } else if (title.equals("女中童#套装")) {
+            category_id = 16;
+        } else if (title.equals("女中童#上装#T恤")) {
+            category_id = 17;
+        } else if (title.equals("女中童#上装#卫衣")) {
+            category_id = 18;
+        } else if (title.equals("女中童#上装#连衣裙")) {
+            category_id = 19;
+        } else if (title.equals("女中童#下装#短裤")) {
+            category_id = 20;
+        } else if (title.equals("女中童#下装#长裤")) {
+            category_id = 21;
+        } else if (title.equals("女中童#下装#短裙")) {
+            category_id = 21;
+        } else if (title.equals("女中童#套装#长袖套装")) {
+            category_id = 23;
+        } else if (title.equals("女中童#套装#短袖套装")) {
+            category_id = 24;
+        } else if (title.equals("女小童")) {
+            category_id = 25;
+        } else if (title.equals("女小童#上装")) {
+            category_id = 26;
+        } else if (title.equals("女小童#下装")) {
+            category_id = 27;
+        } else if (title.equals("女小童#套装")) {
+            category_id = 28;
+        } else if (title.equals("女小童#上装#T恤")) {
+            category_id = 29;
+        } else if (title.equals("女小童#上装#卫衣")) {
+            category_id = 30;
+        } else if (title.equals("女小童#上装#连衣裙")) {
+            category_id = 31;
+        } else if (title.equals("女小童#下装#短裤")) {
+            category_id = 32;
+        } else if (title.equals("女小童#下装#长裤")) {
+            category_id = 33;
+        } else if (title.equals("女小童#下装#短裙")) {
+            category_id = 34;
+        } else if (title.equals("女小童#套装#长袖套装")) {
+            category_id = 35;
+        } else if (title.equals("女小童#套装#短袖套装")) {
+            category_id = 36;
+        } else if (title.equals("女婴童")) {
+            category_id = 37;
+        } else if (title.equals("女婴童#上装")) {
+            category_id = 38;
+        } else if (title.equals("女婴童#下装")) {
+            category_id = 39;
+        } else if (title.equals("女婴童#套装")) {
+            category_id = 40;
+        } else if (title.equals("女婴童#上装#T恤")) {
+            category_id = 41;
+        } else if (title.equals("女婴童#上装#卫衣")) {
+            category_id = 42;
+        } else if (title.equals("女婴童#上装#连衣裙")) {
+            category_id = 43;
+        } else if (title.equals("女婴童#下装#短裤")) {
+            category_id = 44;
+        } else if (title.equals("女婴童#下装#长裤")) {
+            category_id = 45;
+        } else if (title.equals("女婴童#下装#短裙")) {
+            category_id = 46;
+        } else if (title.equals("女婴童#套装#长袖套装")) {
+            category_id = 47;
+        } else if (title.equals("女婴童#套装#短袖套装")) {
+            category_id = 48;
+        }
+
+
+        return category_id;
     }
 }
 

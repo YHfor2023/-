@@ -131,8 +131,6 @@
 	margin-left: 20px;
 	width: 280px;
 	height: 500px;
-	/*background-color: #a0a2a2;*/
-	border: 1px solid white;
 }
 
 .menu-mid-1 {
@@ -145,17 +143,16 @@
 .menu-mid-2 {
 	width: 276px;
 	height: 300px;
-	margin-top: 30px;
+	margin-top: 10px;
+	float: left;
 	/*background-color: #e3e1e1;*/
 }
 
 .menu-mid-2 li {
 	float: left;
-	width: 135px;
+	width: 100px;
 	height: 45px;
 	margin: 5px auto;
-	background-color: #ffffff;
-	border: 1px solid #bebebe;
 	border-radius: 4px;
 }
 .menu-mid-2 li a{

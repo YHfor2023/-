@@ -897,7 +897,8 @@
                             // '<td>#{option_content}</td>\n' +
                             '</tr>';
                         content = content.replaceAll(/#{image}/g, list2[i].image);
-                        content = content.replaceAll(/#{title}/g, list2[i].title);
+                        var titlecontent = list2[i].title.substring(list2[i].title.indexOf("%")+1);
+                        content = content.replaceAll(/#{title}/g, titlecontent+" "+list2[i].color+" "+list2[i].size+" "+list2[i].madeof+" "+list2[i].safety);
                         content = content.replaceAll(/#{price}/g, list2[i].price);
                         content = content.replaceAll(/#{num}/g, list2[i].num);
                         content = content.replaceAll(/#{totalprice}/g, list2[i].price * list2[i].num);

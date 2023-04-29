@@ -728,7 +728,8 @@
 										'<td><span>#{totalPrice}</span></td>\n' +
 										'</tr>';
 								tr = tr.replace("#{image}",list[i].image);
-								tr = tr.replace("#{title}",list[i].title);
+								var titlecontent = list[i].title.substring(list[i].title.indexOf("%")+1);
+								tr = tr.replace("#{title}",titlecontent);
 								tr = tr.replace("#{price}",list[i].realPrice);
 								tr = tr.replace("#{num}",list[i].num);
 								tr = tr.replace("#{totalPrice}",list[i].realPrice*list[i].num);

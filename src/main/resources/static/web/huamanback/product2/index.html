@@ -55,13 +55,11 @@
         <th>库存数量</th>
         <th>图片地址</th>
         <th>是否下架</th>
+        <th>推荐指数</th>
         <th>操作</th>
     </tr>
     </thead>
     <tbody id="orderitems_list">
-    <tr >
-
-    </tr>
     </tbody>
 
 </table>
@@ -74,7 +72,7 @@
 <!--        <a onclick="self.location=document.referrer;"><button type="button" class="btn btn-success"  >返回管理员首页</button>&nbsp;&nbsp;</a>-->
     </td>
 </div>
-<div class="col-md-offset-1 col-md-10">
+<div class="col-md-offset-1 col-md-10" style="display: none">
     <p id="PaginationList" align="center">
         <!--待填充内容-->
     </p>
@@ -107,8 +105,8 @@
             return unescape(r[2]);
         return null;
     }
-    var title = getOne();
-    var product_title = title;
+    var category = getOne();
+    // alert(category)
     // var  num =getUrlParam("pageNum");
 
     //为了查询设置的全局参数
@@ -125,7 +123,7 @@
 
     });
     function findall(pageNum,pageSize){
-        var url="/back/findProductsByTitle/" + pageNum + "/" + pageSize + "/"+product_title;
+        var url="/back/findProductsByTitle/" + pageNum + "/" + pageSize + "/"+category;
         // alert(url);
         $.ajax({
             url: url,
@@ -175,6 +173,7 @@
                 '        <td>#{num}</td>\n' +
                 '        <td>#{image}</td>\n' +
                 '        <td>#{status}</td>\n' +
+                '        <td>#{priority}</td>\n' +
                 '        <td><a href="edit.html?id=#{id}">编辑</a></td>\n' +
                 '    </tr>';
             //下面用正则表达式更改字符串,上面的#{oid}#{name}等等只
@@ -201,6 +200,7 @@
                 tr = tr.replaceAll("#{status}","已下架");
             }
             //
+            tr = tr.replaceAll("#{priority}",list[i].priority);
             $("#orderitems_list").append(tr);
             // $("#addbutton").empty();
             // var addurl ='<a href="add.html?title='+product_title+'"><button type="button" class="btn btn-primary" >新增</button>&nbsp;&nbsp;</a>';
@@ -214,13 +214,13 @@
     //     window.history.back();
     // });
     $("#addbutton").click(function (){
-        location.href = "add.html?title="+product_title;
+        location.href = "add.html?category="+category;
     });
     function PaginationListSelect(num,size,res) {
         //进行查询的关键字
         let title =  $("#search").val()
-        location.href = "/web/search.html?title=" + title + "&pageNum=" + num + "&pageSize=" + size
-        location.href = "/back/findProductsByTitle/" + num + "/" + size + "/"+product_title
+        // location.href = "/web/search.html?title=" + title + "&pageNum=" + num + "&pageSize=" + size
+        location.href = "/back/findProductsByTitle/" + num + "/" + size + "/"+category
         //填充分页条信息
         addPaginationData(res);
     }

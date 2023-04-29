@@ -9,7 +9,10 @@ public class OrderItem extends BaseEntity {
     private String image;
     private Long price;
     private Integer num;
-
+    private String color;
+    private String size;
+    private String madeof;
+    private String safety;
 
     @Override
     public String toString() {
@@ -21,6 +24,10 @@ public class OrderItem extends BaseEntity {
                 ", image='" + image + '\'' +
                 ", price=" + price +
                 ", num=" + num +
+                ", color='" + color + '\'' +
+                ", size='" + size + '\'' +
+                ", madeof='" + madeof + '\'' +
+                ", safety='" + safety + '\'' +
                 '}';
     }
 
@@ -38,7 +45,12 @@ public class OrderItem extends BaseEntity {
         if (getTitle() != null ? !getTitle().equals(orderItem.getTitle()) : orderItem.getTitle() != null) return false;
         if (getImage() != null ? !getImage().equals(orderItem.getImage()) : orderItem.getImage() != null) return false;
         if (getPrice() != null ? !getPrice().equals(orderItem.getPrice()) : orderItem.getPrice() != null) return false;
-        return getNum() != null ? getNum().equals(orderItem.getNum()) : orderItem.getNum() == null;
+        if (getNum() != null ? !getNum().equals(orderItem.getNum()) : orderItem.getNum() != null) return false;
+        if (getColor() != null ? !getColor().equals(orderItem.getColor()) : orderItem.getColor() != null) return false;
+        if (getSize() != null ? !getSize().equals(orderItem.getSize()) : orderItem.getSize() != null) return false;
+        if (getMadeof() != null ? !getMadeof().equals(orderItem.getMadeof()) : orderItem.getMadeof() != null)
+            return false;
+        return getSafety() != null ? getSafety().equals(orderItem.getSafety()) : orderItem.getSafety() == null;
     }
 
     @Override
@@ -51,15 +63,12 @@ public class OrderItem extends BaseEntity {
         result = 31 * result + (getImage() != null ? getImage().hashCode() : 0);
         result = 31 * result + (getPrice() != null ? getPrice().hashCode() : 0);
         result = 31 * result + (getNum() != null ? getNum().hashCode() : 0);
+        result = 31 * result + (getColor() != null ? getColor().hashCode() : 0);
+        result = 31 * result + (getSize() != null ? getSize().hashCode() : 0);
+        result = 31 * result + (getMadeof() != null ? getMadeof().hashCode() : 0);
+        result = 31 * result + (getSafety() != null ? getSafety().hashCode() : 0);
         return result;
     }
-
-    /**
-     * get,set
-     * equals和hashCode
-     * toString
-     */
-
 
     public Integer getId() {
         return id;
@@ -115,5 +124,37 @@ public class OrderItem extends BaseEntity {
 
     public void setNum(Integer num) {
         this.num = num;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
+
+    public String getMadeof() {
+        return madeof;
+    }
+
+    public void setMadeof(String madeof) {
+        this.madeof = madeof;
+    }
+
+    public String getSafety() {
+        return safety;
+    }
+
+    public void setSafety(String safety) {
+        this.safety = safety;
     }
 }

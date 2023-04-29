@@ -12,7 +12,7 @@ public interface ICartService {
      * @param amount 增加的数量
      * @param username 当前登录的用户名
      */
-    void addToCart(Integer uid, Integer pid, Integer amount, String username);
+    void addToCart(Integer uid, Integer pid, Integer amount, String color,String size, String username);
 
     /**
      * 查询某用户的购物车数据

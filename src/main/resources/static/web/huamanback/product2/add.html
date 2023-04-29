@@ -33,9 +33,13 @@
 </head>
 <form id="productdata">
 <table class="table table-bordered table-hover definewidth m10">
+    <tr style="display: none">
+        <td width="10%" class="tableleft">服装类别</td>
+        <td><input type="text" name="category" id="category"/></td>
+    </tr>
     <tr>
         <td width="10%" class="tableleft">服装名称</td>
-        <td><input type="text" name="titlelast"/></td>
+        <td><input type="text" name="title"/></td>
     </tr>
     <tr>
         <td class="tableleft">服装卖点</td>
@@ -70,6 +74,10 @@
         <td><input type="text" name="num"/></td>
     </tr>
     <tr>
+        <td class="tableleft">推荐指数</td>
+        <td><input type="text" name="priority"/></td>
+    </tr>
+    <tr>
         <td class="tableleft">图片地址</td>
         <td><input type="text" name="image"/></td>
     </tr>
@@ -83,8 +91,8 @@
     <tr>
         <td class="tableleft"></td>
         <td>
-            <button type="submit" class="btn btn-primary" type="button" id="setptoduct">保存</button>&nbsp;&nbsp;
-            <button type="button" class="btn btn-success" name="backid" id="backid">返回列表</button>
+            <button class="btn btn-primary" type="button" id="setproduct">保存</button>&nbsp;&nbsp;
+            <button type="button" class="btn btn-success" name="backid" id="backid" onclick="history.back(-1);">返回列表</button>
         </td>
     </tr>
 </table>
@@ -92,14 +100,11 @@
 </body>
 </html>
 <script>
-    // var title = getOne();
-    // title = title.substring(0,title.indexOf("&"))
-    // //获取上个页面传来的title
-    // var product_title = getUrlParam("title");
-    // alert(product_title)
-    var product_title = "女大童";
-    // var product_title = title;
-
+    $(document).ready(function () {
+        var category = getOne();
+        // alert(category)
+        $("#category").val(category);
+    });
     function getOne(){
         var result;
         //返回字符串从url的?处开始
@@ -112,6 +117,7 @@
         return result;
     }
 
+
     //根据指定得name获取参数值
     function getUrlParam(name) {
         var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
@@ -121,10 +127,11 @@
         return null;
     }
 
-    $("#setptoduct").click(function () {
+    $("#setproduct").click(function () {
+        // alert($("#productdata").serialize())
 
         $.ajax({
-            url: "/back/insertproduct?title="+product_title,
+            url: "/back/insertProduct",
             type: "POST",
 
             //serialize这个API会自动检测该表单有什么控件,每个控件检测后还会获取每个控

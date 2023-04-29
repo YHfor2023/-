@@ -58,10 +58,10 @@
     <!-- 插入订单商品数据 -->
     <insert id="insertOrderItem" useGeneratedKeys="true" keyProperty="id">
         insert into t_order_item (
-        oid, pid, title, image, price, num, created_user,
-        created_time, modified_user, modified_time
+        oid, pid, title, image, price, num, color,size,madeof,safety,
+                                  created_user,created_time, modified_user, modified_time
         ) values (
-        #{oid}, #{pid}, #{title}, #{image}, #{price}, #{num}, #{createdUser},
+        #{oid}, #{pid}, #{title}, #{image}, #{price}, #{num}, #{color}, #{size}, #{madeof}, #{safety}, #{createdUser},
         #{createdTime}, #{modifiedUser}, #{modifiedTime}
         )
     </insert>

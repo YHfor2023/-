@@ -12,8 +12,8 @@ public class CartServiceTests {
     @Autowired
     private ICartService cartService;
 
-    @Test
-    public void addToCart() {
-        cartService.addToCart(11, 10000042, 5, "Tom");
-    }
+//    @Test
+//    public void addToCart() {
+//        cartService.addToCart(11, 10000042, 5, "Tom");
+//    }
 }

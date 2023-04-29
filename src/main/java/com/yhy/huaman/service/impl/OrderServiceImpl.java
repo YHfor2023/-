@@ -100,6 +100,10 @@ public class OrderServiceImpl implements IOrderService {
             orderItem.setImage(cartVO.getImage());
             orderItem.setPrice(cartVO.getRealPrice());
             orderItem.setNum(cartVO.getNum());
+            orderItem.setColor(cartVO.getColor());
+            orderItem.setSize(cartVO.getSize());
+            orderItem.setMadeof(cartVO.getMadeof());
+            orderItem.setSafety(cartVO.getSafety());
 
             orderItem.setCreatedUser(username);
             orderItem.setCreatedTime(new Date());

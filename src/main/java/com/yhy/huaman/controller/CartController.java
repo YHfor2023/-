@@ -18,11 +18,14 @@ public class CartController extends BaseController {
     private ICartService cartService;
 
     @RequestMapping("add_to_cart")
-    public JsonResult<Void> addToCart(Integer pid, Integer amount, HttpSession session) {
+    public JsonResult<Void> addToCart(Integer pid, Integer amount, String color, String size,HttpSession session) {
+        System.err.println(color+size);
         cartService.addToCart(
                 getUidFromSession(session),
                 pid,
                 amount,
+                color,
+                size,
                 getUsernameFromSession(session));
         return new JsonResult<Void>(OK);
     }

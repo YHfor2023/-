@@ -77,6 +77,10 @@
         <td class="tableleft">图片地址</td>
         <td><input type="text" name="image" id="product-image"/></td>
     </tr>
+    <tr>
+        <td class="tableleft">推荐指数</td>
+        <td><input type="text" name="priority" id="product-priority"/></td>
+    </tr>
 <!--    <tr>-->
 <!--        <td class="tableleft">是否下架</td>-->
 <!--        <td><input type="text" name="image" id="product-image"/></td>-->
@@ -92,8 +96,8 @@
     <tr>
         <td class="tableleft"></td>
         <td>
-            <button type="submit" class="btn btn-primary" type="button" id="setproduct">保存</button>&nbsp;&nbsp;
-            <button type="button" class="btn btn-success" name="backid" id="backid">返回列表</button>
+            <button class="btn btn-primary" type="button" id="setproduct">保存</button>&nbsp;&nbsp;
+            <button type="button" class="btn btn-success" name="backid" id="backid"  onclick="history.back(-1);">返回列表</button>
         </td>
     </tr>
 </table>
@@ -155,6 +159,7 @@
                     $("#product-size").val(sizes);
                     $("#product-num").val(json.data.num);
                     $("#product-image").val(json.data.image);
+                    $("#product-priority").val(json.data.priority);
                     // alert(colors)
                     // alert(sizes)
                     // for (var i = 1; i <= 5; i++) {
@@ -171,6 +176,7 @@
     });
 
     $("#setproduct").click(function () {
+        // alert($("#productdata").serialize())
         $.ajax({
             url: "/back/change" ,
             data: $("#productdata").serialize(),
@@ -184,8 +190,7 @@
                 }
             },
         })
-        // alert($("#productdata").serialize())
 
     });
 </script>
-<script type="text/javascript" src="../js/jquery-getUrlParam.js"></script>
+<script type="text/javascript" src="../../../js/jquery-getUrlParam.js"></script>

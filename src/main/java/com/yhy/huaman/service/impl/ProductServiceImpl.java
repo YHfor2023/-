@@ -71,7 +71,6 @@ public class ProductServiceImpl implements IProductService {
             throw new ProductNotFoundException("尝试访问的商品数据不存在");
         }
         // 将查询结果中的部分属性设置为null
-        product.setPriority(null);
         product.setCreatedUser(null);
         product.setCreatedTime(null);
         product.setModifiedUser(null);
