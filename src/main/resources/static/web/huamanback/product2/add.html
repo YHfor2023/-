@@ -3,9 +3,9 @@
 <head>
     <title></title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="../Css/bootstrap.css" />
-    <link rel="stylesheet" type="text/css" href="../Css/bootstrap-responsive.css" />
-    <link rel="stylesheet" type="text/css" href="../Css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../Css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="../Css/bootstrap-responsive.css"/>
+    <link rel="stylesheet" type="text/css" href="../Css/style.css"/>
     <script type="text/javascript" src="../Js/jquery.js"></script>
     <script type="text/javascript" src="../Js/jquery.sorted.js"></script>
     <script type="text/javascript" src="../Js/bootstrap.js"></script>
@@ -15,6 +15,7 @@
         body {
             padding-bottom: 40px;
         }
+
         .sidebar-nav {
             padding: 9px 0;
         }
@@ -32,71 +33,74 @@
     </style>
 </head>
 <form id="productdata">
-<table class="table table-bordered table-hover definewidth m10">
-    <tr style="display: none">
-        <td width="10%" class="tableleft">服装类别</td>
-        <td><input type="text" name="category" id="category"/></td>
-    </tr>
-    <tr>
-        <td width="10%" class="tableleft">服装名称</td>
-        <td><input type="text" name="title"/></td>
-    </tr>
-    <tr>
-        <td class="tableleft">服装卖点</td>
-        <td><input type="text" name="sellPoint"/></td>
-    </tr>
-    <tr>
-        <td class="tableleft">服装颜色</td>
-        <td><input type="text" name="colors"/></td>
-    </tr>
-    <tr>
-        <td class="tableleft">服装尺码</td>
-        <td><input type="text" name="sizes"/></td>
-    </tr>
-    <tr>
-        <td class="tableleft">服装材质</td>
-        <td><input type="text" name="madeof"/></td>
-    </tr>
-    <tr>
-        <td class="tableleft">适合季节</td>
-        <td><input type="text" name="season"/></td>
-    </tr>
-    <tr>
-        <td class="tableleft">安全等级</td>
-        <td><input type="text" name="safety"/></td>
-    </tr>
-    <tr>
-        <td class="tableleft">服装价格</td>
-        <td><input type="text" name="price"/></td>
-    </tr>
-    <tr>
-        <td class="tableleft">库存数量</td>
-        <td><input type="text" name="num"/></td>
-    </tr>
-    <tr>
-        <td class="tableleft">推荐指数</td>
-        <td><input type="text" name="priority"/></td>
-    </tr>
-    <tr>
-        <td class="tableleft">图片地址</td>
-        <td><input type="text" name="image"/></td>
-    </tr>
-<!--    <tr>-->
-<!--        <td class="tableleft">是否下架</td>-->
-<!--        <td>-->
-<!--            <input type="radio" name="status" value="1" checked/> 启用-->
-<!--            <input type="radio" name="status" value="0"/> 禁用-->
-<!--        </td>-->
-<!--    </tr>-->
-    <tr>
-        <td class="tableleft"></td>
-        <td>
-            <button class="btn btn-primary" type="button" id="setproduct">保存</button>&nbsp;&nbsp;
-            <button type="button" class="btn btn-success" name="backid" id="backid" onclick="history.back(-1);">返回列表</button>
-        </td>
-    </tr>
-</table>
+    <table class="table table-bordered table-hover definewidth m10">
+        <tr style="display: none">
+            <td width="10%" class="tableleft">服装类别</td>
+            <td><input type="text" name="category" id="category"/></td>
+        </tr>
+        <tr>
+            <td width="10%" class="tableleft">服装名称</td>
+            <td><input type="text" name="title"/></td>
+        </tr>
+        <tr>
+            <td class="tableleft">服装卖点</td>
+            <td><input type="text" name="sellPoint"/></td>
+        </tr>
+        <tr>
+            <td class="tableleft">服装颜色</td>
+            <td><input type="text" name="colors"/></td>
+        </tr>
+        <tr>
+            <td class="tableleft">服装尺码</td>
+            <td><input type="text" name="sizes"/></td>
+        </tr>
+        <tr>
+            <td class="tableleft">服装材质</td>
+            <td><input type="text" name="madeof"/></td>
+        </tr>
+        <tr>
+            <td class="tableleft">适合季节</td>
+            <td><input type="text" name="season"/></td>
+        </tr>
+        <tr>
+            <td class="tableleft">安全等级</td>
+            <td><input type="text" name="safety"/></td>
+        </tr>
+        <tr>
+            <td class="tableleft">服装价格</td>
+            <td><input type="text" name="price"/></td>
+        </tr>
+        <tr>
+            <td class="tableleft">库存数量</td>
+            <td><input type="text" name="num"/></td>
+        </tr>
+        <tr>
+            <td class="tableleft">推荐指数</td>
+            <td><input type="text" name="priority"/></td>
+        </tr>
+        <!--    <tr>-->
+        <!--        <td class="tableleft">图片地址</td>-->
+        <!--        <td><input type="text" name="image"/></td>-->
+        <!--    </tr>-->
+        <!--    <tr>-->
+        <!--        <td class="tableleft">是否下架</td>-->
+        <!--        <td>-->
+        <!--            <input type="radio" name="status" value="1" checked/> 启用-->
+        <!--            <input type="radio" name="status" value="0"/> 禁用-->
+        <!--        </td>-->
+        <!--    </tr>-->
+        <tr>
+            <td class="tableleft"></td>
+            <td>
+                <button class="btn btn-primary" type="button" id="setproduct">保存</button>&nbsp;&nbsp;
+                <button type="button" class="btn btn-success" name="backid" id="backid" onclick="history.back(-1);">
+                    返回列表
+                </button>
+            </td>
+        </tr>
+    </table>
 </form>
+
 </body>
 </html>
 <script>
@@ -105,14 +109,15 @@
         // alert(category)
         $("#category").val(category);
     });
-    function getOne(){
+
+    function getOne() {
         var result;
         //返回字符串从url的?处开始
         var url = decodeURI(window.location.search);
         //如果等于-1，代表没有找到，即网页连接没有携带任何参数
-        if (url.indexOf("?") != -1){
+        if (url.indexOf("?") != -1) {
             //返回一个新的字符串，从url连接=符号处索引+1的位置开始返回
-            result = url.substr(url.indexOf("=")+1);
+            result = url.substr(url.indexOf("=") + 1);
         }
         return result;
     }

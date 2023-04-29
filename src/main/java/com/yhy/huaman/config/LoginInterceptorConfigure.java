@@ -4,6 +4,7 @@ import com.yhy.huaman.interceptor.LoginInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.ArrayList;
@@ -40,5 +41,16 @@ public class LoginInterceptorConfigure implements WebMvcConfigurer {
         registry.addInterceptor(interceptor)
                 .addPathPatterns("/**")
                 .excludePathPatterns(patterns);
+    }
+
+    /**
+     * 图片虚拟地址映射
+     * @param registry
+     * 设置该映射之后，外网只能访问本地的images文件内部的资源
+     */
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/images/**")
+                .addResourceLocations("file:" + System.getProperty("user.dir")+"\\src\\main\\resources\\static\\images\\");
     }
 }

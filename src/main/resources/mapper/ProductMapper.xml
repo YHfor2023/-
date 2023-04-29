@@ -29,7 +29,7 @@
     <select id="queryProductByTitle" resultMap="ProductEntityMap">
         SELECT *
         FROM t_product
-        WHERE status = 1
+        WHERE status != 3
           AND title LIKE '%${title}%'
         ORDER BY priority DESC
 

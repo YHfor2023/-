@@ -33,8 +33,8 @@
 </head>
 <form id="productdata">
 <table class="table table-bordered table-hover definewidth m10">
-    <tr>
-        <td width="10%" class="tableleft">服装id</td>
+    <tr style="display: none">
+        <td width="10%" class="tableleft" >服装id</td>
         <td><input type="text" name="id" id="product-id" /></td>
     </tr>
     <tr>
@@ -73,7 +73,7 @@
         <td class="tableleft">库存数量</td>
         <td><input type="text" name="num" id="product-num"/></td>
     </tr>
-    <tr>
+    <tr >
         <td class="tableleft">图片地址</td>
         <td><input type="text" name="image" id="product-image"/></td>
     </tr>
@@ -85,14 +85,14 @@
 <!--        <td class="tableleft">是否下架</td>-->
 <!--        <td><input type="text" name="image" id="product-image"/></td>-->
 <!--    </tr>-->
-<!--    <tr>-->
-<!--        <td class="tableleft">是否下架</td>-->
-<!--        <td id="status"> -->
-<!--            <input type="radio" name="status" value="1" checked /> 上架-->
-<!--            <input type="radio" name="status" value="2" /> 下架-->
-<!--            <input type="radio" name="status" value="3"/> 删除-->
-<!--        </td>-->
-<!--    </tr>-->
+    <tr>
+        <td class="tableleft">是否下架</td>
+        <td id="status">
+            <input type="radio" name="status" value="1" /> 上架
+            <input type="radio" name="status" value="2" /> 下架
+            <input type="radio" name="status" value="3" /> 删除
+        </td>
+    </tr>
     <tr>
         <td class="tableleft"></td>
         <td>
@@ -101,6 +101,23 @@
         </td>
     </tr>
 </table>
+</form>
+<form action="/back/uploads" method="post" enctype="multipart/form-data"  id="uploadimages" >
+    <table class="table table-bordered table-hover definewidth m10" >
+        <tr style="display: none">
+            <td class="tableleft">图片地址</td>
+            <td><input type="text" name="image_attr" id="product-image2"/></td>
+        </tr>
+        <tr>
+            <td width="10%" class="tableleft">服装类别</td>
+            <td>
+
+                <input type="file" name="image" multiple="multiple">
+                <input type="submit" value="上传图片" class="btn btn-primary">
+
+            </td>
+        </tr>
+    </table>
 </form>
 </body>
 </html>
@@ -158,7 +175,8 @@
                     $("#product-color").val(colors);
                     $("#product-size").val(sizes);
                     $("#product-num").val(json.data.num);
-                    $("#product-image").val(json.data.image);
+                    $("#product-image").val('/images/portal/'+json.data.id+'/');
+                    $("#product-image2").val(json.data.id);
                     $("#product-priority").val(json.data.priority);
                     // alert(colors)
                     // alert(sizes)

@@ -173,8 +173,8 @@ public class UserController extends BaseController{
          * 对路径获取绝对路径,返回一个路径字符串,如果不能进行映射返回null,单
          * 斜杠可要可不要
          */
-//        String parent ="D:/FILE/Graduation_Design/HuaMan/src/main/resources/static/images/upload";
-      String parent = session.getServletContext().getRealPath("/upload");
+        String parent ="D:/FILE/Graduation_Design/HuaMan/src/main/resources/static/images/upload";
+//        String parent = session.getServletContext().getRealPath("/upload");
         System.out.println(parent);//调试用
 
         //File对象指向这个路径,通过判断File是否存在得到该路径是否存在
@@ -215,8 +215,8 @@ public class UserController extends BaseController{
 
         Integer uid = getUidFromSession(session);
         String username = getUsernameFromSession(session);
-        String avatar = "/upload/"+filename;
-//        String avatar = "../images/upload/"+filename;
+//        String avatar = "/upload/"+filename;
+        String avatar = "../images/upload/"+filename;
         userService.changeAvatar(uid,avatar,username);
         //返回用户头像的路径给前端页面,将来用于头像展示使用
         return new JsonResult<>(OK,avatar);

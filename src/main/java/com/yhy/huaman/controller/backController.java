@@ -20,10 +20,13 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+
+import static org.apache.catalina.startup.ExpandWar.deleteDir;
 
 @RestController //其作用等同于@Controller+@ResponseBody
 //@Controller
@@ -77,11 +80,11 @@ public class backController extends BaseController {
         product.setCategoryId(nameToId(category.replaceAll("%23","#")));
         product.setTitle(finaltitle);
         product.setItemType(colors+"%"+sizes);
-        product.setStatus(1);
+        product.setStatus(2);
 
         Date date = new Date();
         System.err.println(product.toString()+date);
-        productService.insert(product);
+//        productService.insert(product);
         return new JsonResult<>(OK);
     }
 
@@ -101,6 +104,63 @@ public class backController extends BaseController {
         productService.changeInfo(product);
         System.err.println(product);
         return new JsonResult<>(OK);
+    }
+
+    /**
+     * 多文件上传,返回图片路径数组
+     * 建议使用这种，因为这种可以上传单张图片，也可以上传多张图片
+     * 限制单张图片的在前端限制就行
+     * @param image
+     * @return
+     */
+    @RequestMapping("/uploads")
+    public ArrayList upload(MultipartFile[] image,String image_attr){
+        String url=System.getProperty("user.dir");//获取项目路径
+        ArrayList list=new ArrayList();
+//        System.err.println(image.toString());
+//        System.err.println(image_attr);
+        if(image.length!=0){
+            String parent ="D:/FILE/Graduation_Design/HuaMan/src/main/resources/static/images/portal/"+image_attr;
+            File dir = new File(parent);
+            if (!dir.exists()) {//检测目录是否存在
+                dir.mkdirs();//创建当前目录
+            }else {
+                deleteDir(dir);
+                dir.mkdirs();//创建当前目录
+            }
+             Integer index =1;
+            for(MultipartFile file:image){
+                UUID id=UUID.randomUUID();
+                try {
+
+                    file.transferTo(new File(url+"\\src\\main\\resources\\static\\images\\portal\\"+image_attr+"\\"+index+".png"));
+                    list.add("localhost:8080/images/portal/"+image_attr+"/"+index+".png");
+
+                    File source = new File(url+"\\src\\main\\resources\\static\\images\\portal\\"+image_attr+"\\"+index+".png");
+                    File dest = new File(url+"\\src\\main\\resources\\static\\images\\portal\\"+image_attr+"\\"+index+"_big.png");
+                    try{
+                        Files.copy(source.toPath(), dest.toPath());
+                    } catch (IOException e){
+                        e.printStackTrace();
+                    }
+                    list.add("localhost:8080/images/portal/"+image_attr+"/"+index+"_big.png");
+                    if(index==1){
+                        dest = new File(url+"\\src\\main\\resources\\static\\images\\portal\\"+image_attr+"\\"+"collect.png");
+                        try{
+                            Files.copy(source.toPath(), dest.toPath());
+                        } catch (IOException e){
+                            e.printStackTrace();
+                        }
+                        list.add("localhost:8080/images/portal/"+image_attr+"/"+"collect.png");
+                    }
+                    index = index+1;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            return list;
+        }
+        return list;
     }
 
     private Integer nameToId(String title){
