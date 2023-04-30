@@ -161,7 +161,23 @@
         $.cookie("avatar", null, {expires: 7});
         $.cookie("auto", null, {expires: 7});
         $.cookie("login", null, {expires: 7});
-        history.go(0);
+        $.ajax({
+            url: "/users/logout",
+            type: "POST",
+            dataType: "JSON",
+            success: function (json) {
+                if (json.state == 200) {
+                    alert("退出登录成功")
+                    location.href = "login.html";
+                } else {
+                    alert("退出登录失败")
+                }
+            },
+            error: function (xhr) {
+                alert("产生未知的异常!" + xhr.message);
+            }
+        });
+        location.href = "index.html";
     }
 </script>
 </body>
